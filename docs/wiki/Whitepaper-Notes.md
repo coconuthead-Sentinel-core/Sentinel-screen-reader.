@@ -538,3 +538,12 @@
   and the rule that a red-plum class's next occurrence is a process
   failure, not a code failure. For the paper: individual bugs teach
   little; tallied classes teach where the process leaks.
+
+- **2026-07-25 — The day's lessons became law.** With the proprietor's
+  authorization, the six-defect day was distilled into a permanent
+  guardrail skill (shop-defect-laws): breadcrumbs before diagnosis,
+  full-path QA, declines must speak, second-miss → contract, every
+  sweep ends with a gate, and a platform-trap checklist. For the
+  paper: a retrospective that only produces a document changes
+  nothing — one that produces an enforced rule changes the defect
+  rate; laws were written citing the tickets that paid for them.
