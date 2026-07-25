@@ -36,14 +36,15 @@ not a code failure — the question becomes "why did the law not hold?"
 
 | # | Item | Origin | State |
 |---|---|---|---|
-| 1 | Owner UAT: full CRUD cycle on Topics after 68fb199 (delete topic+7 entries, add fresh, delete again) | 2026-07-25 ticket 4 | OPEN — awaiting owner's ✅ |
-| 2 | Owner UAT: paste → ➕ Add lands entries in all three sections (b73a7cf flow) | 2026-07-25 ticket 3 | OPEN — awaiting owner's ✅ |
+| 1 | Owner UAT: full CRUD cycle on Topics after 68fb199 (delete topic+7 entries, add fresh, delete again) | 2026-07-25 ticket 4 | ~~STRUCK~~ — owner UAT ✅ 2026-07-25 ("read, saved, deleted, copied and pasted into every section") |
+| 2 | Owner UAT: paste → ➕ Add lands entries in all three sections (b73a7cf flow) | 2026-07-25 ticket 3 | ~~STRUCK~~ — owner UAT ✅ 2026-07-25; Matrix + all three planners also UAT-passed with toolbar add/remove/mark-off |
 | 3 | Read-only glossary view has no copy-out clipboard menu | 2026-07-25 audit | OPEN — candidate ticket, small |
 | 4 | Legacy save/remove handlers survive ghost-tab only via lucky TclError — sweep to explicit window checks | Blueprint §11 trap | OPEN — sweep candidate, gate exists for Add route only |
 | 5 | Decline paths in `_ftb_action_*` chains: several return silently with neither breadcrumb nor status | red-plum class 2 | OPEN — instrument-the-decline sweep |
 | 6 | Vault Catalog (optical/external media index): archive-set export + media catalog table in study.db | owner's 2026-07-25 optical-media intake | BACKLOG — scope-first + blueprint before any code |
 | 7 | Script-export pipeline for narrated educational segments (notes/glossary → script text for outside video tools) | same intake | BACKLOG — idea only, no scope yet |
 | 8 | E: drive verification; 7 unmerged child branches decision | journal 2026-07-20 | OPEN — proprietor's call |
+| 9 | AI assistant grounding gaps (verified in code 2026-07-25): feed reads Library files, study notes, glossary, journal, topic TITLES — not Matrix, Planner, the commentaries table, or topic-entry bodies. Owner believed commentary was read; likely via Library files, not the section. | owner status report 2026-07-25 | OPEN — scope decision: which sections should the assistant see? |
 
 ## C. How a line moves
 
