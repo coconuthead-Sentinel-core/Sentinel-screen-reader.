@@ -18036,6 +18036,11 @@ class BookReader:
                           bg=BG_INPUT, fg=FG_TEXT, insertbackground=FG_TEXT,
                           font=("Segoe UI", 12, "bold"), relief=tk.FLAT, bd=0)
         term_e.pack(fill=tk.X, padx=14, ipady=5)
+        # Owner QA find (2026-07-25): this dialog missed the app-wide
+        # right-click clipboard menu, so a title copied in the Library
+        # could not be pasted into the Term field.
+        self._attach_clipboard_menu(
+            term_e, clear_cmd=lambda: term_var.set(""), clear_label="🧹  Clear")
 
         tk.Label(dlg, text="Definition:", bg=BG_DARK, fg=FG_MUTED,
                  font=("Segoe UI", 10), padx=14).pack(anchor=tk.W, pady=(10, 2))
@@ -18045,6 +18050,9 @@ class BookReader:
             padx=12, pady=10, relief=tk.FLAT, undo=True,
         )
         body.pack(fill=tk.BOTH, expand=True, padx=14, pady=4)
+        self._attach_clipboard_menu(
+            body, clear_cmd=lambda: self._clear_input(body),
+            clear_label="🧹  Clear")
         if definition:
             body.insert("1.0", definition)
 
@@ -22341,6 +22349,10 @@ class BookReader:
                       insertbackground=FG_TEXT, font=("Segoe UI", 12, "bold"),
                       relief=tk.FLAT, bd=0)
         te.pack(fill=tk.X, padx=14, ipady=5)
+        # Same 2026-07-25 QA fix as _edit_glossary_entry — this dialog
+        # mirrors it and had mirrored the missing clipboard menu too.
+        self._attach_clipboard_menu(
+            te, clear_cmd=lambda: title_var.set(""), clear_label="🧹  Clear")
 
         tk.Label(dlg, text="Commentary:", bg=BG_DARK, fg=FG_MUTED,
                  font=("Segoe UI", 10), padx=14).pack(anchor=tk.W, pady=(10, 2))
@@ -22348,6 +22360,9 @@ class BookReader:
             dlg, wrap=tk.WORD, font=("Segoe UI", 11), bg=BG_INPUT, fg=FG_TEXT,
             insertbackground=FG_TEXT, padx=12, pady=10, relief=tk.FLAT, undo=True)
         body_w.pack(fill=tk.BOTH, expand=True, padx=14, pady=4)
+        self._attach_clipboard_menu(
+            body_w, clear_cmd=lambda: self._clear_input(body_w),
+            clear_label="🧹  Clear")
         if body:
             body_w.insert("1.0", body)
 

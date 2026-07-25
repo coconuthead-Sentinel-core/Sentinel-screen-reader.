@@ -178,3 +178,18 @@ audio/UI paths **on the real hardware** before trusting them.
 messagebox or a fixed-height widget must be length-capped — a title/name
 field can hold an entire pasted document. And accessibility font-scaling
 must target reading surfaces only, never navigation indexes.
+
+### 2026-07-25 — Glossary entry dialog: no right-click paste
+
+Owner QA (screenshot evidence): text copied in the Library could not be
+pasted into a new Glossary entry — the dialog's Term and Definition
+fields were the one input form that never received the app-wide
+right-click clipboard menu. The Commentary entry dialog, written by
+mirroring the glossary one, had mirrored the omission. Fix: attach the
+existing `_attach_clipboard_menu` helper to all four widgets (standard
+🧹 Clear included). Regression gate: `tests/test_clipboard_wiring.py`
+statically asserts (ast scan, headless) that both dialog builders call
+the helper at least twice — the wiring can no longer be dropped
+silently. Lesson: a hand-applied cross-cutting affordance always leaves
+a straggler, and copied dialogs copy omissions — gate the pattern, don't
+trust the sweep.

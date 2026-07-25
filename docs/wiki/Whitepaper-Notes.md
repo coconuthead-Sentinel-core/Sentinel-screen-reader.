@@ -493,3 +493,12 @@
   the cheapest QA session is the one the logs already ran, and the
   timer defect class (trusting ticks over clocks) is old enough to
   have a textbook name and still shipped in v1.
+
+- **2026-07-25 — The one form the sweep missed is the one QA found.**
+  The app-wide right-click clipboard menu had reached every editable
+  field except the Glossary entry dialog — and the Commentary dialog
+  that was written by mirroring it inherited the same hole. For the
+  paper: cross-cutting UI affordances applied by hand always leave a
+  straggler, and a copied dialog copies its omissions; the durable fix
+  is a static gate (an ast scan asserting the wiring) rather than a
+  memory to be careful.

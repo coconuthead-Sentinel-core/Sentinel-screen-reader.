@@ -11,6 +11,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Fixed
+- **📒 Glossary entry dialog had no right-click paste** (owner QA find,
+  2026-07-25, screenshot evidence — a title copied in the Library
+  could not be pasted into a new entry's Term field). The dialog was
+  the one input form that never got the app-wide clipboard menu; the
+  Commentary entry dialog mirrors it and had mirrored the miss. Fix:
+  four wiring lines — `_attach_clipboard_menu` (the existing, tested
+  helper) on the Term/Title Entry and the scrolled body of both
+  dialogs, with the standard 🧹 Clear. New static regression gate
+  `tests/test_clipboard_wiring.py` (ast scan, headless) locks the
+  wiring in place. Suite 432 green + 14 pre-existing skips.
 - **⏱ Pomodoro blocks could run long against the wall clock** (owner
   QA session 2026-07-22; diagnosed from the pomo breadcrumbs — a
   "20-minute" work block on 07-21 ran 61 real minutes, another 27).
