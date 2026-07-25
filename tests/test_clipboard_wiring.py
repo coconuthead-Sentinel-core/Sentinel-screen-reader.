@@ -86,6 +86,23 @@ class EntryDialogClipboardTest(unittest.TestCase):
             "(Title + Commentary must each get _attach_clipboard_menu)")
 
 
+class ReadOnlyViewCopyOutTest(unittest.TestCase):
+    """Punch item 3 (2026-07-25): the read-only glossary view must offer
+    right-click copy-out (Button-3 menu + Ctrl+A), without dead
+    Cut/Paste items on its disabled body."""
+
+    def test_glossary_view_has_copy_out_bindings(self):
+        if not os.path.exists(_APP):
+            self.skipTest("app file not found")
+        fn = _find_func("_show_glossary_entry")
+        consts = {n.value for n in ast.walk(fn)
+                  if isinstance(n, ast.Constant) and isinstance(n.value, str)}
+        for needed in ("<Button-3>", "<Control-a>", "<<Copy>>"):
+            self.assertIn(needed, consts,
+                          f"_show_glossary_entry lost its {needed} "
+                          "copy-out wiring")
+
+
 class EntryDialogSaveReachableTest(unittest.TestCase):
     """The 2026-07-25 'stuck with no way to save' gates."""
 

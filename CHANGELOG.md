@@ -11,6 +11,19 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Fixed
+- **📒 Read-only glossary view: right-click copy-out** (punch item 3,
+  Eisenhower DO, 2026-07-25). The view allowed selecting a definition
+  but offered no Copy. Now: right-click → Copy / Select all (plus
+  Ctrl+A) — deliberately not the full clipboard menu, since Cut/Paste
+  would be dead items on a disabled body and a dead control is a
+  defect. Static gate added.
+
+### Docs
+- **Foreman's dashboard** (`docs/foreman/`) — the proprietor's five
+  dashboard sections mirrored for the foreman as versioned markdown
+  (Journal, Topics, Glossary, Commentary, Library); Eisenhower-triaged
+  work queue lives in its TOPICS.md and mirrors to all stations by
+  git rather than OneDrive.
 - **📌 Topics could not be cleared — the last section blocking an
   empty dashboard** (owner QA, 2026-07-25: "basic 101 stuff — can we
   add things, can we delete everything?"). Root cause: Tk's default

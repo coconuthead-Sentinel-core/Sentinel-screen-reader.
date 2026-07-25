@@ -18040,6 +18040,27 @@ class BookReader:
         )
         body.insert("1.0", definition)
         body.configure(state=tk.DISABLED)
+        # Copy-out menu (punch item 3, Eisenhower DO, 2026-07-25). The
+        # read-only view allowed selecting text but offered no right-click
+        # Copy. Deliberately NOT the full clipboard menu: Cut/Paste would
+        # be dead items on a disabled Text, and a control that does
+        # nothing is a defect (classroom-code).
+        ro_menu = tk.Menu(body, tearoff=0, bg=BG_PANEL, fg=FG_TEXT,
+                          activebackground=ACCENT_SLATE,
+                          activeforeground="white")
+        ro_menu.add_command(
+            label="Copy", command=lambda: body.event_generate("<<Copy>>"))
+        ro_menu.add_command(
+            label="Select all", command=lambda: self._select_all_in(body))
+
+        def _ro_popup(event, _m=ro_menu):
+            try:
+                _m.tk_popup(event.x_root, event.y_root)
+            finally:
+                _m.grab_release()
+        body.bind("<Button-3>", _ro_popup, add="+")
+        body.bind("<Control-a>",
+                  lambda _e: self._select_all_in(body), add="+")
         # Bottom-up packing (row, then source, then the expanding body) so
         # Edit/Close can never be clipped off a short window — the same
         # 2026-07-25 QA law applied to the two entry dialogs.

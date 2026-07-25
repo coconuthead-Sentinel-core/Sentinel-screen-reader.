@@ -34,11 +34,17 @@ not a code failure — the question becomes "why did the law not hold?"
 
 ## B. Open punch items (walk at every session)
 
+**Eisenhower triage 2026-07-25** (working order in
+`docs/foreman/TOPICS.md`): DO → #3 (executed). SCHEDULE → cycles: #5,
+then #4, then #9-implementation (blocked on delegate), then v1.0 cut
+(proprietor's word). DELEGATE → #8, #9-scope-call (Falcon One).
+DEFER → #6, #7 (scope-first before any code).
+
 | # | Item | Origin | State |
 |---|---|---|---|
 | 1 | Owner UAT: full CRUD cycle on Topics after 68fb199 (delete topic+7 entries, add fresh, delete again) | 2026-07-25 ticket 4 | ~~STRUCK~~ — owner UAT ✅ 2026-07-25 ("read, saved, deleted, copied and pasted into every section") |
 | 2 | Owner UAT: paste → ➕ Add lands entries in all three sections (b73a7cf flow) | 2026-07-25 ticket 3 | ~~STRUCK~~ — owner UAT ✅ 2026-07-25; Matrix + all three planners also UAT-passed with toolbar add/remove/mark-off |
-| 3 | Read-only glossary view has no copy-out clipboard menu | 2026-07-25 audit | OPEN — candidate ticket, small |
+| 3 | Read-only glossary view has no copy-out clipboard menu | 2026-07-25 audit | ~~STRUCK~~ — Eisenhower DO, executed 2026-07-25 (Copy + Select-all menu; gated) |
 | 4 | Legacy save/remove handlers survive ghost-tab only via lucky TclError — sweep to explicit window checks | Blueprint §11 trap | OPEN — sweep candidate, gate exists for Add route only |
 | 5 | Decline paths in `_ftb_action_*` chains: several return silently with neither breadcrumb nor status | red-plum class 2 | OPEN — instrument-the-decline sweep |
 | 6 | Vault Catalog (optical/external media index): archive-set export + media catalog table in study.db | owner's 2026-07-25 optical-media intake | BACKLOG — scope-first + blueprint before any code |
