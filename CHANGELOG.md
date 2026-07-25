@@ -11,6 +11,22 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Fixed
+- **📌 Topics could not be cleared — the last section blocking an
+  empty dashboard** (owner QA, 2026-07-25: "basic 101 stuff — can we
+  add things, can we delete everything?"). Root cause: Tk's default
+  `exportselection=1` makes the app's selection a SINGLE token —
+  clicking the entries list or the compose pane silently DESELECTED
+  the chosen topic, so toolbar 🗑 found `curselection()` empty and
+  declined with only a status-line hint. The Topics tab, with two
+  listboxes and a paste pane side by side, was the section most
+  exposed. Fix: `exportselection=False` on the four CRUD listboxes
+  (topics, topic entries, glossary, commentary) so a selection
+  survives until the user changes it; plus `parent=` on both topic
+  delete confirms, which could previously open BEHIND the Study
+  window and make Delete look dead. Proven both ways: real-Tk test
+  shows the default stealing the selection and the flag preserving
+  it; static gates lock the flag and the parenting. Suite 442 green
+  + 14 pre-existing skips.
 - **👻 Ghost-tab guard on the new toolbar-Add route** (foreman's
   self-audit of the same-day fix, 2026-07-25 — caught on the board
   before it bit). `_study_active_tab` outlives the Study workspace

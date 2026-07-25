@@ -19437,6 +19437,11 @@ class BookReader:
             selectbackground=ACCENT_CYAN, selectforeground="white",
             font=("Segoe UI", 11), relief=tk.FLAT, bd=0,
             highlightthickness=0, activestyle="none",
+            # exportselection=False (owner QA 2026-07-25): Tk's default
+            # makes the app's ONE selection token — clicking any other
+            # selectable widget silently DESELECTED the topic, so the
+            # toolbar 🗑 found nothing and Topics could never be cleared.
+            exportselection=False,
         )
         tsb = tk.Scrollbar(list_frame, command=self._topics_listbox.yview)
         self._topics_listbox.configure(yscrollcommand=tsb.set)
@@ -19483,6 +19488,7 @@ class BookReader:
             selectbackground=ACCENT_CYAN, selectforeground="white",
             font=("Segoe UI", 11), relief=tk.FLAT, bd=0,
             highlightthickness=0, activestyle="none",
+            exportselection=False,   # selection survives clicks elsewhere
         )
         sb = tk.Scrollbar(entry_frame, command=self._topic_entries_listbox.yview)
         self._topic_entries_listbox.configure(yscrollcommand=sb.set)
@@ -19888,6 +19894,9 @@ class BookReader:
         if not messagebox.askyesno(
             "Delete topic?",
             f"Permanently delete '{preview}' and its {n} entries?",
+            # Parent to the workspace: unparented, the confirm could open
+            # BEHIND the Study window — Delete looked dead (QA 2026-07-25).
+            parent=self._study_win or self.root,
         ):
             return
         self._db_exec("DELETE FROM topics WHERE id=?", (tid,))
@@ -20021,7 +20030,8 @@ class BookReader:
                 topic_id = None
         eid, _t, _b, _o, _ts = self._topic_entries_records[sel[0]]
         if not messagebox.askyesno("Delete entry?",
-                                     "Remove this entry from the topic?"):
+                                     "Remove this entry from the topic?",
+                                     parent=self._study_win or self.root):
             return
         self._db_exec("DELETE FROM topic_entries WHERE id=?", (eid,))
         self._refresh_tab_topics()
@@ -20745,6 +20755,7 @@ class BookReader:
             selectbackground=ACCENT_CYAN, selectforeground="white",
             font=("Segoe UI", 11), relief=tk.FLAT, bd=0,
             highlightthickness=0, activestyle="none",
+            exportselection=False,   # selection survives clicks elsewhere
         )
         sb = tk.Scrollbar(list_frame, command=self._glossary_listbox.yview)
         self._glossary_listbox.configure(yscrollcommand=sb.set)
@@ -22242,7 +22253,8 @@ class BookReader:
             list_frame, bg=BG_INPUT, fg=FG_TEXT,
             selectbackground=ACCENT_CYAN, selectforeground="white",
             font=("Segoe UI", 11), relief=tk.FLAT, bd=0,
-            highlightthickness=0, activestyle="none")
+            highlightthickness=0, activestyle="none",
+            exportselection=False)   # selection survives clicks elsewhere
         csb = tk.Scrollbar(list_frame, command=self._commentary_listbox.yview)
         self._commentary_listbox.configure(yscrollcommand=csb.set)
         csb.pack(side=tk.RIGHT, fill=tk.Y)

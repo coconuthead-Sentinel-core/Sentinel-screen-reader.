@@ -240,3 +240,19 @@ Rebuild-Blueprint §11 and gated in tests. Lesson: state that OUTLIVES
 its owner is a memory, not a state — every consumer must check the
 owner is alive, and "it works because it crashes quietly" is a bug
 with good luck, not a design.
+
+### 2026-07-25 — Topics undeletable: the selection was a single stolen token
+
+The owner's clear-the-dashboard test stalled on Topics alone. Tk's
+default `exportselection=1` exports a listbox's selection to the
+app-wide selection token — one owner at a time — so clicking the
+entries list or the compose pane silently deselected the chosen topic,
+and the toolbar 🗑 declined on an empty `curselection()`. Topics, with
+two listboxes plus a paste pane in one tab, was the most exposed
+section. Companion defect: the delete confirms had no `parent=` and
+could open behind the Study window, making Delete look dead. Fix:
+`exportselection=False` on the four CRUD listboxes; parented confirms;
+a real-Tk test demonstrating steal-vs-survive; static gates on both.
+Lesson: a "nothing happened" bug is usually a PRECONDITION quietly
+false (selection gone, dialog hidden) — instrument the decline path,
+and never trust a 1980s default in a multi-pane UI.

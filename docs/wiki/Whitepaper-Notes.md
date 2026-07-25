@@ -521,3 +521,12 @@
   fall-throughs turn vague field reports into instant diagnoses, and
   the second miss of a heuristic is the signal to swap guessing
   (search) for a contract (registration).
+
+- **2026-07-25 — The undeletable topic was a stolen selection token.**
+  The clear-the-dashboard QA pass stalled because Tk's default
+  exportselection makes all listbox selections one mutually-exclusive
+  token; the busiest tab lost its selection to every neighboring click
+  and Delete declined silently. For the paper: framework defaults
+  encode assumptions from another era, and "the button does nothing"
+  almost always means a precondition went quietly false — log the
+  decline, don't just decline.
