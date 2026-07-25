@@ -193,3 +193,20 @@ the helper at least twice — the wiring can no longer be dropped
 silently. Lesson: a hand-applied cross-cutting affordance always leaves
 a straggler, and copied dialogs copy omissions — gate the pattern, don't
 trust the sweep.
+
+### 2026-07-25 — Entry dialogs: pasted text had no way to be saved
+
+Owner UAT of the same-day clipboard fix found the next link in the
+chain broken: text pasted into the Glossary/Commentary Add dialogs
+could not be committed. Three causes stacked: `grab_set()` froze the
+floating toolbar (modal grab), the dialogs' own Save row was packed
+after the expanding body so short windows clipped it off-screen
+(probe: at 150px the button sat 70px past the edge), and the toolbar's
+find-a-save-button fallback skipped all Toplevels while these dialogs
+keep Save in a frame beside the field — the Toplevel being the only
+shared ancestor. Fix: no grab, bottom-first button rows, fallback skips
+only the root Tk (the <80-widget guard bounds the search). Lesson: a
+workflow is only fixed when its LAST step works — QA the full path
+(copy → paste → save), not the step that was reported; and pack button
+rows bottom-first, always (the `_prompt_for_text` law, now gated in
+`tests/test_clipboard_wiring.py`).

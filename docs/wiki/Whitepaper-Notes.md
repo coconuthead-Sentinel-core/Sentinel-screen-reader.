@@ -502,3 +502,13 @@
   straggler, and a copied dialog copies its omissions; the durable fix
   is a static gate (an ast scan asserting the wiring) rather than a
   memory to be careful.
+
+- **2026-07-25 — Fixing the reported step exposed the next broken one.**
+  Same-day UAT of the paste fix found the pasted text could not be
+  saved: a modal grab froze the toolbar, the dialog's own Save row was
+  packed where Tk starves it first, and the toolbar's fallback search
+  structurally could not reach a Save button whose only shared ancestor
+  with the text field was the skipped Toplevel. For the paper: defects
+  queue along a workflow, so verification must walk the user's full
+  path end-to-end — and a docstring promising behavior the code cannot
+  deliver is itself a defect class worth a static gate.

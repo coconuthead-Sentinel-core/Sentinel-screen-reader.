@@ -2184,7 +2184,14 @@ class BookReader:
         lowered = tuple(k.lower() for k in keywords)
         for target in self._ftb_action_targets():
             for ancestor in self._ftb_widget_lineage(target):
-                if isinstance(ancestor, (tk.Tk, tk.Toplevel)):
+                # Skip only the root Tk. Small Toplevel DIALOGS must be
+                # searched: the Glossary/Commentary Add windows keep 💾
+                # Save in a frame BESIDE the text field, so the only
+                # shared ancestor is the Toplevel itself — skipping every
+                # Toplevel made those Saves unreachable from the toolbar
+                # (owner QA 2026-07-25). The descendant-count guard below
+                # still keeps big windows (Library, workspace) out.
+                if isinstance(ancestor, tk.Tk):
                     continue
                 if self._ftb_descendant_count(ancestor, limit=80) >= 80:
                     continue
@@ -17993,17 +18000,20 @@ class BookReader:
             dlg, wrap=tk.WORD, font=("Segoe UI", 12),
             bg=BG_INPUT, fg=FG_TEXT, padx=14, pady=12, relief=tk.FLAT,
         )
-        body.pack(fill=tk.BOTH, expand=True, padx=14, pady=4)
         body.insert("1.0", definition)
         body.configure(state=tk.DISABLED)
+        # Bottom-up packing (row, then source, then the expanding body) so
+        # Edit/Close can never be clipped off a short window — the same
+        # 2026-07-25 QA law applied to the two entry dialogs.
+        row = tk.Frame(dlg, bg=BG_DARK, padx=14, pady=10)
+        row.pack(side=tk.BOTTOM, fill=tk.X)
         if source:
             src_label = (self._book_short_label(source)
                          if source.startswith(("lib:", "abs:")) else source)
             tk.Label(dlg, text=f"Source: {src_label}",
                      bg=BG_DARK, fg=FG_MUTED, font=("Segoe UI", 10),
-                     padx=14).pack(anchor=tk.W)
-        row = tk.Frame(dlg, bg=BG_DARK, padx=14, pady=10)
-        row.pack(fill=tk.X)
+                     padx=14).pack(side=tk.BOTTOM, anchor=tk.W)
+        body.pack(fill=tk.BOTH, expand=True, padx=14, pady=4)
         tk.Button(row, text="Edit",
                   command=lambda: (dlg.destroy(),
                                    self._edit_glossary_entry(
@@ -18026,7 +18036,9 @@ class BookReader:
         dlg = tk.Toplevel(self.root)
         dlg.title("📒 Glossary entry")
         dlg.configure(bg=BG_DARK)
-        dlg.grab_set()
+        # No grab_set(): a grab made this dialog modal, which froze the
+        # floating toolbar — the yellow 💾 Save could not even be
+        # clicked while the dialog was open (owner QA 2026-07-25).
         self._fit_dialog(dlg, 560, 460)
 
         tk.Label(dlg, text="Term:", bg=BG_DARK, fg=FG_MUTED,
@@ -18049,7 +18061,6 @@ class BookReader:
             bg=BG_INPUT, fg=FG_TEXT, insertbackground=FG_TEXT,
             padx=12, pady=10, relief=tk.FLAT, undo=True,
         )
-        body.pack(fill=tk.BOTH, expand=True, padx=14, pady=4)
         self._attach_clipboard_menu(
             body, clear_cmd=lambda: self._clear_input(body),
             clear_label="🧹  Clear")
@@ -18102,8 +18113,12 @@ class BookReader:
                 pass
             dlg.destroy()
 
+        # The button row packs at the BOTTOM, BEFORE the body — Tk starves
+        # the last-packed widget first, so packing the row last let a short
+        # window clip 💾 Save clean off the screen (owner QA 2026-07-25,
+        # screenshot evidence; same law as _prompt_for_text).
         row = tk.Frame(dlg, bg=BG_DARK, padx=14, pady=10)
-        row.pack(fill=tk.X)
+        row.pack(side=tk.BOTTOM, fill=tk.X)
         # 💾 restored: the sweep orphaned save() — glossary entries could
         # be typed but never stored.
         tk.Button(row, text="💾 Save", command=save,
@@ -18116,6 +18131,7 @@ class BookReader:
                   activebackground=ACCENT_SLATE, relief=tk.FLAT,
                   padx=14, pady=6, cursor="hand2", borderwidth=0,
                   ).pack(side=tk.RIGHT)
+        body.pack(fill=tk.BOTH, expand=True, padx=14, pady=4)
 
         (body if term else term_e).focus_set()
 
@@ -22340,7 +22356,9 @@ class BookReader:
         dlg.title("📑 Commentary entry")
         dlg.configure(bg=BG_DARK)
         self._fit_dialog(dlg, 620, 520)
-        dlg.grab_set()
+        # No grab_set(): a grab made this dialog modal, which froze the
+        # floating toolbar — the yellow 💾 Save could not even be
+        # clicked while the dialog was open (owner QA 2026-07-25).
 
         tk.Label(dlg, text="Title:", bg=BG_DARK, fg=FG_MUTED,
                  font=("Segoe UI", 10), padx=14).pack(anchor=tk.W, pady=(12, 2))
@@ -22359,7 +22377,6 @@ class BookReader:
         body_w = scrolledtext.ScrolledText(
             dlg, wrap=tk.WORD, font=("Segoe UI", 11), bg=BG_INPUT, fg=FG_TEXT,
             insertbackground=FG_TEXT, padx=12, pady=10, relief=tk.FLAT, undo=True)
-        body_w.pack(fill=tk.BOTH, expand=True, padx=14, pady=4)
         self._attach_clipboard_menu(
             body_w, clear_cmd=lambda: self._clear_input(body_w),
             clear_label="🧹  Clear")
@@ -22392,6 +22409,10 @@ class BookReader:
                 pass
             dlg.destroy()
 
+        # Row packs BEFORE the body (side=BOTTOM alone isn't enough — Tk
+        # starves the LAST-packed widget first, so packing the row after
+        # the expanding body still clipped 💾 Save off a short window;
+        # owner QA 2026-07-25, same law as _prompt_for_text).
         row = tk.Frame(dlg, bg=BG_DARK, padx=14, pady=10)
         row.pack(fill=tk.X, side=tk.BOTTOM)
         tk.Button(row, text="💾 Save", command=save,
@@ -22402,6 +22423,7 @@ class BookReader:
                   font=("Segoe UI", 11, "bold"), bg=ACCENT_SLATE, fg="white",
                   activebackground=ACCENT_SLATE, relief=tk.FLAT, padx=14, pady=6,
                   cursor="hand2", borderwidth=0).pack(side=tk.RIGHT)
+        body_w.pack(fill=tk.BOTH, expand=True, padx=14, pady=4)
         (body_w if title else te).focus_set()
 
     def _commentary_import_file(self) -> None:

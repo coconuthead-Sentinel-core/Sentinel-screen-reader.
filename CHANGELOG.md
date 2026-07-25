@@ -11,6 +11,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Fixed
+- **📒📑 Pasted text stranded in the Glossary/Commentary Add dialogs —
+  no way to save it** (owner UAT of the same-day clipboard fix,
+  2026-07-25). Three compounding causes: (a) `grab_set()` made the
+  dialogs modal, freezing the floating toolbar's yellow 💾 Save;
+  (b) the dialogs' own Save row was packed AFTER the expanding body —
+  Tk starves the last-packed widget first, so a short window clipped
+  Save clean off-screen (reproduced in a real-Tk probe: at 150px the
+  button sat 70px past the edge, unmapped); (c) the toolbar's
+  find-a-save-button fallback skipped every Toplevel ancestor, and
+  these dialogs keep 💾 Save in a frame BESIDE the text field, so the
+  Toplevel is the only shared ancestor — the docstring promised the
+  fallback reached these dialogs; it structurally could not. Fix:
+  grab_set dropped (non-modal, matching the toolbar-driven pilot),
+  button rows bottom-packed BEFORE the body in all three dialogs
+  (the `_prompt_for_text` law), and the fallback now skips only the
+  root Tk — the <80-widget guard already keeps big windows out.
+  3 new static gates in `tests/test_clipboard_wiring.py`. Suite 435
+  green + 14 pre-existing skips.
 - **📒 Glossary entry dialog had no right-click paste** (owner QA find,
   2026-07-25, screenshot evidence — a title copied in the Library
   could not be pasted into a new entry's Term field). The dialog was
