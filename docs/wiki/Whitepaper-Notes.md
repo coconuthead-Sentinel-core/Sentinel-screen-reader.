@@ -512,3 +512,12 @@
   queue along a workflow, so verification must walk the user's full
   path end-to-end — and a docstring promising behavior the code cannot
   deliver is itself a defect class worth a static gate.
+
+- **2026-07-25 — The log had the diagnosis before the ticket did.**
+  The owner's "Add does nothing" report was already sitting in
+  qa_debug.log as three `ftb-add: fell through` breadcrumbs spanning
+  two days — and the fix replaced a twice-widened heuristic search
+  with explicit hook registration. For the paper: instrumented
+  fall-throughs turn vague field reports into instant diagnoses, and
+  the second miss of a heuristic is the signal to swap guessing
+  (search) for a contract (registration).

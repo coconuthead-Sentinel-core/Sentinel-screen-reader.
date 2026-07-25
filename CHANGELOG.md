@@ -11,6 +11,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Fixed
+- **➕ The floating toolbar's green Add never reached Topics /
+  Glossary / Commentary** (owner UAT continued, 2026-07-25; the
+  qa_debug.log breadcrumbs showed `ftb-add: fell through` three times
+  across two days while the owner's paste sat stranded). The Add
+  dispatch chain had handlers for the Prompt Library, Library, Planner,
+  Matrix, Journal and Review — but none for the three study sections,
+  and committing an open entry dialog relied on a heuristic
+  find-a-save-button search that kept missing in the field. Fix, the
+  deterministic pilot pattern: (a) both entry dialogs now register
+  their save() as `_ftb_inline_input` while open (cleared on close) —
+  the hook `_prompt_inline` already proved; (b) green ➕ honors that
+  hook first, exactly like yellow 💾 always has, so EITHER button
+  commits the open box; (c) new `_study_add_from_toolbar` in the Add
+  chain: with no box open, ➕ on Topics opens the new-topic box and on
+  Glossary/Commentary opens that section's entry window. The owner's
+  QA workflow — copy in the Library, paste into the box, click ➕ —
+  now lands the entry in the section. 2 new static gates. Suite 437
+  green + 14 pre-existing skips.
 - **📒📑 Pasted text stranded in the Glossary/Commentary Add dialogs —
   no way to save it** (owner UAT of the same-day clipboard fix,
   2026-07-25). Three compounding causes: (a) `grab_set()` made the

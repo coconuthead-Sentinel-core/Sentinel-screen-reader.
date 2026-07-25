@@ -1931,6 +1931,14 @@ class BookReader:
 
     def _ftb_action_add(self) -> None:
         """Context-aware Add button from the floating toolbar."""
+        # An open entry window (Glossary/Commentary Add, new-topic box…)
+        # claims ➕ first: the owner's flow is paste → ➕ → it's in the
+        # section, so Add and Save both commit the open box (owner QA
+        # 2026-07-25 — 'ftb-add: fell through' while the box sat filled).
+        inline = getattr(self, "_ftb_inline_input", None)
+        if inline is not None:
+            inline()
+            return
         if self._prompt_lib_add_from_toolbar():
             return
         if self._library_add_from_toolbar():
@@ -1945,12 +1953,32 @@ class BookReader:
             return
         if self._review_add_from_toolbar():
             return
+        if self._study_add_from_toolbar():
+            return
         if self._ftb_generate_bound_event("<Return>"):
             return
         if self._ftb_invoke_context_button(("add", "new", "create", "upload")):
             return
         _qlog("ftb-add: fell through — no panel claimed the click")
         self.set_status("Click into an add field or list, then use Add.")
+
+    def _study_add_from_toolbar(self) -> bool:
+        """Green ➕ on the study sections opens that section's entry
+        window (Topics → new-topic box, Glossary/Commentary → the Add
+        dialog); the box registers itself as _ftb_inline_input, so the
+        NEXT ➕ (or the yellow 💾) commits it. Open with Add, fill by
+        right-click paste, commit with Add — the owner's QA workflow."""
+        tab = getattr(self, "_study_active_tab", None)
+        if tab == "topics":
+            self._create_new_topic()
+            return True
+        if tab == "glossary":
+            self._edit_glossary_entry()
+            return True
+        if tab == "commentary":
+            self._edit_commentary_entry()
+            return True
+        return False
 
     def _ftb_action_remove(self) -> None:
         """Context-aware Remove button from the floating toolbar."""
@@ -18133,6 +18161,19 @@ class BookReader:
                   ).pack(side=tk.RIGHT)
         body.pack(fill=tk.BOTH, expand=True, padx=14, pady=4)
 
+        # PILOT wiring (owner QA 2026-07-25): while this window is open
+        # the floating toolbar's green ➕ Add AND yellow 💾 Save both
+        # commit it — the same _ftb_inline_input hook _prompt_inline
+        # uses. Deterministic: the heuristic find-a-save-button search
+        # kept missing in the field; a registered hook cannot.
+        self._ftb_inline_input = save
+
+        def _clear_hook(_e=None):
+            if getattr(self, "_ftb_inline_input", None) is save:
+                self._ftb_inline_input = None
+        dlg.bind("<Destroy>", _clear_hook, add="+")
+        term_e.focus_set()
+
         (body if term else term_e).focus_set()
 
     # ---- 4b. Journal helpers (used by the workspace tab) ----------------
@@ -22424,6 +22465,15 @@ class BookReader:
                   activebackground=ACCENT_SLATE, relief=tk.FLAT, padx=14, pady=6,
                   cursor="hand2", borderwidth=0).pack(side=tk.RIGHT)
         body_w.pack(fill=tk.BOTH, expand=True, padx=14, pady=4)
+
+        # PILOT wiring (owner QA 2026-07-25): toolbar ➕/💾 commit this
+        # window while it's open — same hook as the glossary dialog.
+        self._ftb_inline_input = save
+
+        def _clear_hook(_e=None):
+            if getattr(self, "_ftb_inline_input", None) is save:
+                self._ftb_inline_input = None
+        dlg.bind("<Destroy>", _clear_hook, add="+")
         (body_w if title else te).focus_set()
 
     def _commentary_import_file(self) -> None:

@@ -112,6 +112,43 @@ class EntryDialogSaveReachableTest(unittest.TestCase):
                 f"{fn}: the button row packs after the body again — a short "
                 "window will clip the buttons off-screen")
 
+    def test_dialogs_register_the_toolbar_commit_hook(self):
+        """While an entry dialog is open it must register its save() as
+        self._ftb_inline_input (the _prompt_inline pilot hook) so the
+        toolbar's ➕/💾 commit deterministically — the heuristic button
+        search missed in the field (owner QA 2026-07-25)."""
+        for fn in self._EDITORS:
+            assigns = [n for n in ast.walk(_find_func(fn))
+                       if isinstance(n, ast.Assign)
+                       and any(isinstance(t, ast.Attribute)
+                               and t.attr == "_ftb_inline_input"
+                               for t in n.targets)]
+            self.assertTrue(
+                assigns,
+                f"{fn} no longer registers _ftb_inline_input — the "
+                "floating toolbar cannot commit the open dialog")
+
+    def test_toolbar_add_honors_hook_and_study_tabs(self):
+        """Green ➕ must (a) run the registered inline hook first and
+        (b) route to _study_add_from_toolbar so the Topics/Glossary/
+        Commentary sections claim the click instead of falling through."""
+        fn = _find_func("_ftb_action_add")
+        names = {n.value for n in ast.walk(fn)
+                 if isinstance(n, ast.Constant) and isinstance(n.value, str)}
+        self.assertIn("_ftb_inline_input", names,
+                      "_ftb_action_add no longer checks the inline hook")
+        calls = {c.func.attr for c in ast.walk(fn)
+                 if isinstance(c, ast.Call)
+                 and isinstance(c.func, ast.Attribute)}
+        self.assertIn("_study_add_from_toolbar", calls,
+                      "_ftb_action_add lost the study-tab route")
+        study = _find_func("_study_add_from_toolbar")
+        keys = {n.value for n in ast.walk(study)
+                if isinstance(n, ast.Constant) and isinstance(n.value, str)}
+        for key in ("topics", "glossary", "commentary"):
+            self.assertIn(key, keys,
+                          f"_study_add_from_toolbar dropped the '{key}' tab")
+
     def test_toolbar_fallback_searches_toplevel_dialogs(self):
         """_ftb_invoke_context_button must not skip Toplevel ancestors:
         the entry dialogs keep 💾 Save in a frame BESIDE the text field,

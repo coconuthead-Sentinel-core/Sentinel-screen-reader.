@@ -210,3 +210,19 @@ workflow is only fixed when its LAST step works — QA the full path
 (copy → paste → save), not the step that was reported; and pack button
 rows bottom-first, always (the `_prompt_for_text` law, now gated in
 `tests/test_clipboard_wiring.py`).
+
+### 2026-07-25 — Green ➕ Add never reached the study sections
+
+Third link in the same QA chain (paste → save → add): the toolbar's Add
+dispatch had handlers for six panels but none for Topics, Glossary, or
+Commentary — qa_debug.log had recorded `ftb-add: fell through` three
+times across two days, a defect self-reporting in the breadcrumbs while
+nobody read them. And the commit path for an open entry dialog relied
+on a heuristic button search that missed in the field even after being
+widened. Fix: the deterministic hook pattern — dialogs register their
+save() as `_ftb_inline_input` while open; ➕ and 💾 both honor it; a
+new `_study_add_from_toolbar` opens the right section's entry box when
+nothing is open. Lessons: (1) read the breadcrumbs FIRST — the log had
+the diagnosis before the ticket was filed; (2) when a heuristic misses
+twice, stop widening it and replace it with explicit registration —
+search is a guess, a hook is a contract.
