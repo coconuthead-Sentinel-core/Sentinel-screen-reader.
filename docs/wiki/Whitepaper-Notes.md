@@ -530,3 +530,11 @@
   encode assumptions from another era, and "the button does nothing"
   almost always means a precondition went quietly false — log the
   decline, don't just decline.
+
+- **2026-07-25 — The punch list became a defect-class ledger.** The
+  proprietor asked for a running list with a recurrence alarm — same
+  defect class three times → red flag → trace to origin. Filed as
+  Shop-Punch-List.md: IEEE-1044-style classification, tally marks,
+  and the rule that a red-plum class's next occurrence is a process
+  failure, not a code failure. For the paper: individual bugs teach
+  little; tallied classes teach where the process leaks.
