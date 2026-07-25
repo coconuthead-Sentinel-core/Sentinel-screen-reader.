@@ -1968,6 +1968,16 @@ class BookReader:
         dialog); the box registers itself as _ftb_inline_input, so the
         NEXT ➕ (or the yellow 💾) commits it. Open with Add, fill by
         right-click paste, commit with Add — the owner's QA workflow."""
+        # Ghost guard (foreman's self-audit, 2026-07-25): the tab key
+        # OUTLIVES the Study workspace window — without this check a
+        # stale tab would pop a Glossary dialog from anywhere in the
+        # app after the workspace closed (Blueprint §11, KNOWN TRAP).
+        win = getattr(self, "_study_win", None)
+        try:
+            if win is None or not win.winfo_exists():
+                return False
+        except tk.TclError:
+            return False
         tab = getattr(self, "_study_active_tab", None)
         if tab == "topics":
             self._create_new_topic()

@@ -11,6 +11,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Fixed
+- **👻 Ghost-tab guard on the new toolbar-Add route** (foreman's
+  self-audit of the same-day fix, 2026-07-25 — caught on the board
+  before it bit). `_study_active_tab` outlives the Study workspace
+  window (close nulls `_study_win` but never the tab key), so the new
+  `_study_add_from_toolbar` would have popped a Glossary/Commentary
+  dialog from anywhere in the app after the workspace closed. The
+  legacy save/remove handlers only survive this by accident (dead-
+  widget TclError makes them decline). Fix: the Add route verifies
+  `_study_win` exists before acting. The whole workflow is now also
+  written down as pseudocode — Rebuild-Blueprint §11, the fourth
+  source of truth — with this trap documented. 1 new static gate.
+  Suite 438 green + 14 pre-existing skips.
+
+### Docs
+- **Rebuild-Blueprint §11** — the paste-to-section workflow (traffic
+  light × entry windows) in rebuildable pseudocode: dispatch law,
+  entry-window lifecycle (hook contract, bottom-first rows, no grab),
+  and the known ghost-tab trap.
 - **➕ The floating toolbar's green Add never reached Topics /
   Glossary / Commentary** (owner UAT continued, 2026-07-25; the
   qa_debug.log breadcrumbs showed `ftb-add: fell through` three times

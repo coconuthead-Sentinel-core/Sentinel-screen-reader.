@@ -226,3 +226,17 @@ nothing is open. Lessons: (1) read the breadcrumbs FIRST — the log had
 the diagnosis before the ticket was filed; (2) when a heuristic misses
 twice, stop widening it and replace it with explicit registration —
 search is a guess, a hook is a contract.
+
+### 2026-07-25 — Ghost tab: the workspace's memory outlived its window
+(Caught in the foreman's self-audit, before the owner ever saw it.)
+`_study_active_tab` persists after the Study workspace closes — the
+window handle is nulled, the tab key is not — so any toolbar dispatch
+keyed on the tab alone acts on a ghost. The day's new Add route would
+have opened entry dialogs from anywhere in the app; the older save/
+remove handlers survive only because touching a dead widget throws
+TclError and they decline by accident. Fix: the Add route checks
+`_study_win.winfo_exists()` first; the trap is written into
+Rebuild-Blueprint §11 and gated in tests. Lesson: state that OUTLIVES
+its owner is a memory, not a state — every consumer must check the
+owner is alive, and "it works because it crashes quietly" is a bug
+with good luck, not a design.

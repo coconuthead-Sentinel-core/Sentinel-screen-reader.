@@ -273,3 +273,49 @@ size it?" is answerable at a glance. Text-size + Format presets touch the
 READING panes only, never the navigation lists (that scaling bug is fixed
 and lint-gated). The three actions are one context-dispatch each, so the
 cluster behaves the same everywhere it appears.
+
+## 11. The paste-to-section workflow (traffic light × entry windows)
+
+Intake (the owner's QA workflow, proven out 2026-07-25): copy in the
+Library → paste into a little entry window → green ➕ (or yellow 💾) →
+the entry lands in Topics / Glossary / Commentary. This pseudocode is
+the FOURTH source of truth for that workflow — the other three are the
+three synced copies of the code (GitHub, the live install, the OneDrive
+clone). If they ever disagree, rebuild to this.
+
+```text
+ON green ➕ Add:
+    IF an entry window is open (hook _ftb_inline_input registered):
+        COMMIT it (run the hook); STOP.
+    FOR each panel handler (prompt library, library, planner, matrix,
+                            journal, review):
+        IF that panel's WINDOW EXISTS and it claims the click: STOP.
+    IF the Study workspace WINDOW EXISTS (not just a remembered tab):
+        SWITCH on the visible tab:
+            topics     -> open the new-topic box
+            glossary   -> open the Glossary entry window
+            commentary -> open the Commentary entry window
+        STOP.
+    ELSE fall through: breadcrumb to qa_debug.log + status-line hint.
+
+ON yellow 💾 Save:
+    IF an entry window is open: COMMIT it (same hook); STOP.
+    ... existing panel chain unchanged ...
+
+ENTRY-WINDOW LIFECYCLE (Glossary / Commentary / new-topic box):
+    ON OPEN:  register save() as _ftb_inline_input — a CONTRACT the
+              toolbar honors first; never a heuristic button search.
+    ON CLOSE: clear the hook ONLY if it is still ours (identity check —
+              a newer window may have taken the slot).
+    LAYOUT:   button row packs BOTTOM-FIRST (Tk starves the last-packed
+              widget, so bottom-first means Save can never clip);
+              NO grab_set (a grab freezes the toolbar).
+
+KNOWN TRAP (worked out here before code):
+    _study_active_tab OUTLIVES the Study workspace window — it is a
+    memory, not a state. On window close _study_win is nulled but the
+    tab key persists. ANY dispatch keyed on the tab MUST also verify
+    _study_win exists, or it acts on a ghost. (The legacy save/remove
+    handlers survive only by accident — dead-widget TclError makes them
+    decline. New routes must check the window explicitly.)
+```

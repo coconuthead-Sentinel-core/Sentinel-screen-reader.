@@ -149,6 +149,23 @@ class EntryDialogSaveReachableTest(unittest.TestCase):
             self.assertIn(key, keys,
                           f"_study_add_from_toolbar dropped the '{key}' tab")
 
+    def test_study_add_checks_the_window_not_just_the_tab(self):
+        """_study_active_tab outlives the Study workspace window (it is a
+        memory, not a state — Blueprint §11 KNOWN TRAP). The Add route
+        must verify _study_win exists or a stale tab pops a dialog from
+        anywhere in the app after the workspace closes."""
+        fn = _find_func("_study_add_from_toolbar")
+        names = {n.value for n in ast.walk(fn)
+                 if isinstance(n, ast.Constant) and isinstance(n.value, str)}
+        self.assertIn("_study_win", names,
+                      "_study_add_from_toolbar lost its ghost guard")
+        calls = {c.func.attr for c in ast.walk(fn)
+                 if isinstance(c, ast.Call)
+                 and isinstance(c.func, ast.Attribute)}
+        self.assertIn("winfo_exists", calls,
+                      "_study_add_from_toolbar no longer verifies the "
+                      "workspace window exists")
+
     def test_toolbar_fallback_searches_toplevel_dialogs(self):
         """_ftb_invoke_context_button must not skip Toplevel ancestors:
         the entry dialogs keep 💾 Save in a frame BESIDE the text field,
