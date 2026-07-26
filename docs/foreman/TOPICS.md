@@ -22,8 +22,8 @@ EISENHOWER TRIAGE of punch items (2026-07-25)
              survival documented in Blueprint §11)
     CYCLE 3: #9 implementation — extend the assistant's grounding
              feed per the proprietor's scope call (BLOCKED ON DELEGATE)
-    CYCLE 4: v1.0 release cut — tag + changelog roll-up
-             (BLOCKED ON the proprietor's word)
+    CYCLE 4: v1.0 release cut ............... EXECUTED 2026-07-25
+             (tag v1.0.0; stakeholder's order given in session)
 
 🔵 DELEGATE — with Falcon One (only he can decide):
     #8  E: drive verification; verdict on 7 unmerged child branches

@@ -547,3 +547,11 @@
   paper: a retrospective that only produces a document changes
   nothing — one that produces an enforced rule changes the defect
   rate; laws were written citing the tickets that paid for them.
+
+- **2026-07-25 — v1.0 cut on the stakeholder's word.** The release
+  followed the book: feature freeze, stabilization QA, dual-layer V&V
+  (457-test suite + the owner's multi-week acceptance program), then
+  the tag at the stakeholder's explicit order — with the punch list
+  published alongside so v1.0 claims delivered scope, not an empty
+  backlog. For the paper: a release is a DECISION with evidence
+  attached, and the honest release note names what is still open.

@@ -3,7 +3,12 @@
 - **Project:** Sentinel Forge — Personal Development
 - **Owner / stakeholder:** Shannon Brian Kelley (also the primary user)
 - **Document date:** 2026-06-27
-- **Working version:** v0.9 (release-candidate track; supersedes the 2026-05-28 "MVP" label)
+- **Working version:** v1.0 — RELEASED 2026-07-25 (tag `v1.0.0`). The
+  RC exit path this document prescribed was followed: feature freeze,
+  stabilization QA, stakeholder acceptance review (the owner's
+  multi-week UAT program, reported complete 2026-07-25), then the cut
+  at the stakeholder's order. Supersedes the v0.9 RC label below;
+  historical sections kept as the record of the road.
 - **Prepared with:** Claude (AI by Anthropic), working only from the local repository
 
 > Purpose: state, in the language used by software-engineering courses worldwide,

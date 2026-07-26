@@ -70,3 +70,14 @@ ACTIONABLE NEXT STEPS (each with its verifiable proof):
     5. OWNER (whenever ready): the word "cut v1.0" → proof: tag on
        GitHub + rolled-up CHANGELOG
 ```
+
+## 2026-07-25 — Release entry
+
+Proprietor's order received in plain words: cut v1.0 now. Executed:
+CHANGELOG rolled up ([Unreleased] → [1.0.0] with release preamble and
+V&V evidence), README badge and version line updated, SDLC_STATUS
+marked RELEASED via its own prescribed exit path, release-gate suite
+run on the exact code tagged (457 ran / 443 green / 14 platform
+skips), annotated tag v1.0.0. Cycle 4 struck from the queue. Open
+punch items remain published — v1.0 = delivered scope, not empty
+backlog.

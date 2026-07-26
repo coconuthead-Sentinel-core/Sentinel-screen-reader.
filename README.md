@@ -5,7 +5,7 @@
 > capture by Whisper voice dictation, and run focused sessions with goals,
 > accountability tracking, and a zone-tagged Library.**
 
-![Status](https://img.shields.io/badge/status-v0.9%20release--candidate-success)
+![Status](https://img.shields.io/badge/status-v1.0%20released-success)
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 ![Platform: Windows](https://img.shields.io/badge/platform-Windows-0078d4.svg)
@@ -49,7 +49,8 @@ Summary of the standing guardrails, set by the owner:
 This project follows an **iterative / incremental** software life cycle
 (single-developer **Kanban**), documented in
 [`docs/SDLC_STATUS.md`](docs/SDLC_STATUS.md) against ISO/IEC/IEEE 12207 and the
-IEEE SWEBOK. Current working version: **v0.9 (release-candidate track)**.
+IEEE SWEBOK. Current version: **v1.0 (released 2026-07-25, after
+stakeholder acceptance testing — see CHANGELOG for the release record)**.
 
 **Architecture — functional core / imperative shell.** The Tkinter app
 (`sentinel_personal_development.py`) is the UI shell; reusable, UI-free logic

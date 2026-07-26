@@ -10,6 +10,23 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+_Nothing yet — the next change lands here._
+
+## [1.0.0] — 2026-07-25
+
+**First full release**, cut at the stakeholder's order. The v0.9
+release-candidate scope passed both layers of V&V: **verification** —
+457 automated tests (443 green, 14 platform-dependent skips) plus the
+static design-law gates — and **validation** — the proprietor's
+multi-week user-acceptance program, reported complete 2026-07-25:
+books/articles load from the desktop into the Library and can be read,
+saved, deleted, and copied into Topics, Study Notes, Journal, Glossary,
+and Commentary; the Eisenhower Matrix and the daily/weekly/monthly
+planners are fully operable from the floating toolbar (add, remove,
+mark off, copy/paste). Known open items are tracked on the Shop Punch
+List (`docs/wiki/Shop-Punch-List.md`) — v1.0 means the promised scope
+is delivered and validated, not that the backlog is empty.
+
 ### Fixed
 - **📒 Read-only glossary view: right-click copy-out** (punch item 3,
   Eisenhower DO, 2026-07-25). The view allowed selecting a definition
@@ -24,6 +41,8 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   (Journal, Topics, Glossary, Commentary, Library); Eisenhower-triaged
   work queue lives in its TOPICS.md and mirrors to all stations by
   git rather than OneDrive.
+
+### Fixed
 - **📌 Topics could not be cleared — the last section blocking an
   empty dashboard** (owner QA, 2026-07-25: "basic 101 stuff — can we
   add things, can we delete everything?"). Root cause: Tk's default
@@ -58,6 +77,8 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   light × entry windows) in rebuildable pseudocode: dispatch law,
   entry-window lifecycle (hook contract, bottom-first rows, no grab),
   and the known ghost-tab trap.
+
+### Fixed
 - **➕ The floating toolbar's green Add never reached Topics /
   Glossary / Commentary** (owner UAT continued, 2026-07-25; the
   qa_debug.log breadcrumbs showed `ftb-add: fell through` three times
