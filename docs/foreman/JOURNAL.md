@@ -81,3 +81,12 @@ run on the exact code tagged (457 ran / 443 green / 14 platform
 skips), annotated tag v1.0.0. Cycle 4 struck from the queue. Open
 punch items remain published — v1.0 = delivered scope, not empty
 backlog.
+
+## 2026-07-26 — Release completion note
+
+The 07-25 cut was interrupted mid-push by a ~3-hour Wi-Fi outage: the
+release commit + tag existed locally but never reached GitHub or the
+clones. On service restoration the push completed and both clones
+pulled — all four stations now read 7c61737 with tag v1.0.0. Lesson
+for the record: a release isn't cut until the tag is VERIFIED on the
+remote and every mirror — local success is half a release.
