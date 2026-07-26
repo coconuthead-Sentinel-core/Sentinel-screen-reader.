@@ -13147,9 +13147,20 @@ class BookReader:
                 f.pack_forget()
             ss_frames[key].pack(fill=tk.BOTH, expand=True)
             for k, b in ss_buttons.items():
-                b.configure(bg=ACCENT_SLATE if k == key else BG_INPUT,
-                            fg="white" if k == key else FG_TEXT)
+                if k == "wheel":
+                    b.configure(bg=self._WHEEL_TAB_COLOR, fg="white")
+                else:
+                    b.configure(bg=ACCENT_SLATE if k == key else BG_INPUT,
+                                fg="white" if k == key else FG_TEXT)
 
+        # F3 Phase A (Blueprint §12, owner's design 2026-07-26): ONE
+        # visible tab — ☸ Wheel of Life in its own identity color. The
+        # FRONT DOOR. Start and Goals frames are still BUILT and are
+        # reached through the flow (colored area buttons → Goals;
+        # ▶ on the Wheel's footer → Start; Save goal → Matrix), not
+        # through a tab bar — one purpose per screen (W3C COGA
+        # guidance; Hick–Hyman). The old 🎯 Matrix launcher tab is
+        # gone: the flow itself advances there after a goal is saved.
         for key, label in (("start", "🎯 Start"),
                            ("wheel", "☸ Wheel of Life"),
                            ("goals", "🎯 Goals")):
@@ -13159,25 +13170,12 @@ class BookReader:
                           activebackground=ACCENT_SLATE, activeforeground="white",
                           relief=tk.FLAT, padx=10, pady=6, cursor="hand2",
                           borderwidth=0)
-            b.pack(side=tk.LEFT, padx=(0, 3))
+            if key == "wheel":
+                b.configure(bg=self._WHEEL_TAB_COLOR, fg="white",
+                            activebackground=self._WHEEL_TAB_COLOR)
+                b.pack(side=tk.LEFT, padx=(0, 3))
             ss_buttons[key] = b
             ss_frames[key] = tk.Frame(content, bg=BG_DARK)
-
-        # 🎯 Matrix — a LAUNCHER tab (not an inline build). The Matrix is a
-        # heavy stateful tab (4 quadrant editors + timer + autosave handlers);
-        # building it twice would conflict on self._eisenhower_widgets. So this
-        # tab opens the Study workspace and shows the existing Matrix tab.
-        def _go_matrix():
-            try:
-                self.open_study_workspace()
-                self._show_study_tab("matrix")
-            except Exception as e:
-                self.set_status(f"Could not open Matrix: {e}")
-        tk.Button(tabbar, text="🎯 Matrix", command=_go_matrix,
-                  font=("Segoe UI", 10, "bold"), bg=BG_INPUT, fg=FG_TEXT,
-                  activebackground=ACCENT_SLATE, activeforeground="white",
-                  relief=tk.FLAT, padx=10, pady=6, cursor="hand2",
-                  borderwidth=0).pack(side=tk.LEFT, padx=(0, 3))
 
         # The original Session Start flow becomes the "Start" panel.
         body = tk.Frame(ss_frames["start"], bg=BG_DARK, padx=18, pady=12)
@@ -13395,11 +13393,14 @@ class BookReader:
                       cursor="hand2", borderwidth=0
                       ).pack(side=tk.LEFT)
 
-        # Build the two Ziglar panels, then reveal the Start panel first.
+        # Build the two Ziglar panels, then open on the FRONT DOOR —
+        # the Wheel (F3 Phase A: rate today's 1-10 first, then pick a
+        # colored area button; that's the key to the house).
         self._build_wheel_panel(ss_frames["wheel"],
-                                goto_goals=lambda: _show_ss("goals"))
+                                goto_goals=lambda: _show_ss("goals"),
+                                goto_start=lambda: _show_ss("start"))
         self._build_goals_panel(ss_frames["goals"])
-        _show_ss("start")
+        _show_ss("wheel")
 
         if not inline:
             task_entry.focus_set()
@@ -23695,6 +23696,9 @@ class BookReader:
         "career":    "#b91c1c",   # red
         "social":    "#be185d",   # pink
     }
+    # F3 Phase A (Blueprint §12): the Wheel itself — the FRONT DOOR —
+    # wears its own identity color, distinct from all seven area colors.
+    _WHEEL_TAB_COLOR = "#1d4ed8"   # blue — the front door
 
     def _zz_area_label(self, val: str) -> str:
         """Map a stored area key (or label) to its display label."""
@@ -23710,7 +23714,8 @@ class BookReader:
                 return k
         return self._WHEEL_AREAS[0][0]
 
-    def _build_wheel_panel(self, parent: tk.Frame, goto_goals=None) -> None:
+    def _build_wheel_panel(self, parent: tk.Frame, goto_goals=None,
+                           goto_start=None) -> None:
         """Ziglar's Wheel of Life: rate 7 areas 1-10, see your lowest spokes,
         and save a dated snapshot so you can watch the wheel get rounder.
         Builds into `parent` (a frame), so it can live as its own panel inside
@@ -23949,6 +23954,16 @@ class BookReader:
                       fg="white", activebackground=ACCENT_PURPLE,
                       relief=tk.FLAT, padx=12, pady=4, cursor="hand2",
                       borderwidth=0).pack(side=tk.RIGHT)
+        # F3 Phase A (Blueprint §12): the flow ENDS at Start — with the
+        # tab bar reduced to the front door, this is the Start room's
+        # doorway ("then you click start and begin your session").
+        if goto_start is not None:
+            tk.Button(foot, text="▶ Start session",
+                      command=goto_start,
+                      font=("Segoe UI", 10, "bold"), bg=ACCENT_SLATE,
+                      fg="white", activebackground=ACCENT_SLATE,
+                      relief=tk.FLAT, padx=12, pady=4, cursor="hand2",
+                      borderwidth=0).pack(side=tk.RIGHT, padx=(0, 8))
 
 
     def _build_goals_panel(self, parent: tk.Frame) -> None:
@@ -24399,6 +24414,7 @@ class BookReader:
             if not gtitle:
                 self.set_status("Give the goal a title first.")
                 return
+            was_new = state["id"] is None
             now = datetime.now().isoformat()
             fields = (
                 gtitle,
@@ -24432,6 +24448,19 @@ class BookReader:
                         "WHERE id=?", fields + (now, state["id"]))
                 _refresh_list(select_id=state["id"])
                 self.set_status(f"Saved goal: {gtitle}")
+                if was_new:
+                    # F3 Phase A (Blueprint §12): the flow ADVANCES — a
+                    # freshly written goal goes straight to the Matrix
+                    # to be sorted (do now / defer / delegate /
+                    # schedule). Editing an old goal stays put.
+                    try:
+                        self.open_study_workspace()
+                        self._show_study_tab("matrix")
+                        self.set_status(
+                            f"💾 Goal saved — now sort “{gtitle}” in the "
+                            "Matrix: do now / defer / delegate / schedule.")
+                    except Exception:
+                        pass
             except Exception as e:
                 messagebox.showerror("Could not save goal", str(e))
 

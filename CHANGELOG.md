@@ -11,6 +11,22 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **☸ The Front Door — guided session flow, Phase A** (finish-out F3,
+  owner's design, Blueprint §12, 2026-07-26). The Session window now
+  opens on the Wheel of Life as its ONE visible tab, wearing its own
+  identity color (blue, distinct from all seven area colors, WCAG AA
+  vs white — both computed in tests). The Start/Goals/Matrix tab
+  buttons are gone; the rooms remain and are reached by WALKING the
+  flow: rate today's 1-10 → push a colored area button → Goals
+  (badge in the same color) → 💾 Save on a fresh goal AUTO-ADVANCES
+  to the Matrix to sort do-now/defer/delegate/schedule (editing an
+  old goal stays put) → ▶ Start session on the Wheel's footer ends
+  the flow at Start. One purpose per screen, data walks forward —
+  grounded in W3C COGA cognitive-accessibility guidance, Hick–Hyman,
+  and the universal-design curb-cut principle (owner's spec:
+  "not an exception to the rule — something that helps them").
+  Phases B–D (goal→matrix→planner data carry) are blueprinted in
+  §12. 1 new gate. Suite 448 green + 14 skips.
 - **🎯 Goals: life area is a colored badge, not an open dropdown**
   (finish-out F2, owner accessibility QA 2026-07-26). Arriving from a
   wheel button, the worksheet now shows ONE colored chip — same color

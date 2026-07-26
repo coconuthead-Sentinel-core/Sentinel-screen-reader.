@@ -34,3 +34,12 @@ One entry per real CS term, with the day it earned its place.
 - **Redundant coding** — icon + color + word carrying one fact three
   ways; the accessibility pattern behind the wheel buttons and badge.
   (2026-07-26)
+- **Guided task flow (wizard) / sequential disclosure** — one screen,
+  one job, data walks forward; the Front Door design. (2026-07-26)
+- **W3C COGA guidance** — "Making Content Usable for People with
+  Cognitive and Learning Disabilities" (2021): the standards anchor
+  for the finish-out pass. (2026-07-26)
+- **Curb-cut effect / universal design** — built for wheelchairs,
+  helps everyone; the proprietor derived it independently:
+  "not an exception to the rule — something that helps them."
+  (2026-07-26)

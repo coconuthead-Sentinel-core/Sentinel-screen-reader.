@@ -319,3 +319,54 @@ KNOWN TRAP (worked out here before code):
     handlers survive only by accident — dead-widget TclError makes them
     decline. New routes must check the window explicitly.)
 ```
+
+## 12. The Front Door — guided session flow (proprietor's design, 2026-07-26)
+
+Universal-design guided flow: ONE entry, one job per screen, data walks
+forward, no re-entry. Anchored in W3C COGA guidance (one purpose per
+screen, minimal distraction, consistent cues, chunked steps, low memory
+load), Hick–Hyman, and the curb-cut principle: built for neurodivergent
+users, costs neurotypical users nothing.
+
+```text
+THE FLOW (the proprietor's spec, verbatim in structure):
+
+  FRONT DOOR = ☸ Wheel of Life, wearing its OWN distinct color.
+      No Start/Goals/Matrix tabs in view — the rooms remain,
+      reached only by walking the flow (escape hatch: rooms stay
+      programmatically reachable; guided path is the DEFAULT).
+
+  THE KEY: before anything else, set today's 1-10 on the areas.
+  THEN: push ONE colored area button →
+
+  GOALS (one worksheet, area badge in the same color):
+      write the goal (~3 sentences: what + why-now) → Save →
+      AUTO-ADVANCE to →
+
+  MATRIX (Eisenhower): sort THE GOAL's work:
+      do-now / defer / delegate / schedule →
+
+  PLAN (day planner): the do-now and scheduled items LAND here as
+      tasks — carried, never re-typed → the goal's next step is
+      the day's "idea" (this is what I'm working on: my mental
+      stability / my finances / …) →
+
+  START: click ▶ Start and begin the session with the plan loaded.
+
+CARRY RULES (no re-entry):
+  area color+icon+name ride the whole flow (redundant coding);
+  goal title seeds the matrix entry; matrix do-now/schedule seed
+  planner tasks (the Goals "Add to calendar" tie already exists —
+  reuse, don't duplicate).
+
+PHASES (each shippable alone, one commit each):
+  A: wheel = default + only visible tab, distinct color band;
+     Save goal auto-advances to Matrix           [small-functional]
+  B: goal → matrix carry (title seeds the quadrant entry)
+  C: matrix → planner carry (do-now/schedule land as day tasks)
+  D: ▶ Start session close-of-flow button + loaded-plan summary
+
+KNOWN TRAP: hiding tabs must NOT orphan the rooms — every room
+  reachable through the flow, verified per phase; a room you can't
+  reach is a regression, not a simplification.
+```

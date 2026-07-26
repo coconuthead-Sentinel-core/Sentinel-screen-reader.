@@ -93,6 +93,39 @@ class WheelAreaButtonGateTest(unittest.TestCase):
                 f"{key} color {color} has contrast {ratio:.2f}:1 vs white "
                 "text — WCAG AA needs 4.5:1; pick a darker shade")
 
+    def test_front_door_wheel_tab(self):
+        """F3 Phase A (Blueprint §12): the Session window opens on the
+        Wheel, the wheel tab wears its own identity color (also WCAG AA
+        vs white), and a fresh goal's save advances the flow to the
+        Matrix."""
+        for node in ast.walk(_app_tree()):
+            if isinstance(node, ast.Assign) and any(
+                    isinstance(t, ast.Name) and t.id == "_WHEEL_TAB_COLOR"
+                    for t in node.targets):
+                color = ast.literal_eval(node.value)
+                break
+        else:
+            self.fail("_WHEEL_TAB_COLOR missing — the front door lost "
+                      "its identity color")
+        self.assertGreaterEqual(
+            _contrast_vs_white(color), 4.5,
+            f"wheel tab color {color} fails WCAG AA vs white text")
+        areas = _class_dict_literal("_WHEEL_AREA_COLORS")
+        self.assertNotIn(color, areas.values(),
+                         "front-door color must be distinct from every "
+                         "area color")
+        ss = _func_consts("_build_session_start_panel")
+        self.assertIn("wheel", ss)
+        goals = None
+        for node in ast.walk(_app_tree()):
+            if isinstance(node, ast.FunctionDef) \
+                    and node.name == "_build_goals_panel":
+                goals = {n.attr for n in ast.walk(node)
+                         if isinstance(n, ast.Attribute)}
+        self.assertIn("open_study_workspace", goals,
+                      "Save-goal no longer advances the flow to the Matrix")
+        self.assertIn("_show_study_tab", goals)
+
     def test_goals_area_is_a_colored_badge_not_a_dropdown(self):
         """F2: the Goals worksheet's life area renders as a colored badge
         (Menubutton painted from _WHEEL_AREA_COLORS, repainted on every
