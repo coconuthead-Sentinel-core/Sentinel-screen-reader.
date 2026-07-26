@@ -11,6 +11,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Changed
+- **⚔ The Seven Gates** (finish-out G1, Hero's-Journey layer,
+  Blueprint §13, owner's design 2026-07-26). The Wheel of Life front
+  door now speaks the game's language: "☸ The Seven Gates — which
+  gate do you enter today?", and the focus line reads "⚔ The quest is
+  at the lowest gate." Theme is COPY + COLOR only, by §13 law — no
+  new screens or mechanics, because for an ADHD audience the story
+  must never become the distraction. The method underneath remains
+  Ziglar's Wheel of Life, credited in the comments; the existing
+  Reward-Draw engine, streaks, and trend graphs are recognized in the
+  blueprint as the layer's loot and character sheet. Suite 452 green
+  + 14 skips.
 - **🛡 The Sentinel at the gate** (finish-out F7, owner's design
   2026-07-26). The dashboard's top banner now speaks in the product's
   own voice: "🛡 STATE YOUR PURPOSE — NAME YOUR GOAL", with the empty

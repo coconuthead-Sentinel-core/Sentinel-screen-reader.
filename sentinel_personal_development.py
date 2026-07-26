@@ -23797,11 +23797,15 @@ class BookReader:
 
         head = tk.Frame(parent, bg=BG_PANEL, padx=14, pady=10)
         head.pack(fill=tk.X)
-        tk.Label(head, text="☸ Wheel of Life", bg=BG_PANEL, fg=FG_TEXT,
+        # G1 (Blueprint §13, owner's design 2026-07-26): the Wheel is the
+        # SEVEN GATES of the city — theme is copy+color only (§13 Law 1).
+        # The method underneath remains Ziglar's Wheel of Life, credited.
+        tk.Label(head, text="☸ The Seven Gates", bg=BG_PANEL, fg=FG_TEXT,
                  font=("Segoe UI", 15, "bold")).pack(anchor="w")
-        tk.Label(head, text="Rate each area 1 (poor) – 10 (excellent). Your "
-                 "lowest spokes are the \"bumps\" in the wheel — Ziglar says "
-                 "that's where to set your next goals.", bg=BG_PANEL,
+        tk.Label(head, text="Which gate do you enter today? Rate each area "
+                 "1 (poor) – 10 (excellent), then push its gate. Your lowest "
+                 "gate is where the quest is — Ziglar says that's where to "
+                 "set your next goals.", bg=BG_PANEL,
                  fg=FG_MUTED, wraplength=520, justify=tk.LEFT,
                  font=("Segoe UI", 10)).pack(anchor="w", pady=(2, 0))
 
@@ -23856,7 +23860,8 @@ class BookReader:
             vals = [(label, scales[k].get()) for k, label in self._WHEEL_AREAS]
             lo = min(v for _, v in vals)
             weak = [label for label, v in vals if v == lo]
-            focus_var.set(f"Focus areas (lowest = {lo}): " + ", ".join(weak))
+            focus_var.set(f"⚔ The quest is at the lowest gate ({lo}): "
+                          + ", ".join(weak))
         for s in scales.values():
             s.configure(command=_recompute)
         _recompute()

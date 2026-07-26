@@ -393,3 +393,33 @@ only ~6-8 color categories in context (Ware). Applied: Study door
 red→teal, Track door indigo→slate (ended the blue-family duplicate with
 the front door), Career area red→brown. Gated: contrast, door
 distinctness, and a computed red-family reserve check.
+
+## 13. The Hero's Journey layer (proprietor's design intake, 2026-07-26)
+
+Narrative theming over the EXISTING structure — never new mechanics.
+The frame: no one is coming to save you; the dashboard is the
+companion; the Sentinel challenges at the wall (§ F7); the Wheel's
+seven colored buttons ARE the seven gates of the city; Reward-Draw is
+the loot (variable-ratio, honesty-gated); streaks and trend graphs are
+the character sheet.
+
+```text
+LAWS OF THE LAYER (ADHD-safe gamification):
+  1. Theme = COPY + COLOR only. No new screens, popups, animations,
+     or mechanics in the name of fun — for this audience the story
+     must never become the distraction (W3C COGA: minimal
+     distraction; the owner's own guardrail).
+  2. Honesty survives the theme: reward payloads stay source-cited;
+     no manufactured praise; numbers stay numbers (SUS, streaks).
+  3. Attribution survives the theme: Hill/Tracy/Ziglar concepts keep
+     their credits in code comments; the UI wears the game voice.
+  4. Chore quests (money week: paycheck → rent → utilities) may be
+     REFRAMED as quest steps in copy, but the figures are never
+     softened — the game makes the truth pleasant, not vague.
+
+PHASED (each = copy-level, one commit):
+  G1: Wheel = the Seven Gates (header + focus line)      [ready]
+  G2: Goals worksheet = the Quest (title copy)            [next]
+  G3: Matrix = the War Room; Planner = the March          [later]
+  G4: Money chore-flow quest copy (per Law 4)             [later]
+```
