@@ -12981,7 +12981,7 @@ class BookReader:
 
         win = tk.Toplevel(self.root)
         self._money_panel_win = win
-        win.title("💰 Money")
+        win.title("💰 The Treasury")
         try:
             sw = win.winfo_screenwidth(); sh = win.winfo_screenheight()
         except tk.TclError:
@@ -13002,7 +13002,7 @@ class BookReader:
         win.protocol("WM_DELETE_WINDOW", _close)
 
         head = tk.Frame(win, bg=BG_PANEL, padx=14, pady=10); head.pack(fill=tk.X)
-        tk.Label(head, text="💰 Money", bg=BG_PANEL, fg=FG_TEXT,
+        tk.Label(head, text="💰 Treasury", bg=BG_PANEL, fg=FG_TEXT,
                  font=("Segoe UI", 15, "bold")).pack(side=tk.LEFT)
         tk.Button(head, text="✕ Close", command=_close,
                   font=("Segoe UI", 10, "bold"), bg=BG_PANEL, fg=FG_MUTED,
@@ -13215,7 +13215,7 @@ class BookReader:
         self._planning_btn.pack(side=tk.LEFT, padx=(8, 4))
         self._ideas_btn = self._ten_goals_btn = self._vision_btn = \
             self._planning_btn
-        tk.Button(_doors, text="💰 Money", command=self.open_money_panel,
+        tk.Button(_doors, text="💰 Treasury", command=self.open_money_panel,
                   font=("Segoe UI", 9, "bold"), bg=BG_INPUT, fg=FG_TEXT,
                   activebackground=ACCENT_SLATE, activeforeground="white",
                   relief=tk.FLAT, padx=8, pady=3, cursor="hand2",
@@ -23815,33 +23815,62 @@ class BookReader:
         # remain real tk.Buttons — this shop's own ledger (the A−/A+
         # Canvas buttons that dropped clicks) proved decoration and
         # interaction must never share a widget.
-        wall = tk.Canvas(parent, bg=BG_DARK, height=56,
+        wall = tk.Canvas(parent, bg=BG_DARK, height=68,
                          highlightthickness=0)
         wall.pack(fill=tk.X, padx=16)
 
         def _draw_city_wall(_e=None):
+            # G5b (owner's order, 2026-07-26 — "double down on the
+            # wall"): fuller castle — flanking towers with arrow slits,
+            # a wooden gate behind the portcullis, subtle top-light on
+            # the stone. STILL static, still muted, still never a
+            # control (§13 laws).
             c = wall
             c.delete("all")
             W = c.winfo_width() or 560
-            H = 56
+            H = 68
             stone, dark, edge = "#475569", "#334155", "#1e293b"
-            c.create_rectangle(0, 20, W, H, fill=stone, outline="")
+            lite, wood = "#64748b", "#713f12"
+            cx = W // 2
+            # curtain wall
+            c.create_rectangle(0, 30, W, H, fill=stone, outline="")
+            c.create_line(0, 30, W, 30, fill=lite)          # top light
             x = 0
-            while x < W:                       # crenellations
-                c.create_rectangle(x, 8, x + 20, 20, fill=stone,
+            while x < W:                                    # crenellations
+                c.create_rectangle(x, 18, x + 20, 30, fill=stone,
                                    outline="")
+                c.create_line(x, 18, x + 20, 18, fill=lite)
                 x += 40
-            for y in (32, 44):                 # mortar lines
+            for y in (44, 56):                              # mortar
                 c.create_line(0, y, W, y, fill=dark)
-            cx = W // 2                        # the central arch gate
-            c.create_arc(cx - 22, 14, cx + 22, 58, start=0, extent=180,
+            # flanking towers
+            for tx in (cx - 92, cx + 58):
+                c.create_rectangle(tx, 8, tx + 34, H, fill=stone,
+                                   outline=dark)
+                c.create_line(tx, 8, tx + 34, 8, fill=lite)
+                for bx in (tx + 4, tx + 16, tx + 28):       # tower teeth
+                    c.create_rectangle(bx, 2, bx + 6, 8, fill=stone,
+                                       outline="")
+                c.create_line(tx + 17, 22, tx + 17, 34,     # arrow slit
+                              fill=edge, width=2)
+                c.create_line(tx + 17, 46, tx + 17, 58,
+                              fill=edge, width=2)
+            # gatehouse arch, wooden gate, portcullis
+            c.create_arc(cx - 24, 22, cx + 24, 70, start=0, extent=180,
                          fill=edge, outline="")
-            c.create_rectangle(cx - 22, 36, cx + 22, H, fill=edge,
+            c.create_rectangle(cx - 24, 46, cx + 24, H, fill=edge,
                                outline="")
-            for bx in range(cx - 15, cx + 16, 8):   # portcullis bars
-                c.create_line(bx, 28, bx, H, fill=stone)
-            c.create_text(cx, 2, text="🛡", anchor="n",   # the Sentinel
-                          font=("Segoe UI Emoji", 11))
+            c.create_rectangle(cx - 18, 40, cx + 18, H, fill=wood,
+                               outline="")
+            c.create_line(cx, 40, cx, H, fill=dark)          # door seam
+            for by in (48, 58):                              # door bands
+                c.create_line(cx - 18, by, cx + 18, by, fill=dark)
+            for bx in range(cx - 16, cx + 17, 8):            # portcullis
+                c.create_line(bx, 34, bx, H, fill=stone)
+            c.create_line(cx - 18, 38, cx + 18, 38, fill=stone)
+            # the Sentinel on the gatehouse
+            c.create_text(cx, 0, text="🛡", anchor="n",
+                          font=("Segoe UI Emoji", 12))
         wall.bind("<Configure>", _draw_city_wall)
         _draw_city_wall()
 

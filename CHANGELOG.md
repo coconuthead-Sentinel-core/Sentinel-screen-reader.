@@ -11,6 +11,19 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🏰 The fuller castle + 💰 The Treasury** (finish-out G5b + G4a,
+  Blueprint §13, owner's orders 2026-07-26). The city wall doubled
+  down: flanking towers with arrow slits and crenellated teeth, a
+  wooden gate with iron bands behind the portcullis, subtle top-light
+  on the stone — still static, still muted, still never a control.
+  And the Money panel takes its game name: **The Treasury** (window,
+  header, and interior door) — the empire being grown is your own
+  financial security; the wolves at the gate are creditors and
+  grocery runs; figures are never softened (§13 Law 4). The
+  proprietor's Theseus framing is on the blueprint: the black-sail
+  story is the canonical checklist-failure parable — the shop's gates
+  exist so finances never fly a black sail. Suite 453 green + 14
+  skips.
 - **🏰 The city wall is real** (finish-out G5a, Blueprint §13, the
   proprietor's logged and delighted decision, 2026-07-26). The City
   Gates panel now carries static vector art drawn in canvas

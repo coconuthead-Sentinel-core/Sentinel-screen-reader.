@@ -434,3 +434,20 @@ Two laws bound it: §13 Law 1 (static, muted — scenery never spectacle)
 and the new ART-IS-NEVER-A-CONTROL law, earned from this shop's own
 A−/A+ canvas-button defect: decoration and interaction never share a
 widget; everything clickable stays a real tk.Button. Gated in tests.
+
+### §13 amendment (2026-07-26, G5b + G4a): the fuller castle + the Treasury
+
+Logged decisions. G5b: the wall doubled down — flanking towers with
+arrow slits, wooden gate behind the portcullis, subtle top-light on
+the stone; still static, muted, never a control. G4a: the Money panel
+is **💰 The Treasury** (window, header, interior door). The G4 quest
+vocabulary, per the proprietor: the empire being grown is YOUR OWN
+financial security and five-year plan; the invaders are creditors and
+grocery runs — "keeping the wolves at bay," not fighting armies; a
+bank errand is a supply run to town. Candidate hero vocabulary: "What
+are your labors today?" (the proprietor's Theseus framing — and the
+black-sail story is the canonical CHECKLIST-FAILURE parable: one
+forgotten step, catastrophic cost; the shop's gates exist so finances
+never fly a black sail). Law 4 stands over all of it: figures are
+never softened — the game makes the truth pleasant, not vague.
+(Money Hub / Time-vs-Money renames wait for G4 proper.)
