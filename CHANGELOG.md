@@ -11,6 +11,19 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🏙 The city proper, glimpsed past the gate** (finish-out G5d, the
+  owner's composition brief, 2026-07-26). The empty right side of the
+  City Gates header now carries a one-point-perspective vignette:
+  a walkway receding to a vanishing point placed at the canvas's
+  golden sections, hazed rooftop gables flanking the way, a distant
+  tower at the VP — the view a citizen gets just inside the walls.
+  Deliberately low-contrast against the panel color: texture, not
+  signal (the ADHD guardrail by VALUE, not absence); rooftops running
+  off the canvas edge at minimum width read as "the city continues."
+  Parametric throughout (canvas sizes to ~35% of the header, clamped
+  120-280px; every shape a ratio); geometry probed at all three clamp
+  widths; art-never-a-control gate extended to the vignette.
+  Suite 453 green + 14 skips.
 - **🏰 The wall becomes a painting** (finish-out G5c, the owner's
   composition brief, 2026-07-26: foreground/midground/background,
   vanishing light, golden ratio, "geometrically synced"). The scene

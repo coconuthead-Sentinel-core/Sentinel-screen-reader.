@@ -23800,14 +23800,64 @@ class BookReader:
         # G1 (Blueprint §13, owner's design 2026-07-26): the Wheel is the
         # SEVEN GATES of the city — theme is copy+color only (§13 Law 1).
         # The method underneath remains Ziglar's Wheel of Life, credited.
-        tk.Label(head, text="🏰 The City Gates", bg=BG_PANEL, fg=FG_TEXT,
+        # G5d (owner's composition brief, 2026-07-26): the empty right
+        # side of the header carries the CITY PROPER, glimpsed just past
+        # the gate — a one-point-perspective vignette (walkway receding
+        # to a vanishing point at the canvas's golden sections, hazed
+        # rooftops flanking, a distant tower at the VP). Low contrast
+        # against the panel color: texture, not signal. Static, never
+        # a control.
+        head_art = tk.Canvas(head, bg=BG_PANEL, height=64, width=200,
+                             highlightthickness=0)
+        head_art.pack(side=tk.RIGHT, padx=(10, 0))
+        head_txt = tk.Frame(head, bg=BG_PANEL)
+        head_txt.pack(side=tk.LEFT, fill=tk.X, expand=True)
+        tk.Label(head_txt, text="🏰 The City Gates", bg=BG_PANEL,
+                 fg=FG_TEXT,
                  font=("Segoe UI", 15, "bold")).pack(anchor="w")
-        tk.Label(head, text="Rate every area 1 (poor) – 10 (excellent), then "
-                 "face ONE gate at a time — your Sentinel goes with you. "
-                 "The lowest gate is where the quest is. (Ziglar's Wheel of "
-                 "Life underneath.)", bg=BG_PANEL,
+        tk.Label(head_txt, text="Rate every area 1 (poor) – 10 "
+                 "(excellent), then face ONE gate at a time — your "
+                 "Sentinel goes with you. The lowest gate is where the "
+                 "quest is. (Ziglar's Wheel of Life underneath.)",
+                 bg=BG_PANEL,
                  fg=FG_MUTED, wraplength=520, justify=tk.LEFT,
                  font=("Segoe UI", 10)).pack(anchor="w", pady=(2, 0))
+
+        def _draw_city_proper(_e=None):
+            c = head_art
+            c.delete("all")
+            w = c.winfo_width() or 200
+            h = 64
+            PHI = 1.618
+            haze, haze2 = "#3e4f66", "#465871"
+            ground, road = "#33415c", "#2b3950"
+            vpx, vpy = int(w / PHI), int(h * (1 - 1 / PHI))  # golden VP
+            c.create_rectangle(0, vpy, w, h, fill=ground, outline="")
+            # the walkway, converging on the vanishing point
+            c.create_polygon(int(w * 0.30), h, int(w * 0.70), h,
+                             vpx + 5, vpy, vpx - 5, vpy,
+                             fill=road, outline="")
+            # hazed rooftops flanking the way (gable = rect + triangle)
+            for gx, gw, gh in ((int(w * 0.10), 26, 16),
+                               (int(w * 0.78), 30, 20),
+                               (int(w * 0.30), 20, 10)):
+                top = vpy - gh
+                c.create_rectangle(gx, top + gh // 2, gx + gw, vpy + 8,
+                                   fill=haze, outline="")
+                c.create_polygon(gx - 3, top + gh // 2,
+                                 gx + gw // 2, top,
+                                 gx + gw + 3, top + gh // 2,
+                                 fill=haze2, outline="")
+            # the distant tower at the vanishing point
+            c.create_rectangle(vpx - 4, vpy - 22, vpx + 4, vpy,
+                               fill=haze2, outline="")
+            c.create_polygon(vpx - 6, vpy - 22, vpx, vpy - 30,
+                             vpx + 6, vpy - 22, fill=haze, outline="")
+        head_art.bind("<Configure>", _draw_city_proper)
+        head.bind("<Configure>",
+                  lambda e: head_art.configure(
+                      width=max(120, min(280, int(e.width * 0.35)))))
+        _draw_city_proper()
 
         # G5a (logged decision, owner 2026-07-26): the city wall itself —
         # STATIC vector art on a canvas (no animation, muted stone

@@ -141,6 +141,8 @@ class WheelAreaButtonGateTest(unittest.TestCase):
                  if isinstance(n, ast.FunctionDef)}
         self.assertIn("_draw_city_wall", names,
                       "the city wall art is gone from the gates panel")
+        self.assertIn("_draw_city_proper", names,
+                      "the city-proper vignette is gone from the header")
         consts = {n.value for n in ast.walk(fn)
                   if isinstance(n, ast.Constant)
                   and isinstance(n.value, str)}
