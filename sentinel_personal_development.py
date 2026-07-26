@@ -747,7 +747,11 @@ class BookReader:
                   borderwidth=0).pack(side=tk.RIGHT)
         mdp_left = tk.Frame(mdp_bar, bg=MDP_BG)
         mdp_left.pack(side=tk.LEFT, fill=tk.X, expand=True)
-        tk.Label(mdp_left, text="MAJOR DEFINITE PURPOSE — your North Star",
+        # F7 (owner's design 2026-07-26): the Sentinel at the gate — the
+        # game's opening challenge. (Concept remains Hill's Definite
+        # Chief Aim / Tracy's Major Definite Purpose; the UI wears the
+        # Sentinel voice.)
+        tk.Label(mdp_left, text="🛡 STATE YOUR PURPOSE — NAME YOUR GOAL",
                  bg=MDP_BG, fg="#a5b4fc", font=("Segoe UI", 8, "bold")).pack(anchor="w")
         self._mdp_var = tk.StringVar()
         self._mdp_font = tkfont.Font(family="Segoe UI", size=18, weight="bold")
@@ -8774,7 +8778,9 @@ class BookReader:
         if not hasattr(self, "_mdp_var"):
             return
         txt = self._mdp_get()
-        display = txt if txt else "Click to set your one burning goal — your North Star."
+        display = (txt if txt else
+                   "⚔ Halt! State your purpose. Name your goal — "
+                   "then enter.")
         self._mdp_var.set(display)
         self._mdp_draw_text(display, has_value=bool(txt))
 
@@ -8827,10 +8833,10 @@ class BookReader:
         Hill's Definite Chief Aim / Tracy's Major Definite Purpose)."""
         cur = self._mdp_get()
         val = self._ask_text(
-            "Major Definite Purpose",
-            "Your ONE burning goal — the North Star that organizes your whole "
-            "life. Make it specific and dated, e.g. "
-            "“Earn my Computer Science Degree by 2028.”", cur)
+            "🛡 The Sentinel challenges you",
+            "State your purpose. Name your goal — the ONE aim that "
+            "organizes everything. Make it specific and dated, e.g. "
+            "“Earn my Computer Science Degree by 2028.” Then enter.", cur)
         if val is None:
             return
         st = self._load_handoff_state() or {}

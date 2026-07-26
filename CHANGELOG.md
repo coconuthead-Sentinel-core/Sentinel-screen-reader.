@@ -10,6 +10,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- **🛡 The Sentinel at the gate** (finish-out F7, owner's design
+  2026-07-26). The dashboard's top banner now speaks in the product's
+  own voice: "🛡 STATE YOUR PURPOSE — NAME YOUR GOAL", with the empty
+  state "⚔ Halt! State your purpose. Name your goal — then enter."
+  and the edit dialog recast as the Sentinel's challenge. Light
+  gamified framing consistent with the app's name — the sentinel on
+  the city wall challenges you before you enter, and answering it IS
+  setting your aim. The underlying concept (Hill's Definite Chief
+  Aim / Tracy's Major Definite Purpose) keeps its attribution in the
+  code comments; no behavior change. Suite 452 green + 14 skips.
+
 ### Fixed
 - **🎨 The color law — red means stop, nowhere else** (finish-out F6,
   owner QA 2026-07-26: "does the Study button need to be red? Red is
