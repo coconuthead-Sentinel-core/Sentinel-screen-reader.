@@ -23917,12 +23917,27 @@ class BookReader:
                 hx = cx + sx * (dw + hd)
                 c.create_arc(hx - hd, 22, hx + hd, 40, start=0,
                              extent=180, fill=haze, outline="")
-            for tx in (g1, g2):                        # golden-section turrets
-                tw = max(6, int(W * 0.018))
-                c.create_rectangle(tx - tw, 14, tx + tw, 38, fill=haze,
-                                   outline="")
-                c.create_rectangle(tx - tw - 2, 10, tx + tw + 2, 14,
-                                   fill=haze, outline="")
+            # G5f (owner's world-city brief, 2026-07-26): the golden-
+            # section positions now hold two more high traditions —
+            # a tiered PAGODA (Ming/Japanese castle geometry) at the
+            # left section, a domed MUGHAL PAVILION (the structured-
+            # arch-and-dome tradition) at the right — flanking the
+            # Great Dome: three civilizations, one hazed skyline. The
+            # hero approaches Troy; the city holds the world.
+            px = g1                                    # pagoda
+            c.create_rectangle(px - 3, 14, px + 3, 38, fill=haze,
+                               outline="")
+            for ry in (16, 24, 32):                    # tiered roofs
+                c.create_polygon(px - 10, ry + 4, px + 10, ry + 4,
+                                 px + 5, ry, px - 5, ry,
+                                 fill=haze, outline="")
+            c.create_line(px, 10, px, 14, fill=haze, width=2)
+            vx = g2                                    # domed pavilion
+            c.create_rectangle(vx - 6, 27, vx + 6, 38, fill=haze,
+                               outline="")
+            c.create_arc(vx - 7, 18, vx + 7, 32, start=0, extent=180,
+                         fill=haze, outline="")
+            c.create_line(vx, 14, vx, 18, fill=haze, width=2)
 
             # ---- MIDGROUND: curtain wall + flanking towers ----------
             c.create_rectangle(0, 38, W, H, fill=stone, outline="")

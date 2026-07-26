@@ -11,6 +11,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🌏 The world-city skyline** (finish-out G5f, the owner's brief,
+  2026-07-26: the highest art of Ming China, Japan, and India, fairly
+  represented without clutter). The two golden-section turrets are now
+  a tiered PAGODA (left) and a domed MUGHAL PAVILION (right), flanking
+  the Byzantine Great Dome at center — three civilizations' geometric
+  traditions in one hazed skyline, same quiet values, same §13 laws
+  (static, muted, never a control). The narrative reading, per the
+  proprietor: the hero approaches the city as toward Troy — "we're
+  entering the city gates to go to the city" — and the city holds the
+  world. Suite 453 green + 14 skips.
 - **⛪ The Great Dome rises behind the gates** (finish-out G5e, the
   owner's Byzantine brief, 2026-07-26). The mural's background layer
   is now a full skyline: a structured sky in horizon-glow bands

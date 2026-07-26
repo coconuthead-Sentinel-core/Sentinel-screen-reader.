@@ -76,3 +76,10 @@ One entry per real CS term, with the day it earned its place.
   Anthemius of Tralles and Isidore of Miletus: geometry built to catch
   the light. The proprietor's brief for the mural's skyline — the
   highest art of that empire was made by mathematicians. (2026-07-26)
+- **The world-city skyline** — Ming/Japanese pagoda geometry, Mughal
+  arch-and-dome (the Taj tradition), Byzantine Great Dome: three high
+  traditions at the golden sections of one hazed skyline. Teaching
+  note: Chinese scroll masters achieved precision with PARALLEL
+  perspective, not a vanishing point — "precise" has more than one
+  grammar. Troy names the story: the hero approaches the city.
+  (2026-07-26)
