@@ -10,6 +10,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- **🏰 The city wall is real** (finish-out G5a, Blueprint §13, the
+  proprietor's logged and delighted decision, 2026-07-26). The City
+  Gates panel now carries static vector art drawn in canvas
+  primitives — stone wall, crenellations, a central arch with
+  portcullis, the 🛡 Sentinel standing watch — responsive to window
+  width, no images, no new dependencies, era-true to the 2D games
+  the design honors. Bound by two laws: §13 Law 1 (static and muted —
+  scenery, never spectacle) and ART IS NEVER A CONTROL, earned from
+  this shop's own A−/A+ canvas-button defect: everything clickable
+  remains a real button; the art canvas is gated against ever
+  receiving a click binding. Real-Tk probe verified the drawing at
+  full and narrow widths. Suite 453 green + 14 skips.
+
 ### Changed
 - **🏰 The gates are named gates** (finish-out G1b, Blueprint §13,
   owner's design 2026-07-26). Header: "🏰 The City Gates" with the

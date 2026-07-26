@@ -423,3 +423,14 @@ PHASED (each = copy-level, one commit):
   G3: Matrix = the War Room; Planner = the March          [later]
   G4: Money chore-flow quest copy (per Law 4)             [later]
 ```
+
+### §13 amendment (2026-07-26, G5a): the wall is real, the law is realer
+
+Logged decision (proprietor's enthusiastic order): the City Gates panel
+carries STATIC vector art — a stone wall, crenellations, central arch
+with portcullis, the Sentinel standing watch — drawn in ~30 lines of
+canvas primitives, responsive to width, no images, no dependencies.
+Two laws bound it: §13 Law 1 (static, muted — scenery never spectacle)
+and the new ART-IS-NEVER-A-CONTROL law, earned from this shop's own
+A−/A+ canvas-button defect: decoration and interaction never share a
+widget; everything clickable stays a real tk.Button. Gated in tests.

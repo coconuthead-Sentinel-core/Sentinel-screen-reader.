@@ -126,6 +126,29 @@ class WheelAreaButtonGateTest(unittest.TestCase):
                       "Save-goal no longer advances the flow to the Matrix")
         self.assertIn("_show_study_tab", goals)
 
+    def test_city_wall_art_is_never_a_control(self):
+        """G5a: the drawn city wall is decoration ONLY — no click
+        bindings on the art canvas. The shop's own ledger (A−/A+
+        canvas buttons dropping clicks) is why: controls stay real
+        tk.Buttons, art stays art."""
+        fn = None
+        for node in ast.walk(_app_tree()):
+            if isinstance(node, ast.FunctionDef) \
+                    and node.name == "_build_wheel_panel":
+                fn = node
+        self.assertIsNotNone(fn)
+        names = {n.name for n in ast.walk(fn)
+                 if isinstance(n, ast.FunctionDef)}
+        self.assertIn("_draw_city_wall", names,
+                      "the city wall art is gone from the gates panel")
+        consts = {n.value for n in ast.walk(fn)
+                  if isinstance(n, ast.Constant)
+                  and isinstance(n.value, str)}
+        for click in ("<Button-1>", "<ButtonPress-1>", "<Double-Button-1>"):
+            self.assertNotIn(click, consts,
+                             "a click binding appeared in the gates "
+                             "panel — art must never be a control")
+
     def test_color_law_red_reserved_and_doors_distinct(self):
         """F6: red means stop/delete ONLY — no room or door identity may
         be red-family (a red Study door said 'stop' beside the red 🗑 in

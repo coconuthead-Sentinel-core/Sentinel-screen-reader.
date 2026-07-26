@@ -23809,6 +23809,42 @@ class BookReader:
                  fg=FG_MUTED, wraplength=520, justify=tk.LEFT,
                  font=("Segoe UI", 10)).pack(anchor="w", pady=(2, 0))
 
+        # G5a (logged decision, owner 2026-07-26): the city wall itself —
+        # STATIC vector art on a canvas (no animation, muted stone
+        # palette; §13 Law 1). ART IS NEVER A CONTROL: the gates below
+        # remain real tk.Buttons — this shop's own ledger (the A−/A+
+        # Canvas buttons that dropped clicks) proved decoration and
+        # interaction must never share a widget.
+        wall = tk.Canvas(parent, bg=BG_DARK, height=56,
+                         highlightthickness=0)
+        wall.pack(fill=tk.X, padx=16)
+
+        def _draw_city_wall(_e=None):
+            c = wall
+            c.delete("all")
+            W = c.winfo_width() or 560
+            H = 56
+            stone, dark, edge = "#475569", "#334155", "#1e293b"
+            c.create_rectangle(0, 20, W, H, fill=stone, outline="")
+            x = 0
+            while x < W:                       # crenellations
+                c.create_rectangle(x, 8, x + 20, 20, fill=stone,
+                                   outline="")
+                x += 40
+            for y in (32, 44):                 # mortar lines
+                c.create_line(0, y, W, y, fill=dark)
+            cx = W // 2                        # the central arch gate
+            c.create_arc(cx - 22, 14, cx + 22, 58, start=0, extent=180,
+                         fill=edge, outline="")
+            c.create_rectangle(cx - 22, 36, cx + 22, H, fill=edge,
+                               outline="")
+            for bx in range(cx - 15, cx + 16, 8):   # portcullis bars
+                c.create_line(bx, 28, bx, H, fill=stone)
+            c.create_text(cx, 2, text="🛡", anchor="n",   # the Sentinel
+                          font=("Segoe UI Emoji", 11))
+        wall.bind("<Configure>", _draw_city_wall)
+        _draw_city_wall()
+
         # Footer first (pack BOTTOM) so the buttons are always on screen.
         foot = tk.Frame(parent, bg=BG_PANEL, padx=14, pady=10)
         foot.pack(side=tk.BOTTOM, fill=tk.X)
