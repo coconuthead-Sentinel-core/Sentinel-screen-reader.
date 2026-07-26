@@ -47,3 +47,18 @@ One entry per real CS term, with the day it earned its place.
   caution/save (platform HIGs, ISO 3864); identity colors never borrow
   red. The owner's question "does Study need to be red?" was the law
   being discovered. (2026-07-26)
+- **Technology Acceptance Model (TAM)** — Davis 1989: perceived
+  usefulness + perceived ease of use → intention → actual use; the
+  owner's "friendly by design → more interaction" question,
+  formalized and globally replicated. Meta-analytic nuance: ease
+  works largely THROUGH usefulness — function first, friction second.
+  (2026-07-26)
+- **System Usability Scale (SUS)** — Brooke 1996: 10 questions, 0-100,
+  industry mean ≈68; correlates with loyalty and recommendation
+  (SUS/10 ≈ NPS). The instrument that turns "more user friendly"
+  into a number. (2026-07-26)
+- **ISO 9241-11** — usability defined as measurable effectiveness,
+  efficiency, and satisfaction. (2026-07-26)
+- **Aesthetic-usability effect** — Kurosu & Kashimura 1995: pleasing
+  design raises perceived usability and friction tolerance;
+  "pleasing" is functional. (2026-07-26)

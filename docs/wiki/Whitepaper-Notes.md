@@ -555,3 +555,14 @@
   published alongside so v1.0 claims delivered scope, not an empty
   backlog. For the paper: a release is a DECISION with evidence
   attached, and the honest release note names what is still open.
+
+- **2026-07-26 — The engagement question, answered with instruments.**
+  The proprietor asked whether literature proves low-friction design
+  increases use. Answer on the record: TAM (globally replicated)
+  formalizes it, with the meta-analytic nuance that ease works through
+  usefulness — validating this shop's order of operations (function
+  validated at v1.0 BEFORE the accessibility finish-out). No universal
+  "+X% engagement" constant exists; the honest path is instruments
+  (SUS, ISO 9241-11) applied to one's own product. For the paper: the
+  measurable-claims discipline applies to UX claims exactly as it does
+  to clinical ones.
