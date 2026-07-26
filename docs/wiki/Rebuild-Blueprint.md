@@ -370,3 +370,14 @@ KNOWN TRAP: hiding tabs must NOT orphan the rooms — every room
   reachable through the flow, verified per phase; a room you can't
   reach is a regression, not a simplification.
 ```
+
+### §12 amendment (2026-07-26, F4): doors and the cost carry rule
+
+The house has THREE doors, all on the Session tab bar: ☸ Wheel (front,
+blue) · 📊 Track (garage, indigo) · 📓 Study (back, red). Planning and
+Money are NOT doors: planning is the flow's destination, and money is
+a CARRY — a cost attribute captured while walking the flow (a goal's
+medication refill has a price and a pharmacy trip: the price belongs
+to the budget, the trip to the schedule/do-now). Until the cost carry
+is built (Phase B/C), the Planning hub and Money panel keep interior
+doors at the Start room's foot — the trap rule holds: no orphan rooms.

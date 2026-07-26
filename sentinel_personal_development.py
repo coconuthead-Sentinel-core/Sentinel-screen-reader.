@@ -825,35 +825,20 @@ class BookReader:
             return inner
 
         # (📂 Open and 📚 Library live in the Study workspace.)
-        # --- Row 1: one clean, evenly-spaced row of identical action buttons.
-        # Every button sits in its own equal-width grid column (uniform="topbtn")
-        # so each is guaranteed the SAME size and shape; together they stretch
-        # edge-to-edge with even gaps — no cramming, no clipping, no overflow.
-        row1 = tk.Frame(topbar, bg=BG_PANEL); row1.pack(fill=tk.X)
-        TOPBAR_BUTTONS = [
-            ("📋 Planning", self.open_planning_hub,    ACCENT_PURPLE),
-            ("📊 Track",    self.open_track_hub,        ACCENT_INDIGO),
-            ("💰 Money",    self.open_money_panel,      ACCENT_GOLD),
-            ("📓 Study",    self.open_study_workspace,  ACCENT_RED),
-        ]
-        self._topbar_buttons = {}
-        for _col, (_text, _cmd, _color) in enumerate(TOPBAR_BUTTONS):
-            _b = tk.Button(
-                row1, text=_text, command=_cmd,
-                font=("Segoe UI", 10, "bold"),
-                bg=_color, fg="white", activebackground=_color,
-                relief=tk.FLAT, padx=4, pady=6, cursor="hand2", borderwidth=0,
-            )
-            _b.grid(row=0, column=_col, sticky="ew", padx=3, pady=2)
-            row1.grid_columnconfigure(_col, weight=1, uniform="topbtn")
-            self._topbar_buttons[_text] = _b
-        # References the rest of the app relies on (morning/evening nudges
-        # flash these; the mic button toggles its own label/colour).
-        self._planning_btn = self._topbar_buttons["📋 Planning"]
-        self._ideas_btn = self._ten_goals_btn = self._vision_btn = self._planning_btn
-        self._track_btn = self._review_btn = self._topbar_buttons["📊 Track"]
-        # Mic feature was removed — keep a None stub so dead references that
-        # still touch self.mic_btn / self._whisper_quality_var don't crash.
+        # F4 (owner's design, 2026-07-26, Blueprint §12): the four-button
+        # exterior row (Planning/Track/Money/Study) is GONE — a house has
+        # one front door, not four. The three doors now live on the
+        # Session panel's tab bar (☸ Wheel = front, 📊 Track = garage,
+        # 📓 Study = back); Planning is where the FLOW goes, and Money
+        # rides the flow as a cost attribute. The Planning hub and Money
+        # panel keep quiet INTERIOR doors at the Start room's foot, so
+        # no room is orphaned (§12 trap rule). Nudge-flash references
+        # (_planning_btn, _track_btn, …) are reassigned to the new
+        # doors when the Session panel builds; the flashers are
+        # getattr-guarded meanwhile.
+        # Mic feature was removed — keep a None stub so dead references
+        # that still touch self.mic_btn / self._whisper_quality_var
+        # don't crash.
         self.mic_btn = None
         self._whisper_quality_var = None
 
@@ -13176,6 +13161,45 @@ class BookReader:
                 b.pack(side=tk.LEFT, padx=(0, 3))
             ss_buttons[key] = b
             ss_frames[key] = tk.Frame(content, bg=BG_DARK)
+
+        # F4 (owner's design 2026-07-26): the house's other two doors sit
+        # beside the front door — 📊 Track (garage) and 📓 Study (back),
+        # each in its identity color. These replace the dashboard's old
+        # exterior button row.
+        self._track_btn = self._review_btn = tk.Button(
+            tabbar, text="📊 Track", command=self.open_track_hub,
+            font=("Segoe UI", 10, "bold"), bg=ACCENT_INDIGO, fg="white",
+            activebackground=ACCENT_INDIGO, activeforeground="white",
+            relief=tk.FLAT, padx=10, pady=6, cursor="hand2", borderwidth=0)
+        self._track_btn.pack(side=tk.LEFT, padx=(0, 3))
+        tk.Button(tabbar, text="📓 Study", command=self.open_study_workspace,
+                  font=("Segoe UI", 10, "bold"), bg=ACCENT_RED, fg="white",
+                  activebackground=ACCENT_RED, activeforeground="white",
+                  relief=tk.FLAT, padx=10, pady=6, cursor="hand2",
+                  borderwidth=0).pack(side=tk.LEFT, padx=(0, 3))
+
+        # F4 (2026-07-26): interior doors — the Planning hub and Money
+        # panel lost their exterior buttons (one front door), but the
+        # rooms stay reachable from INSIDE the house: quiet links at the
+        # Start room's foot (like the door from the garage into the
+        # kitchen). Nudge-flash refs point here now.
+        _doors = tk.Frame(ss_frames["start"], bg=BG_DARK, padx=18)
+        _doors.pack(side=tk.BOTTOM, fill=tk.X, pady=(0, 8))
+        tk.Label(_doors, text="More rooms:", bg=BG_DARK, fg=FG_MUTED,
+                 font=("Segoe UI", 9)).pack(side=tk.LEFT)
+        self._planning_btn = tk.Button(
+            _doors, text="📋 Planning hub", command=self.open_planning_hub,
+            font=("Segoe UI", 9, "bold"), bg=BG_INPUT, fg=FG_TEXT,
+            activebackground=ACCENT_SLATE, activeforeground="white",
+            relief=tk.FLAT, padx=8, pady=3, cursor="hand2", borderwidth=0)
+        self._planning_btn.pack(side=tk.LEFT, padx=(8, 4))
+        self._ideas_btn = self._ten_goals_btn = self._vision_btn = \
+            self._planning_btn
+        tk.Button(_doors, text="💰 Money", command=self.open_money_panel,
+                  font=("Segoe UI", 9, "bold"), bg=BG_INPUT, fg=FG_TEXT,
+                  activebackground=ACCENT_SLATE, activeforeground="white",
+                  relief=tk.FLAT, padx=8, pady=3, cursor="hand2",
+                  borderwidth=0).pack(side=tk.LEFT, padx=(0, 4))
 
         # The original Session Start flow becomes the "Start" panel.
         body = tk.Frame(ss_frames["start"], bg=BG_DARK, padx=18, pady=12)

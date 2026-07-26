@@ -126,6 +126,29 @@ class WheelAreaButtonGateTest(unittest.TestCase):
                       "Save-goal no longer advances the flow to the Matrix")
         self.assertIn("_show_study_tab", goals)
 
+    def test_one_front_door_no_orphaned_rooms(self):
+        """F4: the dashboard's four-button exterior row is gone, the
+        Session tab bar carries the three doors (wheel/Track/Study), and
+        the Planning hub + Money panel keep interior doors — a room you
+        can't reach is a regression (Blueprint §12 trap rule)."""
+        src_attrs = None
+        for node in ast.walk(_app_tree()):
+            if isinstance(node, ast.FunctionDef) \
+                    and node.name == "_build_session_start_panel":
+                src_attrs = {n.attr for n in ast.walk(node)
+                             if isinstance(n, ast.Attribute)}
+        self.assertIsNotNone(src_attrs)
+        for door in ("open_track_hub", "open_study_workspace",
+                     "open_planning_hub", "open_money_panel"):
+            self.assertIn(door, src_attrs,
+                          f"{door} lost its door — orphaned room "
+                          "(Blueprint §12 trap rule)")
+        with open(_APP, encoding="utf-8") as f:
+            src = f.read()
+        self.assertNotIn("TOPBAR_BUTTONS", src,
+                         "the exterior four-button row is back — the "
+                         "house has one front door")
+
     def test_goals_area_is_a_colored_badge_not_a_dropdown(self):
         """F2: the Goals worksheet's life area renders as a colored badge
         (Menubutton painted from _WHEEL_AREA_COLORS, repainted on every

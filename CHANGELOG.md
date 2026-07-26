@@ -11,6 +11,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🚪 One front door** (finish-out F4, owner's design 2026-07-26).
+  The dashboard's four-button exterior row (Planning / Track / Money /
+  Study) is gone. The house now has exactly three doors, on the
+  Session panel's tab bar: ☸ Wheel of Life (front door, blue),
+  📊 Track (garage, indigo), 📓 Study (back door, red). Planning is
+  not a door anymore — it is where the FLOW goes (wheel → goal →
+  matrix → plan); Money is not a door — cost rides the flow as an
+  attribute of the goal (meds refill → cost → budget; pharmacy trip →
+  schedule), blueprinted as a §12 carry rule. Per the §12 trap rule
+  no room is orphaned: the Planning hub and Money panel keep quiet
+  interior doors at the Start room's foot ("More rooms:"), and the
+  morning/evening nudge-flash references were re-pointed there.
+  1 new gate (exterior row stays gone + all four rooms reachable).
+  Suite 449 green + 14 skips.
 - **☸ The Front Door — guided session flow, Phase A** (finish-out F3,
   owner's design, Blueprint §12, 2026-07-26). The Session window now
   opens on the Wheel of Life as its ONE visible tab, wearing its own
