@@ -381,3 +381,15 @@ medication refill has a price and a pharmacy trip: the price belongs
 to the budget, the trip to the schedule/do-now). Until the cost carry
 is built (Phase B/C), the Planning hub and Money panel keep interior
 doors at the Start room's foot — the trap rule holds: no orphan rooms.
+
+### §12 amendment (2026-07-26, F6): the color law
+
+Paint is code. (1) The traffic light's meanings are RESERVED — green
+go/add, yellow save, RED stop/delete only (platform HIGs; ISO 3864
+gives red the strongest reserved meaning): no room or door identity is
+ever red-family. (2) Identities never duplicate the traffic light's own
+shades. (3) No hue family repeats within one view — humans discriminate
+only ~6-8 color categories in context (Ware). Applied: Study door
+red→teal, Track door indigo→slate (ended the blue-family duplicate with
+the front door), Career area red→brown. Gated: contrast, door
+distinctness, and a computed red-family reserve check.

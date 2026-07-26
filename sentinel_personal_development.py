@@ -13175,15 +13175,20 @@ class BookReader:
         # beside the front door — 📊 Track (garage) and 📓 Study (back),
         # each in its identity color. These replace the dashboard's old
         # exterior button row.
+        # F6 (2026-07-26): door colors obey the color law — slate garage,
+        # teal back door; red/green/yellow stay reserved for the traffic
+        # light (stop/go/save) and are never room identities.
         self._track_btn = self._review_btn = tk.Button(
             tabbar, text="📊 Track", command=self.open_track_hub,
-            font=("Segoe UI", 10, "bold"), bg=ACCENT_INDIGO, fg="white",
-            activebackground=ACCENT_INDIGO, activeforeground="white",
+            font=("Segoe UI", 10, "bold"), bg=self._TRACK_TAB_COLOR,
+            fg="white", activebackground=self._TRACK_TAB_COLOR,
+            activeforeground="white",
             relief=tk.FLAT, padx=10, pady=6, cursor="hand2", borderwidth=0)
         self._track_btn.pack(side=tk.LEFT, padx=(0, 3))
         tk.Button(tabbar, text="📓 Study", command=self.open_study_workspace,
-                  font=("Segoe UI", 10, "bold"), bg=ACCENT_RED, fg="white",
-                  activebackground=ACCENT_RED, activeforeground="white",
+                  font=("Segoe UI", 10, "bold"), bg=self._STUDY_TAB_COLOR,
+                  fg="white", activebackground=self._STUDY_TAB_COLOR,
+                  activeforeground="white",
                   relief=tk.FLAT, padx=10, pady=6, cursor="hand2",
                   borderwidth=0).pack(side=tk.LEFT, padx=(0, 3))
 
@@ -23726,12 +23731,26 @@ class BookReader:
         "physical":  "#15803d",   # green
         "family":    "#c2410c",   # orange
         "financial": "#a16207",   # amber
-        "career":    "#b91c1c",   # red
+        # career was red (#b91c1c) until F6: red is RESERVED for
+        # stop/delete (it sat in the same window as the red 🗑) —
+        # brown is briefcase-neutral and category-distinct from
+        # family's orange.
+        "career":    "#7c2d12",   # brown
         "social":    "#be185d",   # pink
     }
     # F3 Phase A (Blueprint §12): the Wheel itself — the FRONT DOOR —
     # wears its own identity color, distinct from all seven area colors.
     _WHEEL_TAB_COLOR = "#1d4ed8"   # blue — the front door
+    # F6 color law (owner QA 2026-07-26, Blueprint §12): the traffic
+    # light's meanings are RESERVED (green=go/add, yellow=save, red=
+    # stop/delete — platform HIGs; ISO 3864 gives red the strongest
+    # reserved meaning). Rules: (1) NO room/door identity color may be
+    # in the red family — red only ever means stop; (2) identities
+    # never duplicate the traffic light's own shades; (3) no hue
+    # family repeats within one view (~6-8 discriminable color
+    # categories, Ware).
+    _TRACK_TAB_COLOR = "#334155"   # slate — the garage door
+    _STUDY_TAB_COLOR = "#0f766e"   # teal — the back door
 
     def _zz_area_label(self, val: str) -> str:
         """Map a stored area key (or label) to its display label."""

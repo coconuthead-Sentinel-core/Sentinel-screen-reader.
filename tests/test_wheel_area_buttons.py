@@ -126,6 +126,40 @@ class WheelAreaButtonGateTest(unittest.TestCase):
                       "Save-goal no longer advances the flow to the Matrix")
         self.assertIn("_show_study_tab", goals)
 
+    def test_color_law_red_reserved_and_doors_distinct(self):
+        """F6: red means stop/delete ONLY — no room or door identity may
+        be red-family (a red Study door said 'stop' beside the red 🗑 in
+        the same window). The three door colors must be mutually
+        distinct and hold WCAG AA contrast vs their white text."""
+        def _class_str(attr):
+            for node in ast.walk(_app_tree()):
+                if isinstance(node, ast.Assign) and any(
+                        isinstance(t, ast.Name) and t.id == attr
+                        for t in node.targets):
+                    return ast.literal_eval(node.value)
+            self.fail(f"{attr} missing")
+        doors = {k: _class_str(k) for k in
+                 ("_WHEEL_TAB_COLOR", "_TRACK_TAB_COLOR",
+                  "_STUDY_TAB_COLOR")}
+        self.assertEqual(len(set(doors.values())), 3,
+                         "door identity colors must be mutually distinct")
+        identities = dict(doors)
+        identities.update(_class_dict_literal("_WHEEL_AREA_COLORS"))
+        for name, color in identities.items():
+            self.assertGreaterEqual(
+                _contrast_vs_white(color), 4.5,
+                f"{name} {color} fails WCAG AA vs white text")
+            r, g, b = (int(color[i:i + 2], 16) for i in (1, 3, 5))
+            # True red = strong red channel with LITTLE green and blue
+            # (orange and brown carry real green and are not reds —
+            # first draft flagged them; the 3x ratio separates the
+            # categories: #b91c1c r/g≈6.6 is red, #c2410c r/g≈3.0 is
+            # orange, #7c2d12 r/g≈2.8 is brown).
+            self.assertFalse(
+                r >= 120 and r > 3 * g and r > 3 * b,
+                f"{name} {color} is red-family — red is reserved for "
+                "stop/delete (F6 color law; ISO 3864)")
+
     def test_toolbar_shell_controls_pack_before_the_body(self):
         """F5: ❓ Tour and Dock/Undock must be created (and packed)
         BEFORE the toolbar's expanding _FlowFrame body — packed after

@@ -11,6 +11,19 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Fixed
+- **🎨 The color law — red means stop, nowhere else** (finish-out F6,
+  owner QA 2026-07-26: "does the Study button need to be red? Red is
+  stop… am I passionate about learning or am I stopping?"). Platform
+  HIGs and ISO 3864 reserve red for errors/stop/destructive — and the
+  red 📓 Study door sat in the same window as the red 🗑 Delete.
+  Changes: Study door red→teal, Track door indigo→slate (ending the
+  blue-family duplicate with the blue front door — humans discriminate
+  only ~6-8 color categories per view), Career area red→brown
+  (briefcase-neutral; red now means ONLY stop/delete anywhere in the
+  house). The law is written into Blueprint §12 and enforced by a
+  computed gate: contrast, door distinctness, and a red-family reserve
+  check that correctly separates red from orange/brown. Suite 451
+  green + 14 skips.
 - **❓ Tour clipped to "❓ Tou" + shell-button uniformity** (finish-out
   F5, owner QA 2026-07-26). The toolbar's Dock/Undock and ❓ Tour were
   packed LAST, after the expanding content strip — so Tk starved them

@@ -43,3 +43,7 @@ One entry per real CS term, with the day it earned its place.
   helps everyone; the proprietor derived it independently:
   "not an exception to the rule — something that helps them."
   (2026-07-26)
+- **Reserved semantic colors** — red=stop/delete, green=go, yellow=
+  caution/save (platform HIGs, ISO 3864); identity colors never borrow
+  red. The owner's question "does Study need to be red?" was the law
+  being discovered. (2026-07-26)
