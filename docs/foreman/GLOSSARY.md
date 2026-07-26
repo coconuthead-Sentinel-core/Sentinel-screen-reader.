@@ -26,3 +26,11 @@ One entry per real CS term, with the day it earned its place.
 - **exportselection** — Tk default making every listbox selection one
   mutually-exclusive token; the stolen-selection defect class.
   (2026-07-25)
+- **Hick–Hyman law** — decision time grows with the number of visible
+  choices; why the Goals area dropdown became a single badge.
+  (2026-07-26)
+- **Progressive disclosure** — keep the choice, hide the list until
+  asked; how the badge stays functional. (2026-07-26)
+- **Redundant coding** — icon + color + word carrying one fact three
+  ways; the accessibility pattern behind the wheel buttons and badge.
+  (2026-07-26)

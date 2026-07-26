@@ -11,6 +11,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🎯 Goals: life area is a colored badge, not an open dropdown**
+  (finish-out F2, owner accessibility QA 2026-07-26). Arriving from a
+  wheel button, the worksheet now shows ONE colored chip — same color
+  as the button you pushed, icon + word on it (three redundant
+  signals) — instead of a dropdown holding seven alternatives while
+  you work on one. Grounding: Hick–Hyman law (decision time grows
+  with visible choices), extraneous-load reduction (cognitive load
+  theory), and redundant coding per accessibility practice. Function
+  kept via progressive disclosure: click the badge and the area menu
+  opens on request; the badge repaints to the new area's color.
+  1 new gate. Suite 447 green + 14 skips.
 - **☸ Wheel of Life: colored area buttons → Goals** (finish-out F1,
   owner accessibility QA 2026-07-26 — first item of the post-1.0
   finish-out pass: ADHD/dyslexia/dyscalculia real-world lens, cosmetic

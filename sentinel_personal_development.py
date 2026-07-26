@@ -24035,11 +24035,33 @@ class BookReader:
         tk.Label(meta, text="Life area", bg=BG_DARK, fg=FG_TEXT,
                  font=("Segoe UI", 10, "bold")).pack(side=tk.LEFT)
         area_var = tk.StringVar(value=self._WHEEL_AREAS[0][1])
-        area_menu = tk.OptionMenu(meta, area_var,
-                                  *[lab for _, lab in self._WHEEL_AREAS])
-        _style_optionmenu(area_menu)
-        area_menu.configure(width=11, font=("Segoe UI", 10, "bold"))
-        area_menu.pack(side=tk.LEFT, padx=(6, 14))
+        # F2 (owner accessibility QA, 2026-07-26): the life area is a
+        # colored BADGE, not an open dropdown — same color as the wheel
+        # button that brought you here, icon + word on it (three signals:
+        # color, icon, text). Seven alternatives no longer sit in view
+        # while you work on ONE (Hick–Hyman law; extraneous cognitive
+        # load). Progressive disclosure keeps function: clicking the
+        # badge opens the area menu only when asked.
+        area_badge = tk.Menubutton(
+            meta, textvariable=area_var, fg="white",
+            activeforeground="white", relief=tk.FLAT,
+            font=("Segoe UI", 10, "bold"), padx=10, pady=3,
+            cursor="hand2", borderwidth=0)
+        _area_pick = tk.Menu(area_badge, tearoff=0, bg=BG_PANEL,
+                             fg=FG_TEXT, activebackground=ACCENT_SLATE,
+                             activeforeground="white")
+        for _k, _lab in self._WHEEL_AREAS:
+            _area_pick.add_command(
+                label=_lab, command=lambda l=_lab: area_var.set(l))
+        area_badge.configure(menu=_area_pick)
+        area_badge.pack(side=tk.LEFT, padx=(6, 14))
+
+        def _paint_area_badge(*_a):
+            c = self._WHEEL_AREA_COLORS.get(
+                self._zz_area_key(area_var.get()), ACCENT_SLATE)
+            area_badge.configure(bg=c, activebackground=c)
+        area_var.trace_add("write", _paint_area_badge)
+        _paint_area_badge()
         tk.Label(meta, text="Target date", bg=BG_DARK, fg=FG_TEXT,
                  font=("Segoe UI", 10, "bold")).pack(side=tk.LEFT)
         target_e = tk.Entry(meta, bg=BG_INPUT, fg=FG_TEXT, insertbackground=FG_TEXT,

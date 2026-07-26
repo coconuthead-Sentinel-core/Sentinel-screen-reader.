@@ -93,6 +93,26 @@ class WheelAreaButtonGateTest(unittest.TestCase):
                 f"{key} color {color} has contrast {ratio:.2f}:1 vs white "
                 "text — WCAG AA needs 4.5:1; pick a darker shade")
 
+    def test_goals_area_is_a_colored_badge_not_a_dropdown(self):
+        """F2: the Goals worksheet's life area renders as a colored badge
+        (Menubutton painted from _WHEEL_AREA_COLORS, repainted on every
+        area change) — not an always-open OptionMenu of 7 alternatives."""
+        fn = None
+        for node in ast.walk(_app_tree()):
+            if isinstance(node, ast.FunctionDef) \
+                    and node.name == "_build_goals_panel":
+                fn = node
+        self.assertIsNotNone(fn)
+        attrs = {n.attr for n in ast.walk(fn)
+                 if isinstance(n, ast.Attribute)}
+        self.assertIn("_WHEEL_AREA_COLORS", attrs,
+                      "goals area badge no longer painted from the "
+                      "area color map")
+        self.assertIn("Menubutton", attrs,
+                      "goals area badge (Menubutton) is gone")
+        self.assertIn("trace_add", attrs,
+                      "badge no longer repaints when the area changes")
+
     def test_wheel_buttons_wired_to_goals_prefill(self):
         wheel = _func_consts("_build_wheel_panel")
         self.assertIn("_zz_prefill_goal_area", wheel,
