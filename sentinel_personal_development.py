@@ -23800,12 +23800,12 @@ class BookReader:
         # G1 (Blueprint §13, owner's design 2026-07-26): the Wheel is the
         # SEVEN GATES of the city — theme is copy+color only (§13 Law 1).
         # The method underneath remains Ziglar's Wheel of Life, credited.
-        tk.Label(head, text="☸ The Seven Gates", bg=BG_PANEL, fg=FG_TEXT,
+        tk.Label(head, text="🏰 The City Gates", bg=BG_PANEL, fg=FG_TEXT,
                  font=("Segoe UI", 15, "bold")).pack(anchor="w")
-        tk.Label(head, text="Which gate do you enter today? Rate each area "
-                 "1 (poor) – 10 (excellent), then push its gate. Your lowest "
-                 "gate is where the quest is — Ziglar says that's where to "
-                 "set your next goals.", bg=BG_PANEL,
+        tk.Label(head, text="Rate every area 1 (poor) – 10 (excellent), then "
+                 "face ONE gate at a time — your Sentinel goes with you. "
+                 "The lowest gate is where the quest is. (Ziglar's Wheel of "
+                 "Life underneath.)", bg=BG_PANEL,
                  fg=FG_MUTED, wraplength=520, justify=tk.LEFT,
                  font=("Segoe UI", 10)).pack(anchor="w", pady=(2, 0))
 
@@ -23834,13 +23834,19 @@ class BookReader:
                 prefill = getattr(self, "_zz_prefill_goal_area", None)
                 if prefill is not None:
                     prefill(_lab)
-                self.set_status(f"🎯 New goal for {_lab} — name it in one "
-                                "line, then 💾 Save goal.")
+                # G1b: the Sentinel walks through the gate WITH you —
+                # companion voice, instructions still crystal clear.
+                self.set_status(f"🛡 Sentinel: I know, friend — but we've "
+                                f"got a plan. Through the {_lab} Gate: name "
+                                "the quest in one line, then 💾 Save.")
             _color = self._WHEEL_AREA_COLORS.get(k, ACCENT_SLATE)
-            tk.Button(r, text=label, command=_area_goal, width=12,
-                      anchor="w", bg=_color, fg="white",
+            # G1b (owner's design 2026-07-26): gates are NAMED gates and
+            # dressed as gates — a ridge border for the carved-plaque
+            # look; still copy/color/border only (§13 Law 1).
+            tk.Button(r, text=f"{label} Gate", command=_area_goal,
+                      width=16, anchor="w", bg=_color, fg="white",
                       activebackground=_color, activeforeground="white",
-                      relief=tk.FLAT, borderwidth=0, cursor="hand2",
+                      relief=tk.RIDGE, borderwidth=2, cursor="hand2",
                       font=("Segoe UI", 11, "bold"), padx=6,
                       ).pack(side=tk.LEFT)
             s = tk.Scale(r, from_=1, to=10, orient=tk.HORIZONTAL, bg=BG_DARK,

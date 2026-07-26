@@ -11,6 +11,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Changed
+- **🏰 The gates are named gates** (finish-out G1b, Blueprint §13,
+  owner's design 2026-07-26). Header: "🏰 The City Gates" with the
+  companion framing ("face ONE gate at a time — your Sentinel goes
+  with you"); each area button now reads "… Gate" (🧠 Mental Gate,
+  💰 Financial Gate, …) wearing a ridge border for the carved-plaque
+  look; pushing a gate answers in the Sentinel's companion voice
+  ("I know, friend — but we've got a plan…") while keeping the
+  instruction crystal clear. Copy/color/border only per §13 Law 1;
+  hardware note for the record: 1995-2005-class 2D game visuals are
+  trivially within any 2026 budget laptop — the constraint is the
+  distraction law, not the machine. Suite 452 green + 14 skips.
 - **⚔ The Seven Gates** (finish-out G1, Hero's-Journey layer,
   Blueprint §13, owner's design 2026-07-26). The Wheel of Life front
   door now speaks the game's language: "☸ The Seven Gates — which
