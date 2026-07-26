@@ -23681,6 +23681,20 @@ class BookReader:
         ("career",    "💼 Career"),
         ("social",    "🤝 Social"),
     ]
+    # Finish-out F1 (owner accessibility QA, 2026-07-26): each area wears
+    # ONE consistent color everywhere it appears — color-coding aids
+    # scanning and cuts text-decoding load (ADHD/dyslexia), per standard
+    # accessibility practice. Color is never the only signal (icon + word
+    # stay), and shades are dark enough for white bold text (WCAG AA).
+    _WHEEL_AREA_COLORS = {
+        "mental":    "#0e7490",   # cyan
+        "spiritual": "#6d28d9",   # violet
+        "physical":  "#15803d",   # green
+        "family":    "#c2410c",   # orange
+        "financial": "#a16207",   # amber
+        "career":    "#b91c1c",   # red
+        "social":    "#be185d",   # pink
+    }
 
     def _zz_area_label(self, val: str) -> str:
         """Map a stored area key (or label) to its display label."""
@@ -23742,8 +23756,26 @@ class BookReader:
         for k, label in self._WHEEL_AREAS:
             r = tk.Frame(body, bg=BG_DARK)
             r.pack(fill=tk.X, pady=2)
-            tk.Label(r, text=label, bg=BG_DARK, fg=FG_TEXT, width=12,
-                     anchor="w", font=("Segoe UI", 11, "bold")).pack(side=tk.LEFT)
+
+            # F1 (2026-07-26): the area name is a colored BUTTON — set the
+            # slider, push the color, land on a fresh Goals worksheet with
+            # this area already selected (no re-typing; first brick of the
+            # carry-the-data-forward flow).
+            def _area_goal(_lab=label):
+                if goto_goals is not None:
+                    goto_goals()
+                prefill = getattr(self, "_zz_prefill_goal_area", None)
+                if prefill is not None:
+                    prefill(_lab)
+                self.set_status(f"🎯 New goal for {_lab} — name it in one "
+                                "line, then 💾 Save goal.")
+            _color = self._WHEEL_AREA_COLORS.get(k, ACCENT_SLATE)
+            tk.Button(r, text=label, command=_area_goal, width=12,
+                      anchor="w", bg=_color, fg="white",
+                      activebackground=_color, activeforeground="white",
+                      relief=tk.FLAT, borderwidth=0, cursor="hand2",
+                      font=("Segoe UI", 11, "bold"), padx=6,
+                      ).pack(side=tk.LEFT)
             s = tk.Scale(r, from_=1, to=10, orient=tk.HORIZONTAL, bg=BG_DARK,
                          fg=FG_TEXT, troughcolor=BG_INPUT, highlightthickness=0,
                          font=("Segoe UI", 9), length=300, sliderrelief=tk.FLAT,
@@ -24327,6 +24359,18 @@ class BookReader:
             _draw_goal_graph()
             lb.selection_clear(0, tk.END)
             title_e.focus_set()
+
+        # F1 (2026-07-26): the Wheel's colored area buttons land here —
+        # fresh worksheet, that life area preselected, cursor in the Goal
+        # line. Registered on self because the Wheel panel is built first.
+        def _prefill_goal_area(label):
+            try:
+                _clear_form()
+                area_var.set(self._zz_area_label(label))
+                title_e.focus_set()
+            except tk.TclError:
+                pass
+        self._zz_prefill_goal_area = _prefill_goal_area
 
         def _save_goal():
             gtitle = title_e.get().strip()

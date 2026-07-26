@@ -10,7 +10,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-_Nothing yet — the next change lands here._
+### Added
+- **☸ Wheel of Life: colored area buttons → Goals** (finish-out F1,
+  owner accessibility QA 2026-07-26 — first item of the post-1.0
+  finish-out pass: ADHD/dyslexia/dyscalculia real-world lens, cosmetic
+  and small-functional only, no restructure). Each life area's name is
+  now a BUTTON in its own consistent color (color-coding aids scanning
+  and cuts text-decoding load; color is never the only signal — icon
+  and word remain; all seven shades hold ≥4.5:1 WCAG AA contrast
+  against the white text, verified by a computed test). Set the 1-10
+  slider, push the color: you land on a fresh Goals worksheet with
+  that life area already selected and the cursor in the Goal line —
+  the area rides along automatically, the first brick of the
+  no-re-entry flow (wheel → goal → matrix → Start), which is on the
+  board as a design item. 3 new gates. Suite 446 green + 14 skips.
 
 ## [1.0.0] — 2026-07-25
 

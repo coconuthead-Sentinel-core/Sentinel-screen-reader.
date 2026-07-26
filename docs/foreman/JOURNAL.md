@@ -90,3 +90,14 @@ clones. On service restoration the push completed and both clones
 pulled — all four stations now read 7c61737 with tag v1.0.0. Lesson
 for the record: a release isn't cut until the tag is VERIFIED on the
 remote and every mirror — local success is half a release.
+
+## 2026-07-26 — Finish-out pass opened (F-series)
+
+Proprietor's readiness check passed; scope set: cosmetic + small-
+functional accessibility items, NO restructure (his call, on record).
+F1 shipped: Wheel of Life area names became colored buttons (7 colors,
+WCAG AA ≥4.5:1 verified by computed gate) that jump to a fresh Goals
+worksheet with the area preselected. The larger no-re-entry pipeline
+(wheel → goal → matrix → Start, data carried forward) is logged as a
+DESIGN item — needs a §-blueprint before code. One-commit-per-item
+rhythm active due to spotty Wi-Fi.
