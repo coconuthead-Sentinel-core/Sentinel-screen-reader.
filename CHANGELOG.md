@@ -11,6 +11,19 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🏰 The wall becomes a painting** (finish-out G5c, the owner's
+  composition brief, 2026-07-26: foreground/midground/background,
+  vanishing light, golden ratio, "geometrically synced"). The scene
+  is now a three-layer composition drawn in painter's-algorithm
+  order: a hazed distant keep and golden-section turrets (atmospheric
+  perspective — far = lighter), the curtain wall and flanking towers
+  in the midground, the darkest-value gatehouse as the focal
+  foreground. Every coordinate derives from canvas width as a RATIO
+  (parametric layout, clamped for narrow windows), so the composition
+  rescales in proportion and can never drift out of alignment —
+  verified by a real-Tk geometry probe at three widths (golden
+  sections in-canvas, towers always clear of the gate). Still static,
+  muted, never a control. Suite 453 green + 14 skips.
 - **🏰 The fuller castle + 💰 The Treasury** (finish-out G5b + G4a,
   Blueprint §13, owner's orders 2026-07-26). The city wall doubled
   down: flanking towers with arrow slits and crenellated teeth, a

@@ -62,3 +62,13 @@ One entry per real CS term, with the day it earned its place.
 - **Aesthetic-usability effect** — Kurosu & Kashimura 1995: pleasing
   design raises perceived usability and friction tolerance;
   "pleasing" is functional. (2026-07-26)
+- **Painter's algorithm** — draw far layers first, near layers over
+  them; depth by draw order. The wall's background/midground/
+  foreground. (2026-07-26)
+- **Atmospheric perspective** — distance = lighter value, lower
+  contrast; the hazed distant keep behind the wall. (2026-07-26)
+- **Parametric (proportional) layout** — every coordinate derived
+  from canvas size as a ratio, clamped at extremes; the answer to
+  "how do we keep it geometrically synced." (2026-07-26)
+- **Golden section (φ ≈ 1.618)** — the classical pleasing division;
+  the distant turrets stand at 0.382·W and 0.618·W. (2026-07-26)

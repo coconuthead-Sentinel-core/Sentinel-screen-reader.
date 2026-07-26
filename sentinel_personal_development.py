@@ -23815,61 +23815,82 @@ class BookReader:
         # remain real tk.Buttons — this shop's own ledger (the A−/A+
         # Canvas buttons that dropped clicks) proved decoration and
         # interaction must never share a widget.
-        wall = tk.Canvas(parent, bg=BG_DARK, height=68,
+        wall = tk.Canvas(parent, bg=BG_DARK, height=76,
                          highlightthickness=0)
         wall.pack(fill=tk.X, padx=16)
 
         def _draw_city_wall(_e=None):
-            # G5b (owner's order, 2026-07-26 — "double down on the
-            # wall"): fuller castle — flanking towers with arrow slits,
-            # a wooden gate behind the portcullis, subtle top-light on
-            # the stone. STILL static, still muted, still never a
-            # control (§13 laws).
+            # G5c (owner's composition brief, 2026-07-26): a three-layer
+            # painting — BACKGROUND (distant keep + turrets, lightened
+            # by atmospheric perspective, turrets at the GOLDEN SECTIONS
+            # of the canvas), MIDGROUND (curtain wall + flanking
+            # towers), FOREGROUND (gatehouse, darkest values) — drawn in
+            # painter's-algorithm order, far to near. Every coordinate
+            # derives from W as a RATIO (parametric layout, clamped for
+            # narrow windows) so the composition can never fall out of
+            # alignment. Still static, muted, never a control.
             c = wall
             c.delete("all")
             W = c.winfo_width() or 560
-            H = 68
+            H = 76
+            PHI = 1.618
             stone, dark, edge = "#475569", "#334155", "#1e293b"
-            lite, wood = "#64748b", "#713f12"
+            lite, wood, haze = "#64748b", "#713f12", "#3e4f66"
             cx = W // 2
-            # curtain wall
-            c.create_rectangle(0, 30, W, H, fill=stone, outline="")
-            c.create_line(0, 30, W, 30, fill=lite)          # top light
-            x = 0
-            while x < W:                                    # crenellations
-                c.create_rectangle(x, 18, x + 20, 30, fill=stone,
+
+            # ---- BACKGROUND: the distant keep (atmospheric haze) ----
+            kw = max(18, int(W * 0.05))
+            c.create_rectangle(cx - kw, 4, cx + kw, 38, fill=haze,
+                               outline="")
+            for bx in range(cx - kw, cx + kw, 10):     # distant teeth
+                c.create_rectangle(bx, 0, bx + 5, 4, fill=haze,
                                    outline="")
-                c.create_line(x, 18, x + 20, 18, fill=lite)
+            g1, g2 = int(W * (1 - 1 / PHI)), int(W / PHI)
+            for tx in (g1, g2):                        # golden-section turrets
+                tw = max(6, int(W * 0.018))
+                c.create_rectangle(tx - tw, 12, tx + tw, 38, fill=haze,
+                                   outline="")
+                c.create_rectangle(tx - tw - 2, 8, tx + tw + 2, 12,
+                                   fill=haze, outline="")
+
+            # ---- MIDGROUND: curtain wall + flanking towers ----------
+            c.create_rectangle(0, 38, W, H, fill=stone, outline="")
+            c.create_line(0, 38, W, 38, fill=lite)
+            x = 0
+            while x < W:
+                c.create_rectangle(x, 26, x + 20, 38, fill=stone,
+                                   outline="")
+                c.create_line(x, 26, x + 20, 26, fill=lite)
                 x += 40
-            for y in (44, 56):                              # mortar
+            for y in (52, 64):
                 c.create_line(0, y, W, y, fill=dark)
-            # flanking towers
-            for tx in (cx - 92, cx + 58):
-                c.create_rectangle(tx, 8, tx + 34, H, fill=stone,
+            t_off = max(60, int(W * 0.16))             # proportional, clamped
+            t_w = max(28, min(40, int(W * 0.06)))
+            for tx in (cx - t_off, cx + t_off - t_w):
+                c.create_rectangle(tx, 14, tx + t_w, H, fill=stone,
                                    outline=dark)
-                c.create_line(tx, 8, tx + 34, 8, fill=lite)
-                for bx in (tx + 4, tx + 16, tx + 28):       # tower teeth
-                    c.create_rectangle(bx, 2, bx + 6, 8, fill=stone,
+                c.create_line(tx, 14, tx + t_w, 14, fill=lite)
+                for bx in (tx + 4, tx + t_w // 2 - 3, tx + t_w - 10):
+                    c.create_rectangle(bx, 8, bx + 6, 14, fill=stone,
                                        outline="")
-                c.create_line(tx + 17, 22, tx + 17, 34,     # arrow slit
-                              fill=edge, width=2)
-                c.create_line(tx + 17, 46, tx + 17, 58,
-                              fill=edge, width=2)
-            # gatehouse arch, wooden gate, portcullis
-            c.create_arc(cx - 24, 22, cx + 24, 70, start=0, extent=180,
+                mid = tx + t_w // 2
+                c.create_line(mid, 28, mid, 40, fill=edge, width=2)
+                c.create_line(mid, 52, mid, 66, fill=edge, width=2)
+
+            # ---- FOREGROUND: the gatehouse (darkest, focal center) --
+            c.create_arc(cx - 24, 30, cx + 24, 78, start=0, extent=180,
                          fill=edge, outline="")
-            c.create_rectangle(cx - 24, 46, cx + 24, H, fill=edge,
+            c.create_rectangle(cx - 24, 54, cx + 24, H, fill=edge,
                                outline="")
-            c.create_rectangle(cx - 18, 40, cx + 18, H, fill=wood,
+            c.create_rectangle(cx - 18, 48, cx + 18, H, fill=wood,
                                outline="")
-            c.create_line(cx, 40, cx, H, fill=dark)          # door seam
-            for by in (48, 58):                              # door bands
+            c.create_line(cx, 48, cx, H, fill=dark)
+            for by in (56, 66):
                 c.create_line(cx - 18, by, cx + 18, by, fill=dark)
-            for bx in range(cx - 16, cx + 17, 8):            # portcullis
-                c.create_line(bx, 34, bx, H, fill=stone)
-            c.create_line(cx - 18, 38, cx + 18, 38, fill=stone)
-            # the Sentinel on the gatehouse
-            c.create_text(cx, 0, text="🛡", anchor="n",
+            for bx in range(cx - 16, cx + 17, 8):
+                c.create_line(bx, 42, bx, H, fill=stone)
+            c.create_line(cx - 18, 46, cx + 18, 46, fill=stone)
+            c.create_text(cx, 6, text="🛡", anchor="n",
                           font=("Segoe UI Emoji", 12))
         wall.bind("<Configure>", _draw_city_wall)
         _draw_city_wall()
