@@ -88,6 +88,21 @@ that applies; each has already cost a ticket:
   Entries once); helpers touching "any input widget" must dispatch on
   widget class and be tested on both.
 
+## Law 7 — The measured bar (A-grade doctrine, proprietor's order 2026-07-26)
+
+Quality claims are NUMBERS from standard instruments, never adjectives.
+Usability is measured per ISO 9241-11 (effectiveness, efficiency,
+satisfaction) with the System Usability Scale; the shop's target is
+**SUS ≥ 85** — an A on the published Sauro–Lewis grade scale, where the
+industry mean of 68 is a C. The bar is aspirational BY DESIGN: the shop
+will not always hit it, but it is never lowered to meet a result —
+shortfalls are reported as the number they are, never rounded up, and
+n-of-1 self-measures are labeled as personal evidence, not market
+claims. Rationale on the record: TAM (globally replicated) ties ease
+and usefulness to actual use, with ease working THROUGH usefulness —
+so function ships first, friction-removal second, and both get
+measured. The scorecard lives at `docs/foreman/SUS-SCORECARD.md`.
+
 ## Enforcement
 
 These laws bind alongside `classroom-code` (which governs stages and

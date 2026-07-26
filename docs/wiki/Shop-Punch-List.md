@@ -50,6 +50,7 @@ DEFER → #6, #7 (scope-first before any code).
 | 6 | Vault Catalog (optical/external media index): archive-set export + media catalog table in study.db | owner's 2026-07-25 optical-media intake | BACKLOG — scope-first + blueprint before any code |
 | 7 | Script-export pipeline for narrated educational segments (notes/glossary → script text for outside video tools) | same intake | BACKLOG — idea only, no scope yet |
 | 8 | E: drive verification (proprietor clarified 2026-07-25: E: = the 1TB external backup/offload HDD); 7 unmerged child branches decision | journal 2026-07-20 | OPEN — checked 2026-07-25: E: NOT mounted; needs the drive plugged in, then foreman reads/verifies. Branch verdict still proprietor's call |
+| 10 | SUS baseline (Law 7, A-grade doctrine): proprietor takes the 10-question scorecard cold against v1.0+F-series (`docs/foreman/SUS-SCORECARD.md`), re-measures after ~2-3 weeks of daily use; target ≥85, shortfalls reported as-is | proprietor's order 2026-07-26 | OPEN — awaiting first administration |
 | 9 | AI assistant grounding gaps (verified in code 2026-07-25): feed reads Library files, study notes, glossary, journal, topic TITLES — not Matrix, Planner, the commentaries table, or topic-entry bodies. Owner believed commentary was read; likely via Library files, not the section. | owner status report 2026-07-25 | OPEN — scope decision: which sections should the assistant see? |
 
 ## C. How a line moves

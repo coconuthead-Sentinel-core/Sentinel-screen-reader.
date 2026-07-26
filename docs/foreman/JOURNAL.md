@@ -101,3 +101,17 @@ worksheet with the area preselected. The larger no-re-entry pipeline
 (wheel → goal → matrix → Start, data carried forward) is logged as a
 DESIGN item — needs a §-blueprint before code. One-commit-per-item
 rhythm active due to spotty Wi-Fi.
+
+## 2026-07-26 — Law 7 enacted: the measured bar
+
+Proprietor's order, complete-ownership framing: the evidence segment
+(TAM/SUS/ISO 9241-11) becomes shop law. Law 7 added to
+shop-defect-laws (user-level + repo mirror): quality claims are
+numbers from standard instruments; shop target SUS ≥ 85 (Sauro–Lewis
+A; industry mean 68 = C — the proprietor graded the curve correctly
+by instinct); the bar never lowers to meet a result; n-of-1 measures
+labeled honestly. Scorecard instrument filed
+(docs/foreman/SUS-SCORECARD.md), baseline ticket opened (punch #10).
+The point, in his words: "we're following industry standards
+already — this isn't something anyone else isn't already doing."
+Correct — and now it's written down and gated by ritual.
