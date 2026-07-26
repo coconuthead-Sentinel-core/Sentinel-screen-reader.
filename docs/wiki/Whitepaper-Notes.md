@@ -566,3 +566,15 @@
   (SUS, ISO 9241-11) applied to one's own product. For the paper: the
   measurable-claims discipline applies to UX claims exactly as it does
   to clinical ones.
+
+- **2026-07-26 — The city-builder proof.** The proprietor grounded the
+  Hero's-Journey layer in the genre he lived: Caesar/Pharaoh/AoE-era
+  city builders were resource-management spreadsheets made voluntarily
+  pleasurable by theme — millions managed grain ledgers for fun. The
+  design claim, kept modest: narrative framing does not remove the
+  chore, it lowers ACTIVATION ENERGY — the starting friction that is
+  the costliest tax on an ADHD user. Bounded by the shop's own laws:
+  static scenery, art-is-never-a-control, instructions stay clear,
+  figures never soften. For the paper: the 1995-2005 management-sim
+  genre is prior art that a life dashboard can borrow its motivation
+  loop from, on commodity hardware, without a graphics budget.
