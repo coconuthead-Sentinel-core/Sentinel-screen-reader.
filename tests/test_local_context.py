@@ -116,5 +116,54 @@ class RetrieveContextRecursionTest(unittest.TestCase):
         self.assertEqual(retrieve_context("zebra", d), "")
 
 
+class StudyDbDocumentsTest(unittest.TestCase):
+    """Punch #9 (proprietor's scope call, 2026-07-26): the assistant's
+    grounding feed reads EVERY validated section — one seeded row per
+    section must come back from study_db_documents(). Isolated on a
+    temp DB via the blessed temp_study_db() (never the live file)."""
+
+    def test_all_sections_feed_the_assistant(self):
+        from lyceum.db import study_db
+        from lyceum.local_context import study_db_documents
+        with study_db.temp_study_db():
+            con = study_db.connect()
+            con.executescript(study_db.STUDY_SCHEMA)
+            now = "2026-07-26T00:00:00"
+            con.execute("INSERT INTO study_note_entries (title, body, "
+                        "created_at, updated_at) VALUES ('n', "
+                        "'seed-note-body', ?, ?)", (now, now))
+            con.execute("INSERT INTO glossary (term, definition, "
+                        "created_at, updated_at) VALUES ('seed-term', "
+                        "'a definition', ?, ?)", (now, now))
+            con.execute("INSERT INTO journal (entry_date, body, "
+                        "created_at, updated_at) VALUES ('2026-07-26', "
+                        "'seed-journal-body', ?, ?)", (now, now))
+            con.execute("INSERT INTO topics (title, created_at) "
+                        "VALUES ('seed-topic-title', ?)", (now,))
+            con.execute("INSERT INTO topic_entries (topic_id, text, "
+                        "created_at) VALUES (1, 'seed-entry-body', ?)",
+                        (now,))
+            con.execute("INSERT INTO commentaries (title, body, "
+                        "created_at, updated_at) VALUES "
+                        "('seed-commentary', 'its body', ?, ?)",
+                        (now, now))
+            con.execute("INSERT INTO eisenhower (quadrant, body, "
+                        "updated_at) VALUES ('do', 'seed-matrix-task', "
+                        "?)", (now,))
+            con.execute("INSERT INTO planner_tasks (day, title, "
+                        "created_at, updated_at) VALUES ('2026-07-26', "
+                        "'seed-planner-task', ?, ?)", (now, now))
+            con.commit()
+            con.close()
+            texts = " | ".join(t for _tag, t in study_db_documents())
+            for needle in ("seed-note-body", "seed-term",
+                           "seed-journal-body", "seed-topic-title",
+                           "seed-entry-body", "seed-commentary",
+                           "seed-matrix-task", "seed-planner-task"):
+                self.assertIn(needle, texts,
+                              f"assistant grounding feed lost '{needle}' "
+                              "— a section fell out of the reading list")
+
+
 if __name__ == "__main__":
     unittest.main()

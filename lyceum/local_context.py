@@ -171,6 +171,15 @@ def _iter_study_db():
         ("SELECT term, definition FROM glossary", "glossary"),
         ("SELECT entry_date, body FROM journal", "journal"),
         ("SELECT title FROM topics", "topic"),
+        # Punch #9 — proprietor's scope call, 2026-07-26: the assistant
+        # reads ALL validated sections. Previously commentary/topic
+        # BODIES, the Matrix, and the Planner were invisible to it (the
+        # owner believed commentary was read; it was only Library
+        # files). Local-first: nothing leaves the laptop.
+        ("SELECT title, body FROM commentaries", "commentary"),
+        ("SELECT text FROM topic_entries", "topic"),
+        ("SELECT quadrant, body FROM eisenhower", "matrix"),
+        ("SELECT day, title FROM planner_tasks", "planner"),
     ):
         try:
             for row in study_db.db_query(sql):

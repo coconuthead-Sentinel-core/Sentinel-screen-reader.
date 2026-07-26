@@ -115,3 +115,13 @@ labeled honestly. Scorecard instrument filed
 The point, in his words: "we're following industry standards
 already — this isn't something anyone else isn't already doing."
 Correct — and now it's written down and gated by ritual.
+
+## 2026-07-26 — The proprietor cleared his side of the board
+
+Delegated decisions received and executed same cycle: (1) branch
+verdict — both remaining Copilot branches verified 0-unique-commits
+and DELETED; GitHub now holds main only; (2) reading-list scope call —
+ALL FOUR sections granted; grounding feed extended (commentaries,
+topic-entry bodies, Matrix, Planner) with a seeded-row retrieval test
+per section. Punch #9 struck; #8 half-struck (E: drive plug-in is the
+only remaining proprietor action besides the SUS baseline).
