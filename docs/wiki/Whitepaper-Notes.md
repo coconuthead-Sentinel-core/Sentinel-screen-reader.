@@ -578,3 +578,14 @@
   figures never soften. For the paper: the 1995-2005 management-sim
   genre is prior art that a life dashboard can borrow its motivation
   loop from, on commodity hardware, without a graphics budget.
+
+- **2026-07-26 — The dome behind the gates.** The proprietor's art
+  brief reached its thesis: the mural uses Byzantine and Renaissance
+  compositional discipline (structured sky, golden-section placement,
+  one-point perspective, atmospheric light) because the game's empire
+  IS the user's own life — "behind the gates, you see a future." For
+  the paper: the Hagia Sophia is the standing proof that the highest
+  aesthetic effect was achieved BY engineering — geometry in service
+  of meaning — which is precisely the claim this dashboard makes at
+  desktop scale: precise, parametric art whose entire job is to make
+  a hard day feel worth entering.

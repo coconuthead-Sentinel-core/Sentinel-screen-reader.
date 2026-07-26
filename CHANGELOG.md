@@ -11,6 +11,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **⛪ The Great Dome rises behind the gates** (finish-out G5e, the
+  owner's Byzantine brief, 2026-07-26). The mural's background layer
+  is now a full skyline: a structured sky in horizon-glow bands
+  (lightest just above the rooftops — the future glows past the
+  gate), two calm geometric clouds at golden positions, and at the
+  focal center a great dome on its drum with flanking half-domes —
+  the Hagia Sophia silhouette, chosen because Byzantium's highest art
+  was built by engineer-geometers to catch light. All hazed per
+  atmospheric perspective, all parametric (probed at three widths),
+  all behind the midground wall — static, muted, never a control.
+  Suite 453 green + 14 skips.
 - **🏙 The city proper, glimpsed past the gate** (finish-out G5d, the
   owner's composition brief, 2026-07-26). The empty right side of the
   City Gates header now carries a one-point-perspective vignette:

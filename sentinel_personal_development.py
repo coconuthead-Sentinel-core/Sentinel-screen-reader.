@@ -23888,19 +23888,40 @@ class BookReader:
             lite, wood, haze = "#64748b", "#713f12", "#3e4f66"
             cx = W // 2
 
-            # ---- BACKGROUND: the distant keep (atmospheric haze) ----
-            kw = max(18, int(W * 0.05))
-            c.create_rectangle(cx - kw, 4, cx + kw, 38, fill=haze,
-                               outline="")
-            for bx in range(cx - kw, cx + kw, 10):     # distant teeth
-                c.create_rectangle(bx, 0, bx + 5, 4, fill=haze,
-                                   outline="")
+            # ---- BACKGROUND (G5e, the owner's Byzantine brief): the
+            # sky is STRUCTURED — horizon-glow bands lightest just above
+            # the skyline (the future glows past the gate), two calm
+            # geometric clouds at golden positions — and the skyline's
+            # crown is the GREAT DOME on its drum with flanking
+            # half-domes (the Hagia Sophia silhouette: geometry built to
+            # catch the light), rising behind the gatehouse at the
+            # focal center. All hazed: distance = light, per
+            # atmospheric perspective. ----
+            sky_lo, sky_hi = "#19253d", "#223250"
+            domec = "#4a5b74"
+            c.create_rectangle(0, 10, W, 24, fill=sky_lo, outline="")
+            c.create_rectangle(0, 24, W, 38, fill=sky_hi, outline="")
             g1, g2 = int(W * (1 - 1 / PHI)), int(W / PHI)
+            for cxx in (g1, g2):                       # geometric clouds
+                cw = max(14, int(W * 0.05))
+                c.create_oval(cxx - cw, 6, cxx + cw, 12, fill=sky_hi,
+                              outline="")
+            dw = max(20, int(W * 0.055))               # the Great Dome
+            c.create_rectangle(cx - dw, 20, cx + dw, 38, fill=domec,
+                               outline="")             # drum
+            c.create_arc(cx - dw, 6, cx + dw, 34, start=0, extent=180,
+                         fill=domec, outline="")       # dome
+            c.create_line(cx, 2, cx, 6, fill=domec, width=2)  # finial
+            for sx in (-1, 1):                         # half-domes
+                hd = max(10, int(W * 0.028))
+                hx = cx + sx * (dw + hd)
+                c.create_arc(hx - hd, 22, hx + hd, 40, start=0,
+                             extent=180, fill=haze, outline="")
             for tx in (g1, g2):                        # golden-section turrets
                 tw = max(6, int(W * 0.018))
-                c.create_rectangle(tx - tw, 12, tx + tw, 38, fill=haze,
+                c.create_rectangle(tx - tw, 14, tx + tw, 38, fill=haze,
                                    outline="")
-                c.create_rectangle(tx - tw - 2, 8, tx + tw + 2, 12,
+                c.create_rectangle(tx - tw - 2, 10, tx + tw + 2, 14,
                                    fill=haze, outline="")
 
             # ---- MIDGROUND: curtain wall + flanking towers ----------

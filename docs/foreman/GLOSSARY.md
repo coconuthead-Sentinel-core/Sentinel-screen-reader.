@@ -72,3 +72,7 @@ One entry per real CS term, with the day it earned its place.
   "how do we keep it geometrically synced." (2026-07-26)
 - **Golden section (φ ≈ 1.618)** — the classical pleasing division;
   the distant turrets stand at 0.382·W and 0.618·W. (2026-07-26)
+- **Hagia Sophia (the Great Dome)** — Byzantine, 537 AD, engineered by
+  Anthemius of Tralles and Isidore of Miletus: geometry built to catch
+  the light. The proprietor's brief for the mural's skyline — the
+  highest art of that empire was made by mathematicians. (2026-07-26)
