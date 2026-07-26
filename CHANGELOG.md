@@ -10,6 +10,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- **❓ Tour clipped to "❓ Tou" + shell-button uniformity** (finish-out
+  F5, owner QA 2026-07-26). The toolbar's Dock/Undock and ❓ Tour were
+  packed LAST, after the expanding content strip — so Tk starved them
+  first and the Tour label clipped off the right edge (the Save-row
+  law, horizontal edition; this corner had clipped before per the
+  code's own history note). They now pack FIRST, beside the grip, and
+  wear the bar's standard control spec (same font/padding as
+  🎤 Voice / 🔊 Read) — consistency and standards, Nielsen #4.
+  Gate locks the pack order. Suite 450 green + 14 skips.
+
 ### Added
 - **🚪 One front door** (finish-out F4, owner's design 2026-07-26).
   The dashboard's four-button exterior row (Planning / Track / Money /

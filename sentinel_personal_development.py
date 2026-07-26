@@ -1269,6 +1269,29 @@ class BookReader:
         grip.bind("<B1-Motion>", self._floating_toolbar_drag_motion)
         self._ftb_grip = grip
 
+        # Shell controls (Dock/Undock + ❓ Tour) pack RIGHT and FIRST —
+        # owner QA 2026-07-26: packed last, they were the first widgets
+        # Tk starved when the bar ran narrow, clipping "❓ Tour" to
+        # "❓ Tou" (the Save-row law, horizontal edition: pack edge
+        # controls before the expanding middle). Sized to the bar's
+        # standard control spec (same font/padding as 🎤 Voice/🔊 Read)
+        # so the shell is uniform with the features — consistency and
+        # standards (Nielsen #4).
+        dock_text = "⇱ Undock" if self._ftb_is_docked else "⇲ Dock ▼"
+        self._ftb_dock_btn = tk.Button(
+            parent, text=dock_text,
+            command=self._floating_toolbar_toggle,
+            font=("Segoe UI", 9, "bold"), bg=ACCENT_SLATE, fg="white",
+            activebackground=ACCENT_SLATE, relief=tk.FLAT,
+            padx=10, pady=2, cursor="hand2", borderwidth=0)
+        self._ftb_dock_btn.pack(side=tk.RIGHT, padx=4, pady=3)
+        tour_btn = tk.Button(
+            parent, text="❓ Tour", command=self._ftb_show_tour,
+            font=("Segoe UI", 9, "bold"), bg=ACCENT_CYAN, fg="white",
+            activebackground=ACCENT_CYAN, relief=tk.FLAT,
+            padx=10, pady=2, cursor="hand2", borderwidth=0)
+        tour_btn.pack(side=tk.RIGHT, padx=(0, 2), pady=3)
+
         # Content area inside the toolbar. A wrapping strip: when the bar
         # is docked into a window narrower than the controls, it flows
         # onto a second row (and grows the dock host) instead of clipping
@@ -1426,23 +1449,9 @@ class BookReader:
         #  highlight is on the right-click menu of every text widget
         #  via _attach_clipboard_menu — Yellow / Teal / Indigo.)
 
-        # Dock/Undock toggle (part of the toolbar shell, not a feature).
-        dock_text = "⇱ Undock" if self._ftb_is_docked else "⇲ Dock ▼"
-        self._ftb_dock_btn = tk.Button(
-            parent, text=dock_text,
-            command=self._floating_toolbar_toggle,
-            font=("Segoe UI", 9, "bold"), bg=ACCENT_SLATE, fg="white",
-            activebackground=ACCENT_SLATE, relief=tk.FLAT,
-            padx=8, pady=2, cursor="hand2", borderwidth=0)
-        self._ftb_dock_btn.pack(side=tk.RIGHT, padx=4, pady=3)
-
-        # ❓ Tour — guided walkthrough of every control on this bar.
-        tour_btn = tk.Button(
-            parent, text="❓ Tour", command=self._ftb_show_tour,
-            font=("Segoe UI", 9, "bold"), bg=ACCENT_CYAN, fg="white",
-            activebackground=ACCENT_CYAN, relief=tk.FLAT,
-            padx=8, pady=2, cursor="hand2", borderwidth=0)
-        tour_btn.pack(side=tk.RIGHT, padx=(0, 2), pady=3)
+        # (Dock/Undock + ❓ Tour moved to the TOP of this builder — they
+        #  must pack before the expanding body or Tk starves them; see
+        #  the shell-controls block by the grip.)
 
         # The tour walks these in order, flashing each control amber.
         self._ftb_tour_items = [

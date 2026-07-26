@@ -126,6 +126,31 @@ class WheelAreaButtonGateTest(unittest.TestCase):
                       "Save-goal no longer advances the flow to the Matrix")
         self.assertIn("_show_study_tab", goals)
 
+    def test_toolbar_shell_controls_pack_before_the_body(self):
+        """F5: ❓ Tour and Dock/Undock must be created (and packed)
+        BEFORE the toolbar's expanding _FlowFrame body — packed after
+        it, Tk starves them first and the labels clip off the right
+        edge (owner QA 2026-07-26: '❓ Tou')."""
+        fn = None
+        for node in ast.walk(_app_tree()):
+            if isinstance(node, ast.FunctionDef) \
+                    and node.name == "_build_floating_toolbar_widgets":
+                fn = node
+        self.assertIsNotNone(fn)
+        tour_line = flow_line = None
+        for n in ast.walk(fn):
+            if isinstance(n, ast.Constant) and n.value == "❓ Tour" \
+                    and tour_line is None:
+                tour_line = n.lineno
+            if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) \
+                    and n.func.id == "_FlowFrame" and flow_line is None:
+                flow_line = n.lineno
+        self.assertIsNotNone(tour_line, "❓ Tour button missing")
+        self.assertIsNotNone(flow_line, "_FlowFrame body missing")
+        self.assertLess(tour_line, flow_line,
+                        "shell controls pack after the expanding body "
+                        "again — they will clip when the bar runs narrow")
+
     def test_one_front_door_no_orphaned_rooms(self):
         """F4: the dashboard's four-button exterior row is gone, the
         Session tab bar carries the three doors (wheel/Track/Study), and
