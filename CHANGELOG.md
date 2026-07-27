@@ -10,6 +10,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- **👻 The invisible skyline — art values are now measured** (G5i,
+  owner QA 2026-07-26/27: "the scene you're describing... just not
+  showing up in the app"). The owner was right and the probes were
+  blind: the sky bands measured 1.17:1 contrast against the window —
+  clinically invisible on a real display — and the header vignette's
+  palette had been tuned against the WRONG background (BG_DARK
+  instead of the PANEL color its canvas actually sits on). Tenth
+  tally mark for the invisible-state red plum, art edition; Law 6
+  proven again (headless probes cannot see contrast — the owner's
+  eyes are the instrument). Fix: the entire mural palette lifted into
+  named class constants (_WALL_PALETTE, _VIGNETTE_PALETTE) with every
+  value re-tuned against its true canvas — structures now measure
+  ~3:1+ (WCAG 1.4.11 spirit), atmospheric layers stay hazy but never
+  drop below ~1.5:1 — and a COMPUTED gate now verifies every mural
+  color against its actual background, so invisible art can never
+  ship silently again. Suite 458 green + 14 skips.
+
 ### Added
 - **🌾 Life in the quarters** (finish-out G5h, the owner's quarters
   brief, 2026-07-26). The city-proper vignette's empty regions now

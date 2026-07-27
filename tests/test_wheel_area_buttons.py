@@ -126,6 +126,41 @@ class WheelAreaButtonGateTest(unittest.TestCase):
                       "Save-goal no longer advances the flow to the Matrix")
         self.assertIn("_show_study_tab", goals)
 
+    def test_mural_palette_visible_on_its_canvas(self):
+        """G5i (owner QA 2026-07-26): the skyline rendered INVISIBLE on
+        the real display — sky bands measured 1.17:1 vs the window and
+        the vignette was tuned against the wrong background. Art values
+        are now measured: structures hold ~3:1 vs their actual canvas
+        (WCAG 1.4.11 spirit), atmospheric sky stays hazy but >= 1.5:1,
+        and shadow accents keep separation from the stone they sit on.
+        Headless probes cannot see contrast; this gate can."""
+        BG_DARK, BG_PANEL = "#0f172a", "#1e293b"
+
+        def cr(a, b):
+            la, lb = _rel_luminance(a), _rel_luminance(b)
+            hi, lo = max(la, lb), min(la, lb)
+            return (hi + 0.05) / (lo + 0.05)
+        wall = _class_dict_literal("_WALL_PALETTE")
+        mins = {"sky_lo": 1.5, "sky_hi": 1.6, "haze": 2.8,
+                "haze2": 3.0, "domec": 3.0, "stone": 2.8,
+                "lite": 3.5, "wood": 2.4, "gold": 3.5}
+        for key, m in mins.items():
+            self.assertGreaterEqual(
+                cr(wall[key], BG_DARK), m,
+                f"wall '{key}' {wall[key]} fades below {m}:1 vs the "
+                "dark canvas — invisible-art regression")
+        self.assertGreaterEqual(cr(wall["stone"], wall["edge"]), 1.7,
+                                "gatehouse no longer reads darker than "
+                                "the wall around it")
+        self.assertGreaterEqual(cr(wall["stone"], wall["dark"]), 1.3,
+                                "mortar lines vanish into the stone")
+        for key, color in _class_dict_literal(
+                "_VIGNETTE_PALETTE").items():
+            self.assertGreaterEqual(
+                cr(color, BG_PANEL), 1.55,
+                f"vignette '{key}' {color} fades below 1.55:1 vs the "
+                "PANEL background it actually sits on")
+
     def test_city_wall_art_is_never_a_control(self):
         """G5a: the drawn city wall is decoration ONLY — no click
         bindings on the art canvas. The shop's own ledger (A−/A+

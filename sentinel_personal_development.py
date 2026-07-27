@@ -23793,6 +23793,24 @@ class BookReader:
     # categories, Ware).
     _TRACK_TAB_COLOR = "#334155"   # slate — the garage door
     _STUDY_TAB_COLOR = "#0f766e"   # teal — the back door
+    # G5i visibility law (owner QA 2026-07-26: the skyline rendered
+    # invisible on the real display — values measured 1.17:1 vs the
+    # window; headless probes can't see contrast, the owner's eyes
+    # can). ART VALUES ARE MEASURED: every mural color lives here so a
+    # computed gate can verify contrast against its actual canvas
+    # background (WCAG 1.4.11 spirit: structures ≥~3:1, atmospheric
+    # layers ≥~1.5:1 — hazy, never invisible).
+    _WALL_PALETTE = {          # drawn on BG_DARK (#0f172a)
+        "sky_lo": "#2b3c62", "sky_hi": "#2f4066",
+        "haze":   "#566a89", "haze2":  "#5f7494", "domec": "#64789b",
+        "stone":  "#57667f", "dark":   "#3b4a60", "edge":  "#1c2739",
+        "lite":   "#74839b", "wood":   "#8a4d16", "gold":  "#a3822a",
+    }
+    _VIGNETTE_PALETTE = {      # drawn on BG_PANEL (#1e293b)
+        "ground": "#3d4c68", "road": "#55637d",
+        "haze":   "#5a6f8e", "haze2": "#647a99",
+        "f1":     "#4a6a5f", "f2":    "#567a68",
+    }
 
     def _zz_area_label(self, val: str) -> str:
         """Map a stored area key (or label) to its display label."""
@@ -23865,8 +23883,9 @@ class BookReader:
             w = c.winfo_width() or 200
             h = 64
             PHI = 1.618
-            haze, haze2 = "#3e4f66", "#465871"
-            ground, road = "#33415c", "#2b3950"
+            V = self._VIGNETTE_PALETTE   # G5i: tuned vs BG_PANEL — the
+            haze, haze2 = V["haze"], V["haze2"]   # old values were tuned
+            ground, road = V["ground"], V["road"]  # vs the WRONG bg
             vpx, vpy = int(w / PHI), int(h * (1 - 1 / PHI))  # golden VP
             c.create_rectangle(0, vpy, w, h, fill=ground, outline="")
             # the walkway, converging on the vanishing point
@@ -23896,7 +23915,7 @@ class BookReader:
             # crop strips. Midground: a chimney with static smoke —
             # the minimalist genre's universal "someone is home."
             # Sky: two distant birds. All muted, all still.
-            f1, f2 = "#3a4f4a", "#425c50"          # field tones
+            f1, f2 = V["f1"], V["f2"]              # field tones
             lw, rw = int(w * 0.28), int(w * 0.72)  # walkway edges at h
             c.create_polygon(0, h, lw, h, vpx - 8, vpy + 6,
                              0, vpy + 6, fill=f1, outline="")
@@ -23953,8 +23972,9 @@ class BookReader:
             W = c.winfo_width() or 560
             H = 76
             PHI = 1.618
-            stone, dark, edge = "#475569", "#334155", "#1e293b"
-            lite, wood, haze = "#64748b", "#713f12", "#3e4f66"
+            P = self._WALL_PALETTE   # G5i: measured, gateable values
+            stone, dark, edge = P["stone"], P["dark"], P["edge"]
+            lite, wood, haze = P["lite"], P["wood"], P["haze"]
             cx = W // 2
 
             # ---- BACKGROUND (G5e, the owner's Byzantine brief): the
@@ -23966,8 +23986,8 @@ class BookReader:
             # catch the light), rising behind the gatehouse at the
             # focal center. All hazed: distance = light, per
             # atmospheric perspective. ----
-            sky_lo, sky_hi = "#19253d", "#223250"
-            domec = "#4a5b74"
+            sky_lo, sky_hi = P["sky_lo"], P["sky_hi"]
+            domec = P["domec"]
             c.create_rectangle(0, 10, W, 24, fill=sky_lo, outline="")
             c.create_rectangle(0, 24, W, 38, fill=sky_hi, outline="")
             g1, g2 = int(W * (1 - 1 / PHI)), int(W / PHI)
@@ -23980,7 +24000,7 @@ class BookReader:
                                outline="")             # drum
             c.create_arc(cx - dw, 6, cx + dw, 34, start=0, extent=180,
                          fill=domec, outline="")       # dome
-            c.create_line(cx, 2, cx, 6, fill="#8a6d1f", width=2)  # gold finial
+            c.create_line(cx, 2, cx, 6, fill=P["gold"], width=2)  # gold finial
             for sx in (-1, 1):                         # half-domes
                 hd = max(10, int(W * 0.028))
                 hx = cx + sx * (dw + hd)
@@ -24056,7 +24076,7 @@ class BookReader:
             # cuirass, spear, round shield — the reference's guardian
             # in our engine's idiom. One whisper of muted Byzantine
             # gold (shield + plume + dome finial), center line only.
-            gold = "#8a6d1f"
+            gold = P["gold"]
             c.create_oval(cx - 3, 50, cx + 3, 56, fill=lite,       # helmet
                           outline="")
             c.create_arc(cx - 5, 47, cx + 5, 55, start=30,         # plume

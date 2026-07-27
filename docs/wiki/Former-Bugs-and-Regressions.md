@@ -256,3 +256,17 @@ a real-Tk test demonstrating steal-vs-survive; static gates on both.
 Lesson: a "nothing happened" bug is usually a PRECONDITION quietly
 false (selection gone, dialog hidden) — instrument the decline path,
 and never trust a 1980s default in a multi-pane UI.
+
+### 2026-07-26/27 — The invisible skyline (invisible-state mark #10)
+
+The owner restarted twice and reported the described mural absent; the
+code was correct and the owner was correct — the VALUES were wrong.
+Sky bands measured 1.17:1 against the window (invisible); the vignette
+palette had been tuned against BG_DARK while its canvas sits on
+BG_PANEL. Geometry probes counted shapes and passed; only the owner's
+eyes could see contrast (shop Law 6, proven a second time). Fix:
+palette lifted to named constants and re-tuned against the TRUE
+canvas of each drawing; a computed contrast gate now measures every
+mural color vs its actual background. Lesson: an artwork has a
+precondition too — sufficient value separation — and "drawn" is not
+"visible"; measure the light, not just the geometry.

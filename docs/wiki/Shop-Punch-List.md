@@ -21,7 +21,7 @@ trace-to-origin investigation as its own ticket.
 
 | Class | What it looks like | Marks | Status |
 |---|---|---|---|
-| Invisible state | control works but shows nothing (checkbox, meter, status) | 9 | 🔴 red plum — standing design law: every action shows visible proof |
+| Invisible state | control works but shows nothing (checkbox, meter, status — and now ART: drawn ≠ visible) | 10 (2026-07-27: the invisible skyline, values 1.17:1) | 🔴 red plum — standing design law: every action shows visible proof |
 | Precondition quietly false | "button does nothing" because selection/focus/window silently invalid | 4 (2026-07-25: stolen selection, hidden confirm, ghost tab, empty curselection decline) | 🔴 red plum — decline paths must LOG (breadcrumb) and TELL (status line), never just return |
 | Cross-cutting affordance missed | app-wide feature (clipboard menu, mic enrollment) skips one widget | 3 (glossary dialog, commentary dialog, earlier mic boxes) | 🔴 red plum — hand-applied sweeps always miss one; every sweep now ends with a static gate |
 | Clipped/unreachable controls | last-packed rows starved off short windows; modal grabs freezing the toolbar | 3 (glossary row, commentary row, read-view row) | ⚠ watch — bottom-first law gated in tests |
