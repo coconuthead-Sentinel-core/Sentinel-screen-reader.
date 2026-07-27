@@ -125,6 +125,9 @@ class WheelAreaButtonGateTest(unittest.TestCase):
         self.assertIn("open_study_workspace", goals,
                       "Save-goal no longer advances the flow to the Matrix")
         self.assertIn("_show_study_tab", goals)
+        self.assertIn("add_text_to_matrix_quadrant", goals,
+                      "Phase B regressed — a new goal no longer CARRIES "
+                      "its next action into the Do-Now quadrant")
 
     def test_mural_palette_visible_on_its_canvas(self):
         """G5i (owner QA 2026-07-26): the skyline rendered INVISIBLE on

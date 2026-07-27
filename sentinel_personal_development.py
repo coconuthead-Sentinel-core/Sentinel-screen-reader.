@@ -24887,18 +24887,38 @@ class BookReader:
                 _refresh_list(select_id=state["id"])
                 self.set_status(f"Saved goal: {gtitle}")
                 if was_new:
-                    # F3 Phase A (Blueprint §12): the flow ADVANCES — a
-                    # freshly written goal goes straight to the Matrix
-                    # to be sorted (do now / defer / delegate /
-                    # schedule). Editing an old goal stays put.
+                    # §12 Phase B (owner's order, 2026-07-27): the flow
+                    # CARRIES, not just advances — the goal's next
+                    # action (first plan line, else the title) LANDS in
+                    # the Do-Now quadrant as a sourced bullet. Nothing
+                    # re-typed. Editing an old goal still stays put.
+                    from lyceum.flow_carry import next_action
+                    carry, used_step = next_action(
+                        gtitle, action_t.get("1.0", tk.END))
                     try:
                         self.open_study_workspace()
                         self._show_study_tab("matrix")
-                        self.set_status(
-                            f"💾 Goal saved — now sort “{gtitle}” in the "
-                            "Matrix: do now / defer / delegate / schedule.")
                     except Exception:
                         pass
+                    landed = False
+                    if carry:
+                        src = (f"🎯 {gtitle} · {area_var.get()}"
+                               if used_step else
+                               f"🎯 {area_var.get()}")
+                        try:
+                            landed = self.add_text_to_matrix_quadrant(
+                                "do", carry, source_label=src)
+                        except Exception:
+                            landed = False
+                    if landed:
+                        self.set_status(
+                            f"⚔ Carried into Do Now: “{carry}” — now "
+                            "sort the rest: defer / delegate / schedule.")
+                    else:
+                        # Decline speaks (shop law 3).
+                        self.set_status(
+                            f"💾 Goal saved — the carry didn't land; "
+                            f"sort “{gtitle}” in the Matrix by hand.")
             except Exception as e:
                 messagebox.showerror("Could not save goal", str(e))
 

@@ -10,6 +10,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- **⚔ Phase B — the flow CARRIES** (Blueprint §12, owner's order
+  2026-07-27: "Build Phase B"). Saving a NEW goal no longer just
+  advances you to the Matrix — it carries your work there: the goal's
+  next action (the action plan's first line; the title stands in when
+  no plan was written) lands in the Do-Now quadrant as a sourced,
+  timestamped bullet (🎯 goal · gate), through the existing
+  add-to-quadrant helper so the live widget and database stay in
+  step. Nothing re-typed — the no-re-entry law, now real. Pure kernel
+  lyceum/flow_carry.py (5 headless tests: first-line wins, bullets
+  stripped, title fallback, blank-declines); the shell declines out
+  loud if the carry can't land; editing an old goal still carries
+  nothing. Static gate locks the wiring. Suite 463 green + 14 skips.
+
 ### Docs
 - **🧭 Cognitive architecture on the record + AGENTS.md** (owner's
   integration intake, 2026-07-27, gated). The README gains a

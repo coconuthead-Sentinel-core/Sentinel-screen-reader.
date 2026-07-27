@@ -362,7 +362,9 @@ CARRY RULES (no re-entry):
 PHASES (each shippable alone, one commit each):
   A: wheel = default + only visible tab, distinct color band;
      Save goal auto-advances to Matrix           [small-functional]
-  B: goal → matrix carry (title seeds the quadrant entry)
+  B: goal → matrix carry ................ EXECUTED 2026-07-27
+     (lyceum/flow_carry.next_action: first plan line, else title →
+      Do-Now bullet via add_text_to_matrix_quadrant, sourced 🎯)
   C: matrix → planner carry (do-now/schedule land as day tasks)
   D: ▶ Start session close-of-flow button + loaded-plan summary
 
