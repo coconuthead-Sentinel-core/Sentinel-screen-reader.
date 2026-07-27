@@ -165,6 +165,7 @@ def retrieve_from_index(query, documents, doc_limit: int = 3,
         key=lambda x: x[0], reverse=True,
     )
     passage_query = query
+    extra: list[str] = []
     if associative:
         seeds = [text[:2000] for s, _n, text in scored[:3] if s > 0]
         extra = expand_query(query, seeds)
@@ -176,19 +177,41 @@ def retrieve_from_index(query, documents, doc_limit: int = 3,
                 key=lambda x: x[0], reverse=True,
             )
             passage_query = query + " " + " ".join(extra)
-    parts, total = [], 0
+    # Context engineering (owner's design, 2026-07-27): the mind is
+    # FIXED — the presentation is the engineering surface. The context
+    # is arranged as a concept map, the way an associative learner
+    # receives knowledge: the ANCHOR (direct matches) first, then the
+    # NEIGHBORS (reached only through the association) with the
+    # linking concepts NAMED, so the model can weigh and cite them
+    # for what they are.
+    anchors, neighbors, total = [], [], 0
     for s, name, text in scored:
-        if s <= 0 or len(parts) >= doc_limit or total >= max_context:
+        if (s <= 0 or len(anchors) + len(neighbors) >= doc_limit
+                or total >= max_context):
             break
         passage = retrieve_from_text(passage_query, text, limit=1,
                                      max_context=per_doc_chars)
-        if passage:
-            parts.append(f"[{name}] {passage}")
-            total += len(passage)
-    if not parts:
+        if not passage:
+            continue
+        entry = f"[{name}] {passage}"
+        if score(text, terms) > 0:
+            anchors.append(entry)
+        else:
+            neighbors.append(entry)
+        total += len(passage)
+    if not anchors and not neighbors:
         return ""
-    return ("Relevant passages from the user's own Library and study notes "
-            "(cite these when useful):\n\n" + "\n\n".join(parts))
+    out = ["Grounding from the user's own Library and study notes, "
+           "arranged as a concept map (cite sources by their bracketed "
+           "names when useful):"]
+    if anchors:
+        out.append("■ ANCHOR — direct matches for the question:\n\n"
+                   + "\n\n".join(anchors))
+    if neighbors:
+        link = (" through: " + ", ".join(extra)) if extra else ""
+        out.append("◆ NEIGHBORS — linked in the user's own corpus"
+                   + link + ":\n\n" + "\n\n".join(neighbors))
+    return "\n\n".join(out)
 
 
 def study_db_documents():

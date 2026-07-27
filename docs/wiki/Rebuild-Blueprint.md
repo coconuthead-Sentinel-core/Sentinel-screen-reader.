@@ -544,3 +544,19 @@ deterministic, literal mode preserved (associative=False), zero new
 dependencies, assistant stays stateless. The gated verdict: this was
 the honest core of three rejected graph-lattice pitches, delivered in
 ~40 lines on the existing kernel.
+
+### §14 amendment (2026-07-27, second): the concept-map presentation
+
+The proprietor articulated the discipline's own principle unprompted:
+"we can't change the mind of the app — but we can PRESENT information
+to it the way a didactic polymath would receive it." That is context
+engineering: the model is fixed and used exactly as its engineers
+designed (context in, completion out); the presentation is the
+engineering surface. Shipped: the grounding string is now a CONCEPT
+MAP — ■ ANCHOR (direct matches) first, then ◆ NEIGHBORS (reached only
+through the associative hop) with the linking concepts NAMED in the
+header — so the mind receives the user's knowledge as anchor + labeled
+branches instead of an undifferentiated pile. The mind untouched, the
+table set differently. Gated: presentation-order and link-naming
+tests; the suite's own doc-limit bracket contract caught and corrected
+a header regression before it shipped.

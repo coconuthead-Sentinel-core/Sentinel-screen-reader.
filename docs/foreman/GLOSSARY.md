@@ -118,3 +118,10 @@ One entry per real CS term, with the day it earned its place.
   novel terms, retrieve again with originals double-weighted. How the
   assistant now reads the owner's corpus associatively — spreading
   activation, implemented honestly. (2026-07-27)
+- **Context engineering** — the model is FIXED; the context window is
+  its designed input surface, and structuring that input is how the
+  engineers intend the mind to be used. The proprietor derived the
+  principle himself: "you can't change the mind of the app, but you
+  can present the information as a didactic polymath would receive
+  it." Shipped as the ■ ANCHOR / ◆ NEIGHBORS concept-map grounding.
+  (2026-07-27)

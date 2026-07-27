@@ -11,6 +11,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🗺 The concept-map presentation** (owner's design, 2026-07-27 —
+  his own words were the spec: "you can't change the mind of the app,
+  but you can present the information as a didactic polymath would
+  receive it"; that principle's textbook name is CONTEXT ENGINEERING,
+  and it is exactly how the model's engineers intend it to be used).
+  The assistant's grounding is no longer an undifferentiated pile of
+  passages: it arrives as a concept map — ■ ANCHOR (direct matches
+  for the question) presented first, then ◆ NEIGHBORS (notes reached
+  only through the associative hop) with the LINKING CONCEPTS NAMED
+  in their header — so the mind can weigh and cite each source for
+  what it is. The mind itself untouched, stateless, used exactly as
+  designed. 1 new presentation test (anchor-before-neighbor order +
+  named links); the suite's own doc-limit bracket contract caught a
+  header regression before it shipped — the safety net paying for
+  itself in real time. Suite 487 green + 14 skips.
 - **🧠 The assistant reads associatively** (owner's question,
   2026-07-27: "can the assistant acquire information in this manner —
   as a tool, without harming it?" — green-lit as classroom CS). The

@@ -158,10 +158,23 @@ class AssociativeRetrievalTest(unittest.TestCase):
         self.assertIn("[pouch.md]", out)       # never says 'quokka'
         self.assertNotIn("[stars.md]", out)    # unrelated stays out
 
+    def test_concept_map_presentation(self):
+        """Context engineering: the mind is fixed, the PRESENTATION is
+        the surface — anchor first, neighbors labeled, links NAMED."""
+        out = retrieve_from_index("quokka", self.DOCS)
+        self.assertIn("■ ANCHOR", out)
+        self.assertIn("◆ NEIGHBORS", out)
+        self.assertIn("marsupial", out.split("◆ NEIGHBORS")[1][:80],
+                      "the linking concept must be NAMED in the "
+                      "neighbors header")
+        self.assertLess(out.index("[quokka.md]"), out.index("[pouch.md]"),
+                        "the anchor must be presented before neighbors")
+
     def test_literal_mode_still_available(self):
         out = retrieve_from_index("quokka", self.DOCS, associative=False)
         self.assertIn("[quokka.md]", out)
         self.assertNotIn("[pouch.md]", out)
+        self.assertNotIn("◆ NEIGHBORS", out)
 
     def test_no_first_pass_hits_stays_empty(self):
         self.assertEqual(retrieve_from_index("zebra", self.DOCS), "")
