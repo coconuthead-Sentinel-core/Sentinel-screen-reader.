@@ -13,6 +13,7 @@ pure function (``rank_snippets``) so it is unit-testable without files or a DB.
 from __future__ import annotations
 
 import glob
+import math
 import os
 import re
 
@@ -51,6 +52,50 @@ def rank_snippets(query, documents, limit: int = 5, max_chars: int = 1500):
             scored.append((s, src, (text or "")[:max_chars]))
     scored.sort(key=lambda x: x[0], reverse=True)
     return [(src, snip) for _, src, snip in scored[:limit]]
+
+
+def bm25_rank(query_terms, documents, k1: float = 1.5, b: float = 0.75):
+    """Okapi BM25 document ranking (Robertson; Manning, Raghavan &
+    Schütze, *Introduction to Information Retrieval*, ch. 11 — and per
+    the current literature, the recommended lexical ranker for small,
+    keyword-heavy personal corpora like this one).
+
+    Three fixes over raw term counting: IDF (a RARE word in the corpus
+    outweighs a common one), TF saturation (a word spammed fifty times
+    does not score fifty-fold), and length normalization (a whole book
+    with scattered mentions no longer beats one focused note).
+    Duplicate terms in ``query_terms`` add weight — which is how the
+    associative pass keeps the original question at double strength.
+    Pure and deterministic (ties break by name); returns
+    [(score, name, text)] best-first.
+    """
+    n = len(documents)
+    if not n or not query_terms:
+        return []
+    prepped = []
+    for name, text in documents:
+        words = _WORD.findall((text or "").lower())
+        counts: dict = {}
+        for w in words:
+            counts[w] = counts.get(w, 0) + 1
+        prepped.append((name, text, counts, len(words)))
+    avg_len = (sum(length for *_a, length in prepped) / n) or 1.0
+    idf = {}
+    for t in set(query_terms):
+        df = sum(1 for _n, _x, c, _l in prepped if t in c)
+        idf[t] = math.log(1 + (n - df + 0.5) / (df + 0.5))
+    scored = []
+    for name, text, counts, length in prepped:
+        s = 0.0
+        for t in query_terms:
+            f = counts.get(t, 0)
+            if f:
+                s += idf[t] * (f * (k1 + 1)) / (
+                    f + k1 * (1 - b + b * length / avg_len))
+        if s > 0:
+            scored.append((s, name, text))
+    scored.sort(key=lambda x: (-x[0], x[1]))
+    return scored
 
 
 _STOP = frozenset("""the and that with this from have for are was you your
@@ -160,10 +205,11 @@ def retrieve_from_index(query, documents, doc_limit: int = 3,
     terms = _terms(query)
     if not terms or not documents:
         return ""
-    scored = sorted(
-        ((score(text, terms), name, text) for name, text in documents),
-        key=lambda x: x[0], reverse=True,
-    )
+    # BM25 replaces raw counting for the doc ranking (2026-07-27, the
+    # on-site research pass): rare terms weigh more, spam saturates,
+    # focused notes beat whole books. Presence classification below
+    # still uses the plain count (anchor = literally mentions it).
+    scored = bm25_rank(terms, documents)
     passage_query = query
     extra: list[str] = []
     if associative:
@@ -171,11 +217,7 @@ def retrieve_from_index(query, documents, doc_limit: int = 3,
         extra = expand_query(query, seeds)
         if extra:
             combined = terms + terms + extra   # originals keep 2x weight
-            scored = sorted(
-                ((score(text, combined), name, text)
-                 for name, text in documents),
-                key=lambda x: x[0], reverse=True,
-            )
+            scored = bm25_rank(combined, documents)
             passage_query = query + " " + " ".join(extra)
     # Context engineering (owner's design, 2026-07-27): the mind is
     # FIXED — the presentation is the engineering surface. The context

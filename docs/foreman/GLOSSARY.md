@@ -125,3 +125,10 @@ One entry per real CS term, with the day it earned its place.
   can present the information as a didactic polymath would receive
   it." Shipped as the ■ ANCHOR / ◆ NEIGHBORS concept-map grounding.
   (2026-07-27)
+- **BM25 (Okapi)** — the IR textbook's lexical ranker (Robertson;
+  Manning IIR ch.11), confirmed by current literature as the right
+  tool for small keyword-heavy personal corpora: IDF (rare terms weigh
+  more), TF saturation (spam caps out), length normalization (a
+  focused note beats a whole book). Replaced raw counting in the
+  assistant's document ranking, 2026-07-27 — found by the shop's first
+  REAL research pass, not a mimicked one. (2026-07-27)

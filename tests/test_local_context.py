@@ -8,7 +8,8 @@ import tempfile
 
 from lyceum.local_context import (rank_snippets, score, retrieve_context,
                                   chunk_text, retrieve_from_text,
-                                  expand_query, retrieve_from_index)
+                                  expand_query, retrieve_from_index,
+                                  bm25_rank)
 
 
 class ScoreTest(unittest.TestCase):
@@ -115,6 +116,45 @@ class RetrieveContextRecursionTest(unittest.TestCase):
         with open(os.path.join(d, "x.md"), "w", encoding="utf-8") as f:
             f.write("nothing relevant")
         self.assertEqual(retrieve_context("zebra", d), "")
+
+
+class Bm25RankTest(unittest.TestCase):
+    """BM25 over raw counting (on-site research pass, 2026-07-27):
+    IDF + TF saturation + length normalization, per the IR textbook."""
+
+    def test_focused_note_beats_keyword_spam_book(self):
+        note = ("note.md", "open a savings account and budget the month")
+        book = ("book.md", ("budget " * 50) + ("filler words here " * 400))
+        ranked = bm25_rank(["savings", "budget"], [note, book])
+        self.assertEqual(ranked[0][1], "note.md",
+                         "the focused note must outrank the spam book")
+
+    def test_rare_term_outweighs_common(self):
+        docs = [("a.md", "budget planning notes"),
+                ("b.md", "budget quokka sighting"),
+                ("c.md", "budget review meeting")]
+        ranked = bm25_rank(["quokka", "budget"], docs)
+        self.assertEqual(ranked[0][1], "b.md",
+                         "the corpus-rare term must dominate the ranking")
+
+    def test_duplicate_terms_add_weight(self):
+        docs = [("x.md", "alpha topic"), ("y.md", "beta topic")]
+        single = bm25_rank(["alpha", "beta"], docs)
+        doubled = bm25_rank(["alpha", "alpha", "beta"], docs)
+        self.assertEqual(doubled[0][1], "x.md")
+        # with equal weights the tie breaks alphabetically
+        self.assertEqual(single[0][1], "x.md")
+
+    def test_zero_match_and_empty_inputs(self):
+        self.assertEqual(bm25_rank(["zebra"], [("a.md", "nothing here")]),
+                         [])
+        self.assertEqual(bm25_rank([], [("a.md", "text")]), [])
+        self.assertEqual(bm25_rank(["x"], []), [])
+
+    def test_deterministic_ordering(self):
+        docs = [("b.md", "same words"), ("a.md", "same words")]
+        ranked = bm25_rank(["same"], docs)
+        self.assertEqual([n for _s, n, _t in ranked], ["a.md", "b.md"])
 
 
 class ExpandQueryTest(unittest.TestCase):

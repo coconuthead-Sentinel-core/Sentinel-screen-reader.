@@ -10,6 +10,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- **📚 BM25 replaces raw counting in the assistant's reading** (the
+  shop's first REAL research pass, 2026-07-27 — the proprietor's
+  framing: "let's not mimic the research; do the actual research."
+  Done: current literature checked, our kernel audited against it,
+  one gap found and closed). Document ranking in the grounding
+  retrieval now uses Okapi BM25 (Robertson; Manning-Raghavan-Schütze
+  IIR ch. 11): corpus-RARE terms outweigh common ones (IDF), a term
+  spammed fifty times saturates instead of scoring fifty-fold, and
+  length normalization lets one focused note outrank a whole book
+  with scattered mentions. The associative pass's double-weighted
+  originals carry through naturally. Vector databases / embeddings /
+  rerankers were RED-lit on scope (new heavy dependencies) with the
+  literature's own support: small keyword-heavy corpora are BM25's
+  home turf. Pure, deterministic, zero dependencies; 5 new headless
+  tests (focused-note-beats-spam-book among them).
+  Suite 492 green + 14 skips.
+
 ### Added
 - **🗺 The concept-map presentation** (owner's design, 2026-07-27 —
   his own words were the spec: "you can't change the mind of the app,
