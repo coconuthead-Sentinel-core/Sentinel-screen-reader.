@@ -616,3 +616,14 @@
   paper: AI-era research hygiene is the gate's core use case — the
   tell-tale signs (fake journals, hyper-precise effect sizes,
   implausible methods) are now documented in the shop's own record.
+
+- **2026-07-27 — Costume vs payload.** An intake document arrived
+  wearing a left-brain/right-brain persona — a documented neuromyth —
+  around a largely sound payload (document the systems-model spine;
+  standardize agent orientation; a state-flow kernel). The gates
+  separated them: the myth was named and rejected, the documentation
+  shipped with feature names verified against code, and the kernel
+  was parked behind the dead-code law until a scoped consumer exists.
+  For the paper: evaluating AI-suggested work means grading the
+  payload and the costume separately — and never letting a good idea
+  smuggle in a bad frame.

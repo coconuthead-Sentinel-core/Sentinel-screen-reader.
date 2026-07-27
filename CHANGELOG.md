@@ -10,6 +10,22 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Docs
+- **🧭 Cognitive architecture on the record + AGENTS.md** (owner's
+  integration intake, 2026-07-27, gated). The README gains a
+  "Cognitive architecture" section mapping every shipped feature onto
+  the classic input → process → data → decide → knowledge systems
+  model (feature names verified against the code before filing), and
+  a root AGENTS.md now standardizes agent orientation (laws, records,
+  test command, mirrors, sprint pipeline — pointing at the README
+  section that already served this role). The intake's proposed
+  cognitive_flow kernel was PARKED in Blueprint §14 rather than
+  shipped as source — the dead-code law: a kernel ships with its
+  first scoped consumer, not "for later." The intake's left-brain/
+  right-brain framing was rejected as a documented neuromyth
+  (learning-science gate); its payload was judged separately and
+  largely accepted. Its "422-test suite" figure corrected: 472.
+
 ### Added
 - **🚶 The Journey vignette** (G5k, owner's order 2026-07-27: "fill
   this blank space with a small vignette"). The empty middle of the

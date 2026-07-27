@@ -317,6 +317,27 @@ Beyond reading, the app is a study and focus workstation:
 - **SQLite-backed** — all of the above persists in a local database
   managed by `lyceum/db/study_db.py`.
 
+## Cognitive architecture (the information-processing spine)
+
+Sentinel Forge is shaped as a personal cognitive workstation, and its
+feature set maps cleanly onto the classic systems model — input →
+process → data → decide → output — taught in every CS curriculum:
+
+| Stage | What lives there (all shipped, all tested) |
+|---|---|
+| **INPUT** | documents (docx/pdf/md/txt/rtf/html), voice dictation, goals, expenses, vision-board images |
+| **PROCESS** | `lyceum/` pure kernels: text normalization, readability, knowledge harvester, formula engine, prompt coach |
+| **DATA** | one local SQLite database (`study.db`) + zone-tagged Markdown excerpts in the Library |
+| **DECIDE** | Eisenhower matrix, 4DX lead/lag measures, V2MOM why-and-obstacles gate, Never-Miss-Twice, if-then automations |
+| **EXTERNAL KNOWLEDGE** | local Library RAG grounding for the AI chat (reads Library files, notes, glossary, journal, topics, commentaries, Matrix, Planner — nothing leaves the laptop) |
+| **KNOWLEDGE / OUTPUT** | FSRS spaced-repetition cards, progress metrics and trend graphs, After-Action Reviews, session handoff state, finance forecasts |
+
+This mapping is documentation, not decoration: it makes the existing
+spine visible so future extensions (e.g., agentic loops over the same
+kernels) have a named attachment point — designed in
+`docs/wiki/Rebuild-Blueprint.md` §14 and admitted only through the
+`scope-first` gate, like everything else here.
+
 ## Why it exists
 
 I built this for myself — a CNA → AI-systems-developer transition who

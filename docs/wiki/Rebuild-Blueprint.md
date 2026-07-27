@@ -469,3 +469,34 @@ recognized: the document's "Phase 5" (spaced repetition) has been in
 production here since the SRS sprint — FSRS, append-only review log.
 Rejected as scope creep: graph-database re-platform, neurodivergent
 diagnostic profiling, TEKS compliance mapping (wrong product).
+
+## 14. The cognitive-flow attachment point (parked design, 2026-07-27)
+
+Intake from the proprietor's agentic-patterns research, gated. The
+payload that survived: the app's information-processing spine is now
+DOCUMENTED in the README (input → process → data → decide → external
+knowledge → knowledge/output — the classic systems model), and future
+agentic loops attach HERE, not ad hoc.
+
+```text
+PARKED KERNEL (ships only WITH its first consumer, per the dead-code
+law — a doorway to nowhere is a defect, not a placeholder):
+
+  lyceum/cognitive_flow.py
+      FlowState: inputs · process_results · data_snapshot · decision ·
+                 external_knowledge · knowledge · output
+      pure nodes: process(state, fn) → decide(state, router) →
+                  knowledge(state, writer)
+      runner:    run_minimal_cycle(...) — headless, deterministic,
+                 tested with temp_study_db like every kernel
+
+ADMISSION CRITERIA (all three, in order):
+  1. a scoped consumer exists (scope-first: in/out/acceptance/lifecycle)
+  2. kernel + tests land green BEFORE any UI wiring (classroom-code)
+  3. any behavioral claims pass clinical-science-gate; framing stays
+     free of neuromyths (the intake document's left-brain/right-brain
+     costume is a documented myth and was rejected on arrival — the
+     payload was judged separately, which is the whole method)
+
+Candidate first consumers: the §12 Phase B-D data carries; a
+"morning briefing" loop over the grounding feed; the Vault Catalog.
