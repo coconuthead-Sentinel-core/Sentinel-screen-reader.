@@ -11,6 +11,23 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **⚒ The Forged Draw** (owner's intake 2026-07-27, triaged on a
+  light board and shipped with corrections). Completing an ⚡ Idea
+  Collision — recalling two of your own concepts and writing the
+  connection — is a REAL completion, so the collision popup now
+  carries a one-shot "⚒ Forged it — claim the draw" button wired to
+  the existing honesty-gated variable-ratio Reward engine (event
+  'idea-collision-forged'; button disables after one claim; no new
+  visuals per §13 Law 1). The intake's remaining proposals: RED —
+  knowledge-graph lattice (the twice-rejected re-platform, renamed)
+  and the undefined "audio-spatial map" (🔊 Read already serves);
+  YELLOW-parked — cluster SRS (honest core = interleaving; needs the
+  rejected graph and would touch a validated FSRS scheduler). Its
+  technobabble (OmniCore 3.0, quantum cognition, DSO-AIR, "dendritic
+  polymath") was rejected; the real science underneath is named in
+  the glossary: spreading activation (Collins & Loftus 1975) and
+  structure-mapping (Gentner 1983). 1 new gate. Suite 479 green
+  + 14 skips.
 - **🛡 Phase D — the loaded plan** (Blueprint §12, owner's order
   2026-07-27; §12 IS NOW COMPLETE — every phase of the owner's
   original no-re-entry design is EXECUTED). The flow's end now greets

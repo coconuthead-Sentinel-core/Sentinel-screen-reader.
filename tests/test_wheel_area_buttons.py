@@ -189,6 +189,22 @@ class WheelAreaButtonGateTest(unittest.TestCase):
                 f"vignette '{key}' {color} fades below 1.55:1 vs the "
                 "PANEL background it actually sits on")
 
+    def test_collision_claims_a_real_reward_draw(self):
+        """The Forged Draw: completing an Idea Collision claims a draw
+        through the existing honesty-gated Reward engine — a contract
+        to a REAL completion, not new spectacle."""
+        fn = None
+        for node in ast.walk(_app_tree()):
+            if isinstance(node, ast.FunctionDef) \
+                    and node.name == "_idea_collision":
+                fn = node
+        self.assertIsNotNone(fn)
+        attrs = {n.attr for n in ast.walk(fn)
+                 if isinstance(n, ast.Attribute)}
+        self.assertIn("_reward_draw_and_show", attrs,
+                      "the Forged Draw is unwired — forging a "
+                      "connection no longer claims a reward")
+
     def test_city_wall_art_is_never_a_control(self):
         """G5a: the drawn city wall is decoration ONLY — no click
         bindings on the art canvas. The shop's own ledger (A−/A+

@@ -18132,9 +18132,42 @@ class BookReader:
                             "first, then collide.")
             return
         a, b, prompt = out
-        self._show_text_popup("⚡ Idea Collision", prompt)
-        self.set_status(f"⚡ Collision drawn: {a} × {b} — forge the link, "
-                        "then save it as a Topic entry or Commentary.")
+        # The Forged Draw (owner's intake 2026-07-27, corrected from
+        # its 'Synaptic Leap' pitch): forging the connection is a REAL
+        # completion, so it may claim a Reward-Draw — the existing
+        # honesty-gated variable-ratio engine, no new spectacle
+        # (§13 Law 1). One claim per collision; the button disables.
+        dlg = tk.Toplevel(self.root)
+        dlg.title("⚡ Idea Collision")
+        dlg.configure(bg=BG_DARK)
+        self._fit_dialog(dlg, 540, 400)
+        row = tk.Frame(dlg, bg=BG_DARK, padx=14, pady=10)
+        row.pack(side=tk.BOTTOM, fill=tk.X)   # bottom-first, house law
+
+        def _claim():
+            claim_btn.configure(state=tk.DISABLED,
+                                text="⚒ Forged — draw claimed")
+            self._reward_draw_and_show("idea-collision-forged")
+        claim_btn = tk.Button(
+            row, text="⚒ Forged it — claim the draw", command=_claim,
+            font=("Segoe UI", 10, "bold"), bg=ACCENT_GREEN, fg="white",
+            activebackground=ACCENT_GREEN, relief=tk.FLAT,
+            padx=12, pady=5, cursor="hand2", borderwidth=0)
+        claim_btn.pack(side=tk.LEFT)
+        tk.Button(row, text="Close", command=dlg.destroy,
+                  font=("Segoe UI", 10, "bold"), bg=ACCENT_SLATE,
+                  fg="white", activebackground=ACCENT_SLATE,
+                  relief=tk.FLAT, padx=12, pady=5, cursor="hand2",
+                  borderwidth=0).pack(side=tk.RIGHT)
+        body = scrolledtext.ScrolledText(
+            dlg, wrap=tk.WORD, font=("Segoe UI", 12),
+            bg=BG_INPUT, fg=FG_TEXT, padx=14, pady=12, relief=tk.FLAT)
+        body.insert("1.0", prompt)
+        body.configure(state=tk.DISABLED)
+        body.pack(fill=tk.BOTH, expand=True, padx=14, pady=(10, 4))
+        self.set_status(f"⚡ Collision drawn: {a} × {b} — forge the link "
+                        "(Topic entry, Commentary, or say it to the AI "
+                        "chat), then claim the draw.")
 
     def _show_glossary_entry(self, term: str, definition: str, source: str) -> None:
         """Read-only popup showing a single glossary entry."""

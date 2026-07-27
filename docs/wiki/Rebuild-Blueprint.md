@@ -509,3 +509,21 @@ ADMISSION CRITERIA (all three, in order):
 
 Candidate first consumers: the §12 Phase B-D data carries; a
 "morning briefing" loop over the grounding feed; the Vault Catalog.
+
+### §13 amendment (2026-07-27): the Forged Draw + the light-board triage
+
+The 'dendritic polymath / OmniCore' intake was triaged on a light
+board: RED — knowledge-graph lattice (the same re-platform rejected
+twice, renamed) and the undefined "audio-spatial map" (🔊 Read already
+serves); YELLOW-parked — cluster-based SRS (the honest core is
+INTERLEAVING, which has real evidence, but it needs the rejected graph
+and would modify a validated FSRS scheduler that isn't broken);
+GREEN, corrected and SHIPPED — the Forged Draw: completing an ⚡ Idea
+Collision is a REAL completion, so its popup carries a one-shot
+"⚒ Forged it — claim the draw" button wired to the existing
+honesty-gated Reward engine (event 'idea-collision-forged'). No new
+visuals (§13 Law 1); one claim per collision. Real science under the
+intake's costume, named honestly in the glossary: spreading
+activation (Collins & Loftus 1975) and structure-mapping (Gentner
+1983) — the invented vocabulary (dendritic polymath, OmniCore,
+quantum cognition, DSO-AIR) rejected as technobabble.

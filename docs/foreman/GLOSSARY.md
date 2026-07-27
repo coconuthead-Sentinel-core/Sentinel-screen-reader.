@@ -106,3 +106,10 @@ One entry per real CS term, with the day it earned its place.
   (dome), cylinder (tower + ellipse cap), cone (spire), prism
   (buildings), frustum (pagoda tiers); Euclid Book XIII ties φ itself
   to the pentagon/dodecahedron/icosahedron. (2026-07-27)
+- **Spreading activation** — Collins & Loftus 1975: activating one
+  concept primes its associates; the real science the 'hyper-
+  associative retrieval' costume was wearing. (2026-07-27)
+- **Structure-mapping theory** — Gentner 1983: analogy = mapping
+  relational structure across domains; the real science under
+  'cross-domain metaphorical transfer'. Both are why ⚡ Idea Collision
+  works without any knowledge-graph re-platform. (2026-07-27)
