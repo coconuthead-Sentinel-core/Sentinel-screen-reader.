@@ -83,3 +83,14 @@ One entry per real CS term, with the day it earned its place.
   perspective, not a vanishing point — "precise" has more than one
   grammar. Troy names the story: the hero approaches the city.
   (2026-07-26)
+- **Commonplace book** — Locke/Franklin's indexed knowledge journal;
+  the foreman dashboard + wiki are this method in git form. The
+  proprietor's vetted edition lives in the app Library as
+  Commonplace-Journal-Vetted.md. (2026-07-26)
+- **Mental contrasting** — vision PLUS obstacles beats pure positive
+  visualization (Oettingen); V2MOM already enforces it by refusing
+  goals without WHY and OBSTACLES. (2026-07-26)
+- **Deliberate practice, honestly sized** — validated, bounded (~4
+  focused h/day), feedback-rich, rest-dependent; explains a meaningful
+  minority of performance variance (Macnamara et al. 2014). A 24-hour
+  sprint is its opposite. (2026-07-26)

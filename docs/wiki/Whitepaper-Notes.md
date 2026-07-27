@@ -589,3 +589,17 @@
   of meaning — which is precisely the claim this dashboard makes at
   desktop scale: precise, parametric art whose entire job is to make
   a hard day feel worth entering.
+
+- **2026-07-26 — The gate ate a flattering document.** The proprietor
+  brought an AI-compiled "Scientific Journal" and asked what survived
+  the rubric. Verdicts: the PNAS placebo finding passed; deliberate
+  practice passed WITH sizing (the 2014 meta-analysis caps its
+  variance share); the document's praise of a 24-hour sprint as
+  deliberate practice was REJECTED — DP is bounded and rest-dependent,
+  and the shop's own field data (defects written at hour 24) agrees;
+  vision-board neurochemistry was corrected to mental contrasting —
+  which the V2MOM feature already implements. Output: a vetted
+  commonplace book filed into the Library where the assistant's
+  grounding can read it. For the paper: the most dangerous claims are
+  the ones that flatter the reader, and a working evidence gate is
+  distinguished precisely by eating those first.
