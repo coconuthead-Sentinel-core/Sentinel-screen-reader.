@@ -603,3 +603,16 @@
   grounding can read it. For the paper: the most dangerous claims are
   the ones that flatter the reader, and a working evidence gate is
   distinguished precisely by eating those first.
+
+- **2026-07-26 — The gate's biggest catch: a fabricated journal.** The
+  polymathy intake mixed real history (Llull's Ars Magna, Leibniz's
+  De arte combinatoria) and real technique (spaced repetition —
+  already shipped here as FSRS) with FABRICATED evidence: an
+  unverifiable journal, N=312 with invented percentages, an fMRI+
+  cortisol school study no ethics board would pass. The gate rejected
+  the fabrications, shipped the one honest kernel (Idea Collision =
+  retrieval + elaboration over the user's own concepts), and refused
+  the scope creep (graph re-platform, diagnostic profiling). For the
+  paper: AI-era research hygiene is the gate's core use case — the
+  tell-tale signs (fake journals, hyper-precise effect sizes,
+  implausible methods) are now documented in the shop's own record.

@@ -451,3 +451,21 @@ forgotten step, catastrophic cost; the shop's gates exist so finances
 never fly a black sail). Law 4 stands over all of it: figures are
 never softened — the game makes the truth pleasant, not vague.
 (Money Hub / Time-vs-Money renames wait for G4 proper.)
+
+### §13 amendment (2026-07-26): the Idea Collision wheel + the gate's biggest catch
+
+Logged decision from the proprietor's polymathy research intake. The
+clinical-science-gate REJECTED the intake document's fabricated
+evidence (an unverifiable 2026 journal, hyper-precise effect sizes,
+an implausible fMRI-plus-cortisol school study) — the fabrications
+are named in the whitepaper notes as a teaching specimen. What
+SURVIVED and shipped: Llull's Ars Magna combinatorial wheel as a pure
+kernel (lyceum/idea_collision.py) behind the ⚡ Collide button on the
+Glossary tab — draws two of the user's OWN studied concepts (glossary
+terms + topic titles) and prompts the connection. Honest evidence
+label: retrieval practice (strong support) + elaboration (moderate,
+Dunlosky et al. 2013); NO neuro-training claims, ever. Also
+recognized: the document's "Phase 5" (spaced repetition) has been in
+production here since the SRS sprint — FSRS, append-only review log.
+Rejected as scope creep: graph-database re-platform, neurodivergent
+diagnostic profiling, TEKS compliance mapping (wrong product).

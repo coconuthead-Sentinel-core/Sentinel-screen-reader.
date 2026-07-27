@@ -18070,6 +18070,32 @@ class BookReader:
         # Register this box as the floating toolbar's current Save target.
         self._ftb_inline_input = _commit
 
+    def _idea_collision(self) -> None:
+        """⚡ Llull's wheel: draw two studied concepts from the user's
+        own Glossary terms + Topic titles and prompt the connection —
+        retrieval practice + elaboration on material the user chose
+        (learning-science: retrieval strong, elaboration moderate; no
+        neuro-training claims). Declines OUT LOUD when the wheel is
+        short of concepts (shop law 3)."""
+        from lyceum.idea_collision import draw_collision
+        try:
+            terms = [r[0] for r in
+                     self._db_query("SELECT term FROM glossary")]
+            topics = [r[0] for r in
+                      self._db_query("SELECT title FROM topics")]
+        except Exception:
+            terms, topics = [], []
+        out = draw_collision(terms + topics)
+        if out is None:
+            self.set_status("⚡ The wheel needs at least two studied "
+                            "concepts — add Glossary terms or Topics "
+                            "first, then collide.")
+            return
+        a, b, prompt = out
+        self._show_text_popup("⚡ Idea Collision", prompt)
+        self.set_status(f"⚡ Collision drawn: {a} × {b} — forge the link, "
+                        "then save it as a Topic entry or Commentary.")
+
     def _show_glossary_entry(self, term: str, definition: str, source: str) -> None:
         """Read-only popup showing a single glossary entry."""
         dlg = tk.Toplevel(self.root)
@@ -20814,6 +20840,16 @@ class BookReader:
                   font=("Segoe UI", 10, "bold"), bg=ACCENT_GREEN, fg="white",
                   activebackground=ACCENT_GREEN, relief=tk.FLAT, padx=8, pady=4,
                   cursor="hand2", borderwidth=0).pack(side=tk.LEFT, padx=(0, 4))
+        # ⚡ Idea Collision (Blueprint §13, owner-approved 2026-07-26):
+        # Llull's wheel over the user's OWN studied concepts — honest
+        # evidence label: retrieval practice + elaboration, no neuro
+        # claims. Slate identity color per the color law.
+        tk.Button(ltbtn, text="⚡ Collide",
+                  command=self._idea_collision,
+                  font=("Segoe UI", 10, "bold"), bg=ACCENT_SLATE,
+                  fg="white", activebackground=ACCENT_SLATE,
+                  relief=tk.FLAT, padx=8, pady=4,
+                  cursor="hand2", borderwidth=0).pack(side=tk.LEFT)
         list_frame = tk.Frame(left, bg=BG_DARK)
         list_frame.pack(fill=tk.BOTH, expand=True)
         self._glossary_listbox = tk.Listbox(

@@ -11,6 +11,22 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **⚡ Idea Collision — Llull's wheel over your own knowledge**
+  (owner-approved from the polymathy research intake, 2026-07-26).
+  New ⚡ Collide button on the Glossary tab: draws two of YOUR studied
+  concepts (Glossary terms + Topic titles) and prompts you to recall
+  both from memory and forge the connection in plain language, then
+  save it as a Topic entry or Commentary. Pure kernel
+  (lyceum/idea_collision.py, 4 headless tests, deterministic via
+  injected rng); declines out loud when fewer than two concepts
+  exist. Evidence label kept honest: retrieval practice (strong) +
+  elaboration (moderate, Dunlosky et al. 2013) — no neural-rewiring
+  claims. The same intake's fabricated studies (unverifiable journal,
+  invented effect sizes) were REJECTED by the clinical-science-gate
+  and documented as a teaching specimen; its knowledge-graph
+  re-platform and diagnostic-profiling proposals were rejected as
+  scope creep. Its "Phase 5" was found already shipped (FSRS spaced
+  repetition). Suite 457 green + 14 skips.
 - **🌏 The world-city skyline** (finish-out G5f, the owner's brief,
   2026-07-26: the highest art of Ming China, Japan, and India, fairly
   represented without clutter). The two golden-section turrets are now
