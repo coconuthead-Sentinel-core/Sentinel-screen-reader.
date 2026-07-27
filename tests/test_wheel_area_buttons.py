@@ -178,6 +178,8 @@ class WheelAreaButtonGateTest(unittest.TestCase):
                       "the city wall art is gone from the gates panel")
         self.assertIn("_draw_city_proper", names,
                       "the city-proper vignette is gone from the header")
+        self.assertIn("_draw_journey", names,
+                      "the journey vignette is gone from the header")
         consts = {n.value for n in ast.walk(fn)
                   if isinstance(n, ast.Constant)
                   and isinstance(n.value, str)}

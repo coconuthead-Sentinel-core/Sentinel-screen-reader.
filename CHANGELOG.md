@@ -10,6 +10,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- **🚶 The Journey vignette** (G5k, owner's order 2026-07-27: "fill
+  this blank space with a small vignette"). The empty middle of the
+  City Gates header now carries the road TO the city: rolling hills
+  drawn as chord-ovals (implied spheres), a road converging by
+  one-point perspective on a tiny walled city — wall, keep, and dome —
+  at the golden-section horizon point, the muted-gold sun at the
+  opposite golden point, and THE HERO on the road: head, body, and
+  walking staff, a dozen pixels of pilgrim. The header now reads
+  left→right as the whole tale: the instruction → the journey → the
+  city proper. Two new palette entries (sun, hero) added THROUGH the
+  contrast gate; geometry probed at all clamp widths; both header
+  canvases resize proportionally; art-never-a-control gate extended.
+  Suite 458 green + 14 skips.
+
 ### Changed
 - **📐 The Vitruvian pass** (G5j, owner-approved 2026-07-27, on his
   question "what happens if you apply the golden ratio properly?").

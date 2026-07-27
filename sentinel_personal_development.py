@@ -23810,6 +23810,9 @@ class BookReader:
         "ground": "#3d4c68", "road": "#55637d",
         "haze":   "#5a6f8e", "haze2": "#647a99",
         "f1":     "#4a6a5f", "f2":    "#567a68",
+        # G5k (journey vignette): the sun's muted gold and the hero's
+        # pale silhouette — both contrast-gated like every other value.
+        "sun":    "#a3822a", "hero":  "#8b99b0",
     }
 
     def _zz_area_label(self, val: str) -> str:
@@ -23864,6 +23867,14 @@ class BookReader:
         head_art = tk.Canvas(head, bg=BG_PANEL, height=64, width=200,
                              highlightthickness=0)
         head_art.pack(side=tk.RIGHT, padx=(10, 0))
+        # G5k (owner's order, 2026-07-27): the blank middle carries THE
+        # JOURNEY — hero on the road, walled city on the horizon, sun
+        # at the golden point. The header reads left→right as the tale:
+        # the instruction → the road → the city proper. Static, muted,
+        # never a control.
+        head_art2 = tk.Canvas(head, bg=BG_PANEL, height=64, width=170,
+                              highlightthickness=0)
+        head_art2.pack(side=tk.RIGHT, padx=(10, 0))
         head_txt = tk.Frame(head, bg=BG_PANEL)
         head_txt.pack(side=tk.LEFT, fill=tk.X, expand=True)
         tk.Label(head_txt, text="🏰 The City Gates", bg=BG_PANEL,
@@ -23942,10 +23953,56 @@ class BookReader:
                 c.create_line(bx - 4, by + 2, bx, by, fill=haze2)  # birds
                 c.create_line(bx, by, bx + 4, by + 2, fill=haze2)
         head_art.bind("<Configure>", _draw_city_proper)
-        head.bind("<Configure>",
-                  lambda e: head_art.configure(
-                      width=max(120, min(280, int(e.width * 0.35)))))
+
+        def _draw_journey(_e=None):
+            # G5k: one-point perspective again — the road converges on
+            # a walled city at the golden-section horizon point; the
+            # hero walks it; the sun hangs at the opposite golden
+            # point. Rolling hills by chord-ovals (implied spheres).
+            c = head_art2
+            c.delete("all")
+            w = c.winfo_width() or 170
+            h = 64
+            PHI = 1.618
+            V = self._VIGNETTE_PALETTE
+            hor = int(h * (1 - 1 / PHI))               # golden horizon
+            vpx = int(w / PHI)                         # city at 0.618·w
+            sunx = int(w * (1 - 1 / PHI))              # sun at 0.382·w
+            c.create_rectangle(0, hor, w, h, fill=V["ground"],
+                               outline="")
+            c.create_oval(-int(w * 0.2), hor - 6, int(w * 0.65),
+                          hor + 18, fill=V["f2"], outline="")   # far hill
+            c.create_oval(int(w * 0.35), hor - 2, int(w * 1.25),
+                          hor + 26, fill=V["f1"], outline="")   # near hill
+            c.create_polygon(int(w * 0.40), h, int(w * 0.60), h,
+                             vpx + 3, hor + 2, vpx - 3, hor + 2,
+                             fill=V["road"], outline="")        # the road
+            c.create_rectangle(vpx - 13, hor - 5, vpx + 13, hor,
+                               fill=V["haze2"], outline="")     # city wall
+            c.create_rectangle(vpx - 4, hor - 12, vpx + 4, hor - 5,
+                               fill=V["haze2"], outline="")     # the keep
+            c.create_arc(vpx - 5, hor - 17, vpx + 5, hor - 8,
+                         start=0, extent=180, fill=V["haze"],
+                         outline="")                            # its dome
+            c.create_oval(sunx - 5, 6, sunx + 5, 16, fill=V["sun"],
+                          outline="")                           # the sun
+            hx, hy = int(w * 0.47), hor + int((h - hor) / PHI)  # the hero
+            c.create_oval(hx - 2, hy - 9, hx + 2, hy - 5,
+                          fill=V["hero"], outline="")           # head
+            c.create_line(hx, hy - 5, hx, hy + 2, fill=V["hero"],
+                          width=2)                              # body
+            c.create_line(hx + 4, hy - 8, hx + 4, hy + 3,
+                          fill=V["hero"])                       # the staff
+        head_art2.bind("<Configure>", _draw_journey)
+
+        def _size_head_art(e):
+            head_art.configure(width=max(110, min(260,
+                                                  int(e.width * 0.30))))
+            head_art2.configure(width=max(100, min(220,
+                                                   int(e.width * 0.24))))
+        head.bind("<Configure>", _size_head_art)
         _draw_city_proper()
+        _draw_journey()
 
         # G5a (logged decision, owner 2026-07-26): the city wall itself —
         # STATIC vector art on a canvas (no animation, muted stone
