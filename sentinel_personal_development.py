@@ -23988,24 +23988,40 @@ class BookReader:
             # atmospheric perspective. ----
             sky_lo, sky_hi = P["sky_lo"], P["sky_hi"]
             domec = P["domec"]
-            c.create_rectangle(0, 10, W, 24, fill=sky_lo, outline="")
-            c.create_rectangle(0, 24, W, 38, fill=sky_hi, outline="")
+            # G5j Vitruvian pass (owner-approved 2026-07-27): the key
+            # horizontals are φ divisions of the height — sky region to
+            # wall band = φ:1, sky bands nested by φ, merlons and
+            # mortar courses as φ fractions of the band. Parts as
+            # ratios of the whole (Vitruvius, De architectura; Euclid,
+            # Elements VI def.3; Pacioli, De divina proportione).
+            y_wall = round(H * (1 - 1 / PHI ** 2))   # ≈ 47: sky:wall = φ:1
+            band = H - y_wall
+            merlon = round(band / PHI ** 2)          # crenellation height
+            m1 = y_wall + round(band / PHI ** 2)     # upper mortar course
+            m2 = y_wall + round(band / PHI)          # lower mortar course
+            y_sky = round(y_wall / PHI)              # sky band split
+            c.create_rectangle(0, round(y_wall / PHI ** 2), W, y_sky,
+                               fill=sky_lo, outline="")
+            c.create_rectangle(0, y_sky, W, y_wall, fill=sky_hi,
+                               outline="")
             g1, g2 = int(W * (1 - 1 / PHI)), int(W / PHI)
             for cxx in (g1, g2):                       # geometric clouds
                 cw = max(14, int(W * 0.05))
                 c.create_oval(cxx - cw, 6, cxx + cw, 12, fill=sky_hi,
                               outline="")
             dw = max(20, int(W * 0.055))               # the Great Dome
-            c.create_rectangle(cx - dw, 20, cx + dw, 38, fill=domec,
-                               outline="")             # drum
+            c.create_rectangle(cx - dw, 20, cx + dw, y_wall, fill=domec,
+                               outline="")             # drum meets the wall
             c.create_arc(cx - dw, 6, cx + dw, 34, start=0, extent=180,
                          fill=domec, outline="")       # dome
             c.create_line(cx, 2, cx, 6, fill=P["gold"], width=2)  # gold finial
             for sx in (-1, 1):                         # half-domes
                 hd = max(10, int(W * 0.028))
                 hx = cx + sx * (dw + hd)
-                c.create_arc(hx - hd, 22, hx + hd, 40, start=0,
-                             extent=180, fill=haze, outline="")
+                c.create_arc(hx - hd, y_wall - 25, hx + hd, y_wall - 7,
+                             start=0, extent=180, fill=haze, outline="")
+                c.create_rectangle(hx - hd + 2, y_wall - 16, hx + hd - 2,
+                                   y_wall, fill=haze, outline="")
             # G5f (owner's world-city brief, 2026-07-26): the golden-
             # section positions now hold two more high traditions —
             # a tiered PAGODA (Ming/Japanese castle geometry) at the
@@ -24014,43 +24030,52 @@ class BookReader:
             # Great Dome: three civilizations, one hazed skyline. The
             # hero approaches Troy; the city holds the world.
             px = g1                                    # pagoda
-            c.create_rectangle(px - 3, 14, px + 3, 38, fill=haze,
+            c.create_rectangle(px - 3, 14, px + 3, y_wall, fill=haze,
                                outline="")
-            for ry in (16, 24, 32):                    # tiered roofs
+            # tiers spaced by φ down the pagoda's own height (frusta)
+            p_top, p_run = 14, (y_wall - 16 - 14)
+            for ry in (p_top + 2,
+                       p_top + 2 + round(p_run / PHI ** 2),
+                       p_top + 2 + round(p_run / PHI)):
                 c.create_polygon(px - 10, ry + 4, px + 10, ry + 4,
                                  px + 5, ry, px - 5, ry,
                                  fill=haze, outline="")
             c.create_line(px, 10, px, 14, fill=haze, width=2)
             vx = g2                                    # domed pavilion
-            c.create_rectangle(vx - 6, 27, vx + 6, 38, fill=haze,
+            c.create_rectangle(vx - 6, 27, vx + 6, y_wall, fill=haze,
                                outline="")
             c.create_arc(vx - 7, 18, vx + 7, 32, start=0, extent=180,
                          fill=haze, outline="")
             c.create_line(vx, 14, vx, 18, fill=haze, width=2)
 
             # ---- MIDGROUND: curtain wall + flanking towers ----------
-            c.create_rectangle(0, 38, W, H, fill=stone, outline="")
-            c.create_line(0, 38, W, 38, fill=lite)
+            c.create_rectangle(0, y_wall, W, H, fill=stone, outline="")
+            c.create_line(0, y_wall, W, y_wall, fill=lite)
             x = 0
             while x < W:
-                c.create_rectangle(x, 26, x + 20, 38, fill=stone,
-                                   outline="")
-                c.create_line(x, 26, x + 20, 26, fill=lite)
+                c.create_rectangle(x, y_wall - merlon, x + 20, y_wall,
+                                   fill=stone, outline="")
+                c.create_line(x, y_wall - merlon, x + 20, y_wall - merlon,
+                              fill=lite)
                 x += 40
-            for y in (52, 64):
+            for y in (m1, m2):                         # φ mortar courses
                 c.create_line(0, y, W, y, fill=dark)
             t_off = max(60, int(W * 0.16))             # proportional, clamped
             t_w = max(28, min(40, int(W * 0.06)))
             for tx in (cx - t_off, cx + t_off - t_w):
                 c.create_rectangle(tx, 14, tx + t_w, H, fill=stone,
                                    outline=dark)
+                # G5j: ellipse cap — the flat slab reads as a CYLINDER
+                # (implied solid; Foley & van Dam's primitive canon).
+                c.create_arc(tx + 1, 11, tx + t_w - 1, 19, start=0,
+                             extent=180, style=tk.ARC, outline=lite)
                 c.create_line(tx, 14, tx + t_w, 14, fill=lite)
                 for bx in (tx + 4, tx + t_w // 2 - 3, tx + t_w - 10):
                     c.create_rectangle(bx, 8, bx + 6, 14, fill=stone,
                                        outline="")
                 mid = tx + t_w // 2
                 c.create_line(mid, 28, mid, 40, fill=edge, width=2)
-                c.create_line(mid, 52, mid, 66, fill=edge, width=2)
+                c.create_line(mid, m1, mid, m2 + 2, fill=edge, width=2)
 
             # ---- FOREGROUND: the gatehouse (darkest, focal center) --
             c.create_arc(cx - 24, 30, cx + 24, 78, start=0, extent=180,

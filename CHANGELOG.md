@@ -10,6 +10,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- **📐 The Vitruvian pass** (G5j, owner-approved 2026-07-27, on his
+  question "what happens if you apply the golden ratio properly?").
+  The mural's key horizontals are now literal φ divisions of the
+  height: sky region to wall band = φ:1 (measured 1.621 at H=76),
+  sky bands nested by φ, merlon height and both mortar courses set as
+  φ fractions of the wall band, pagoda tiers spaced by φ down its own
+  height, half-domes re-seated on the new horizon, and the flanking
+  towers gain ellipse caps so the slabs read as CYLINDERS — adding
+  the fifth implied solid class (hemisphere, prism, frustum, cone,
+  now cylinder) to the five primitive types in play. Textbooks of
+  record: Vitruvius (De architectura — parts as ratios of the whole;
+  rediscovered 1414), Euclid (Elements VI def.3 and Book XIII, where
+  φ constructs the classical solids), Pacioli (De divina proportione,
+  1509, illustrated by Leonardo), Foley & van Dam (the primitive and
+  painter's-algorithm canon). φ relationships verified numerically by
+  probe. Suite 458 green + 14 skips.
+
 ### Fixed
 - **👻 The invisible skyline — art values are now measured** (G5i,
   owner QA 2026-07-26/27: "the scene you're describing... just not

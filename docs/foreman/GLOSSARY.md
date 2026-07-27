@@ -94,3 +94,15 @@ One entry per real CS term, with the day it earned its place.
   focused h/day), feedback-rich, rest-dependent; explains a meaningful
   minority of performance variance (Macnamara et al. 2014). A 24-hour
   sprint is its opposite. (2026-07-26)
+- **Vitruvius (De architectura, 1st c. BC)** — the Roman engineer whose
+  proportion canon (parts as ratios of the whole) was rediscovered by
+  Poggio Bracciolini in 1414 and illustrated by Leonardo's Vitruvian
+  Man; the mural's G5j pass applies it literally: sky:wall = φ:1,
+  courses and merlons as φ fractions of the band. Documented φ lineage
+  kept honest: Euclid VI def.3 → Pacioli's De divina proportione
+  (1509, illus. Leonardo) → Le Corbusier's Modulor; Parthenon/Mona
+  Lisa φ claims are retrospective myth. (2026-07-27)
+- **Implied solids** — flat primitives that read as volumes: hemisphere
+  (dome), cylinder (tower + ellipse cap), cone (spire), prism
+  (buildings), frustum (pagoda tiers); Euclid Book XIII ties φ itself
+  to the pentagon/dodecahedron/icosahedron. (2026-07-27)
