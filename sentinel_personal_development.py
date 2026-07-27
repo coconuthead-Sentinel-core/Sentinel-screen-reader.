@@ -24910,10 +24910,56 @@ class BookReader:
                                 "do", carry, source_label=src)
                         except Exception:
                             landed = False
+                    # §12 Phase C (owner's order, 2026-07-27): the carry
+                    # MARCHES on — the same next action lands on TODAY's
+                    # planner as a day task (house calendar idiom,
+                    # deduped so a re-save never doubles the day).
+                    planned, dup = False, False
                     if landed:
+                        from lyceum.flow_carry import (planner_task_title,
+                                                       is_duplicate_task)
+                        ptitle = planner_task_title(carry, gtitle,
+                                                    used_step)
+                        today = date.today().strftime("%Y-%m-%d")
+                        try:
+                            existing = [r[0] for r in self._db_query(
+                                "SELECT title FROM planner_tasks "
+                                "WHERE day=?", (today,))]
+                            if is_duplicate_task(existing, ptitle):
+                                dup = bool(ptitle)
+                            else:
+                                nxt = self._db_query(
+                                    "SELECT COALESCE(MAX(sort_order),-1)"
+                                    "+1 FROM planner_tasks WHERE day=?",
+                                    (today,))[0][0]
+                                now2 = datetime.now().isoformat()
+                                self._db_exec(
+                                    "INSERT INTO planner_tasks (day,"
+                                    "title,minutes,done,sort_order,"
+                                    "created_at,updated_at) "
+                                    "VALUES (?,?,?,0,?,?,?)",
+                                    (today, ptitle, 0, nxt, now2, now2))
+                                planned = True
+                                try:
+                                    self._refresh_tab_planner()
+                                except Exception:
+                                    pass
+                        except Exception:
+                            planned = False
+                    if landed and planned:
                         self.set_status(
-                            f"⚔ Carried into Do Now: “{carry}” — now "
-                            "sort the rest: defer / delegate / schedule.")
+                            f"⚔ Carried → Do Now + today's Planner: "
+                            f"“{carry}”. Sort the rest: defer / "
+                            "delegate / schedule.")
+                    elif landed and dup:
+                        self.set_status(
+                            f"⚔ Carried into Do Now: “{carry}” — "
+                            "already on today's Planner, not doubled.")
+                    elif landed:
+                        self.set_status(
+                            f"⚔ Carried into Do Now: “{carry}” — the "
+                            "Planner leg didn't land; add it there by "
+                            "hand.")
                     else:
                         # Decline speaks (shop law 3).
                         self.set_status(

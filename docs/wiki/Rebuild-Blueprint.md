@@ -365,7 +365,11 @@ PHASES (each shippable alone, one commit each):
   B: goal → matrix carry ................ EXECUTED 2026-07-27
      (lyceum/flow_carry.next_action: first plan line, else title →
       Do-Now bullet via add_text_to_matrix_quadrant, sourced 🎯)
-  C: matrix → planner carry (do-now/schedule land as day tasks)
+  C: matrix → planner carry ............. EXECUTED 2026-07-27
+     (the same next action lands on TODAY's planner via the house
+      calendar idiom '🎯 goal: step', deduped case/space-insensitively
+      so a re-save never doubles the day; kernel rules in
+      lyceum/flow_carry.py)
   D: ▶ Start session close-of-flow button + loaded-plan summary
 
 KNOWN TRAP: hiding tabs must NOT orphan the rooms — every room

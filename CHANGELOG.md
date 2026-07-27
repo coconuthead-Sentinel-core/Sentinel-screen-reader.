@@ -11,6 +11,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **📅 Phase C — the carry marches onto the Planner** (Blueprint §12,
+  owner's order 2026-07-27). The same next action that lands in Do
+  Now (Phase B) now ALSO lands on TODAY's planner as a day task, in
+  the house calendar idiom ("🎯 goal: step"), with a case- and
+  whitespace-insensitive dedupe so a re-save never doubles the day.
+  Kernel rules (planner_task_title, is_duplicate_task) in
+  lyceum/flow_carry.py — 8 new headless tests; every outcome speaks
+  in the status line (carried to both · already on today's list ·
+  planner leg declined · carry declined), per shop law 3; planner tab
+  refreshes live when open. The full no-re-entry road now runs:
+  gate → goal → Do Now → today's plan, one Save. Static gate locks
+  all three kernel imports. Suite 471 green + 14 skips.
 - **⚔ Phase B — the flow CARRIES** (Blueprint §12, owner's order
   2026-07-27: "Build Phase B"). Saving a NEW goal no longer just
   advances you to the Matrix — it carries your work there: the goal's
