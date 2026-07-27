@@ -7,7 +7,8 @@ import os
 import tempfile
 
 from lyceum.local_context import (rank_snippets, score, retrieve_context,
-                                  chunk_text, retrieve_from_text)
+                                  chunk_text, retrieve_from_text,
+                                  expand_query, retrieve_from_index)
 
 
 class ScoreTest(unittest.TestCase):
@@ -114,6 +115,56 @@ class RetrieveContextRecursionTest(unittest.TestCase):
         with open(os.path.join(d, "x.md"), "w", encoding="utf-8") as f:
             f.write("nothing relevant")
         self.assertEqual(retrieve_context("zebra", d), "")
+
+
+class ExpandQueryTest(unittest.TestCase):
+    """One-hop associative expansion (pseudo-relevance feedback) —
+    owner's design 2026-07-27: the asked concept lights its neighbors."""
+
+    def test_recurring_novel_term_is_mined(self):
+        out = expand_query("quokka",
+                           ["the quokka is a small marsupial",
+                            "marsupial habitats on the island"])
+        self.assertIn("marsupial", out)
+
+    def test_single_mention_is_noise_not_association(self):
+        out = expand_query("quokka", ["a quokka near the jetty"])
+        self.assertNotIn("jetty", out)
+
+    def test_original_terms_and_stopwords_excluded(self):
+        out = expand_query("marsupial",
+                           ["marsupial marsupial because because"])
+        self.assertEqual(out, [])
+
+    def test_empty_inputs_safe(self):
+        self.assertEqual(expand_query("", []), [])
+        self.assertEqual(expand_query("x", [None, ""]), [])
+
+
+class AssociativeRetrievalTest(unittest.TestCase):
+    """The classic PRF win: a note that never says the queried word is
+    still reached through the association."""
+
+    DOCS = [
+        ("quokka.md", "the quokka is a small marsupial; the marsupial "
+                      "thrives on rottnest"),
+        ("pouch.md", "marsupial mothers carry joeys in a pouch"),
+        ("stars.md", "orion rises over the winter sky"),
+    ]
+
+    def test_association_reaches_the_second_note(self):
+        out = retrieve_from_index("quokka", self.DOCS)
+        self.assertIn("[quokka.md]", out)
+        self.assertIn("[pouch.md]", out)       # never says 'quokka'
+        self.assertNotIn("[stars.md]", out)    # unrelated stays out
+
+    def test_literal_mode_still_available(self):
+        out = retrieve_from_index("quokka", self.DOCS, associative=False)
+        self.assertIn("[quokka.md]", out)
+        self.assertNotIn("[pouch.md]", out)
+
+    def test_no_first_pass_hits_stays_empty(self):
+        self.assertEqual(retrieve_from_index("zebra", self.DOCS), "")
 
 
 class StudyDbDocumentsTest(unittest.TestCase):

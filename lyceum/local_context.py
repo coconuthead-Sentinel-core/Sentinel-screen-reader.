@@ -53,6 +53,35 @@ def rank_snippets(query, documents, limit: int = 5, max_chars: int = 1500):
     return [(src, snip) for _, src, snip in scored[:limit]]
 
 
+_STOP = frozenset("""the and that with this from have for are was you your
+not but all can will one when then they their them its has had were what
+which into also more some just like only over out who how why been being
+would could should there here about after before because these those than
+very each own same such most other any our his her she him did does doing
+too""".split())
+
+
+def expand_query(query: str, texts, max_terms: int = 4) -> list[str]:
+    """One associative hop — pseudo-relevance feedback (Rocchio;
+    Manning, Raghavan & Schütze, *Introduction to Information
+    Retrieval*, ch. 9): mine the FIRST retrieval's best passages for
+    their most frequent NOVEL content words and return them as extra
+    query terms. The retrieval analogue of spreading activation
+    (Collins & Loftus 1975): the asked-for concept lights up its
+    neighbors in the user's own corpus. A term must recur (>= 2
+    occurrences) to count as an association — one mention is noise.
+    Pure; deterministic (ties break alphabetically)."""
+    base = set(_terms(query))
+    counts: dict = {}
+    for t in texts:
+        for w in _WORD.findall((t or "").lower()):
+            if (len(w) > 3 and w not in _STOP and w not in base
+                    and not w.isdigit()):
+                counts[w] = counts.get(w, 0) + 1
+    ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
+    return [w for w, n in ranked[:max_terms] if n >= 2]
+
+
 def chunk_text(text: str, chunk_chars: int = 1200, overlap: int = 150):
     """Split text into overlapping chunks for retrieval. Pure.
 
@@ -111,13 +140,22 @@ def retrieve_from_text(query: str, text: str, limit: int = 4,
 
 
 def retrieve_from_index(query, documents, doc_limit: int = 3,
-                        per_doc_chars: int = 1500, max_context: int = 6000) -> str:
+                        per_doc_chars: int = 1500, max_context: int = 6000,
+                        associative: bool = True) -> str:
     """Search MANY documents: rank whole docs by relevance, then pull the single
     best passage from each of the top ``doc_limit`` docs.
 
     ``documents`` is a list of (name, full_text) — e.g. the cached library index
     plus live study.db rows. Pure and testable. This is how the assistant reaches
     a whole library: the right passage from the right few books, not everything.
+
+    With ``associative`` (the default — owner's design, 2026-07-27), a
+    second pass widens the net by one hop: the best first-pass passages
+    are mined for recurring novel terms (``expand_query``) and every
+    document is re-scored with the ORIGINAL terms at double weight
+    (Rocchio-style) plus the associations — so a note that never says
+    "quokka" but talks about marsupials can still reach the assistant
+    when you ask about quokkas.
     """
     terms = _terms(query)
     if not terms or not documents:
@@ -126,11 +164,24 @@ def retrieve_from_index(query, documents, doc_limit: int = 3,
         ((score(text, terms), name, text) for name, text in documents),
         key=lambda x: x[0], reverse=True,
     )
+    passage_query = query
+    if associative:
+        seeds = [text[:2000] for s, _n, text in scored[:3] if s > 0]
+        extra = expand_query(query, seeds)
+        if extra:
+            combined = terms + terms + extra   # originals keep 2x weight
+            scored = sorted(
+                ((score(text, combined), name, text)
+                 for name, text in documents),
+                key=lambda x: x[0], reverse=True,
+            )
+            passage_query = query + " " + " ".join(extra)
     parts, total = [], 0
     for s, name, text in scored:
         if s <= 0 or len(parts) >= doc_limit or total >= max_context:
             break
-        passage = retrieve_from_text(query, text, limit=1, max_context=per_doc_chars)
+        passage = retrieve_from_text(passage_query, text, limit=1,
+                                     max_context=per_doc_chars)
         if passage:
             parts.append(f"[{name}] {passage}")
             total += len(passage)

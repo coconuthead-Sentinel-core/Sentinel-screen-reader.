@@ -527,3 +527,20 @@ intake's costume, named honestly in the glossary: spreading
 activation (Collins & Loftus 1975) and structure-mapping (Gentner
 1983) — the invented vocabulary (dendritic polymath, OmniCore,
 quantum cognition, DSO-AIR) rejected as technobabble.
+
+### §14 amendment (2026-07-27): the assistant reads associatively
+
+The proprietor asked the right version of the question: not "should
+the HUMAN learn dendritically" but "can the app's resident mind
+ACQUIRE information associatively — as a tool, without harm?" Answer:
+yes, and it shipped — one associative hop in the grounding retrieval
+(lyceum/local_context.py): pseudo-relevance feedback (Rocchio;
+Manning-Raghavan-Schütze IIR ch.9), the retrieval analogue of
+spreading activation. First pass ranks; the best passages are mined
+for RECURRING novel terms; every document is re-scored with original
+terms at double weight plus the associations — so a note that never
+says "quokka" is still reached through "marsupial." Pure kernel,
+deterministic, literal mode preserved (associative=False), zero new
+dependencies, assistant stays stateless. The gated verdict: this was
+the honest core of three rejected graph-lattice pitches, delivered in
+~40 lines on the existing kernel.

@@ -113,3 +113,8 @@ One entry per real CS term, with the day it earned its place.
   relational structure across domains; the real science under
   'cross-domain metaphorical transfer'. Both are why ⚡ Idea Collision
   works without any knowledge-graph re-platform. (2026-07-27)
+- **Pseudo-relevance feedback / query expansion** — Rocchio's method
+  (IR textbook canon): retrieve, mine the best hits for recurring
+  novel terms, retrieve again with originals double-weighted. How the
+  assistant now reads the owner's corpus associatively — spreading
+  activation, implemented honestly. (2026-07-27)

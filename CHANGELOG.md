@@ -11,6 +11,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🧠 The assistant reads associatively** (owner's question,
+  2026-07-27: "can the assistant acquire information in this manner —
+  as a tool, without harming it?" — green-lit as classroom CS). The
+  AI chat's grounding retrieval now makes ONE associative hop:
+  pseudo-relevance feedback (Rocchio; Manning, Raghavan & Schütze,
+  Introduction to Information Retrieval, ch. 9 — the honest,
+  textbook implementation of spreading activation). The first pass
+  ranks the corpus; the best passages are mined for RECURRING novel
+  terms (a single mention is noise); every document is re-scored with
+  the original query terms at DOUBLE weight plus the associations —
+  so asking about one concept now also reaches the notes that discuss
+  its neighbors without naming it. Pure kernel, deterministic,
+  literal mode preserved, zero new dependencies, the assistant stays
+  stateless. 7 new headless tests — the suite crosses 500.
+  Suite 486 green + 14 skips.
 - **⚒ The Forged Draw** (owner's intake 2026-07-27, triaged on a
   light board and shipped with corrections). Completing an ⚡ Idea
   Collision — recalling two of your own concepts and writing the
