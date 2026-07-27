@@ -11,6 +11,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🌾 Life in the quarters** (finish-out G5h, the owner's quarters
+  brief, 2026-07-26). The city-proper vignette's empty regions now
+  carry quiet life, quartered as the owner composed it: a terraced
+  field with contour-arc elevation on the left, patchwork crop strips
+  on the right, a chimney with static smoke curls in the midground —
+  the minimalist genre's universal "someone is home" — and two
+  distant birds in the sky. Style verdict grounded in the market's
+  own numbers for this aesthetic (Stardew Valley 50M+ units, Tiny
+  Glade 1M in its first month, Townscaper 1-2M owners): calm,
+  geometric, life-signaled scenes command tens of millions of users.
+  All muted, all static, all parametric; probed at the three clamp
+  widths. Suite 457 green + 14 skips.
 - **🛡 The Sentinel takes human form + the pediment** (finish-out G5g,
   the owner's reference-board session, 2026-07-26 — an illuminated-
   manuscript mockup brought as art direction, interpreted rather than

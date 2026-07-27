@@ -23889,6 +23889,39 @@ class BookReader:
                                fill=haze2, outline="")
             c.create_polygon(vpx - 6, vpy - 22, vpx, vpy - 30,
                              vpx + 6, vpy - 22, fill=haze, outline="")
+            # G5h (owner's quarters brief, 2026-07-26; style verdict
+            # from the era's heirs — Tiny Glade/Townscaper/Stardew):
+            # the panel's QUARTERS get quiet LIFE. Left-fore: terraced
+            # field, contour arcs = elevation. Right-fore: patchwork
+            # crop strips. Midground: a chimney with static smoke —
+            # the minimalist genre's universal "someone is home."
+            # Sky: two distant birds. All muted, all still.
+            f1, f2 = "#3a4f4a", "#425c50"          # field tones
+            lw, rw = int(w * 0.28), int(w * 0.72)  # walkway edges at h
+            c.create_polygon(0, h, lw, h, vpx - 8, vpy + 6,
+                             0, vpy + 6, fill=f1, outline="")
+            for i, ay in enumerate((10, 18)):       # contour terraces
+                c.create_arc(-int(w * 0.2), vpy + ay - 6,
+                             int(lw * 0.9), vpy + ay + 10,
+                             start=20, extent=140, style=tk.ARC,
+                             outline=f2, width=2)
+            c.create_polygon(rw, h, w, h, w, vpy + 6,
+                             vpx + 8, vpy + 6, fill=f2, outline="")
+            for i in range(3):                      # crop strips
+                sx = vpx + 12 + i * max(8, int(w * 0.06))
+                c.create_line(sx, vpy + 8, min(sx + int(w * 0.10), w),
+                              h - 2, fill=f1, width=2)
+            gx = int(w * 0.78)                      # chimney + smoke
+            c.create_rectangle(gx + 20, vpy - 16, gx + 24, vpy - 8,
+                               fill=haze2, outline="")
+            for i, (dx, dy, r) in enumerate(((1, -20, 2), (4, -25, 2),
+                                             (8, -29, 3))):
+                c.create_oval(gx + 20 + dx - r, vpy + dy - r,
+                              gx + 20 + dx + r, vpy + dy + r,
+                              fill=haze, outline="")
+            for bx, by in ((int(w * 0.16), 8), (int(w * 0.22), 12)):
+                c.create_line(bx - 4, by + 2, bx, by, fill=haze2)  # birds
+                c.create_line(bx, by, bx + 4, by + 2, fill=haze2)
         head_art.bind("<Configure>", _draw_city_proper)
         head.bind("<Configure>",
                   lambda e: head_art.configure(
