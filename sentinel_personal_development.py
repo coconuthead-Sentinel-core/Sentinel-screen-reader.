@@ -23947,7 +23947,7 @@ class BookReader:
                                outline="")             # drum
             c.create_arc(cx - dw, 6, cx + dw, 34, start=0, extent=180,
                          fill=domec, outline="")       # dome
-            c.create_line(cx, 2, cx, 6, fill=domec, width=2)  # finial
+            c.create_line(cx, 2, cx, 6, fill="#8a6d1f", width=2)  # gold finial
             for sx in (-1, 1):                         # half-domes
                 hd = max(10, int(W * 0.028))
                 hx = cx + sx * (dw + hd)
@@ -24012,8 +24012,34 @@ class BookReader:
             for bx in range(cx - 16, cx + 17, 8):
                 c.create_line(bx, 42, bx, H, fill=stone)
             c.create_line(cx - 18, 46, cx + 18, 46, fill=stone)
-            c.create_text(cx, 6, text="🛡", anchor="n",
-                          font=("Segoe UI Emoji", 12))
+            # G5g (owner's reference board, 2026-07-26): the classical
+            # PEDIMENT over the arch — the reference's Greco-Roman
+            # temple front, translated to flat vector.
+            c.create_polygon(cx - 26, 40, cx, 30, cx + 26, 40,
+                             fill=stone, outline=dark)
+            c.create_line(cx - 26, 40, cx, 30, fill=lite)
+            # The SENTINEL, drawn (replaces the emoji, which rendered
+            # as a blob on the owner's machine): helmet with plume,
+            # cuirass, spear, round shield — the reference's guardian
+            # in our engine's idiom. One whisper of muted Byzantine
+            # gold (shield + plume + dome finial), center line only.
+            gold = "#8a6d1f"
+            c.create_oval(cx - 3, 50, cx + 3, 56, fill=lite,       # helmet
+                          outline="")
+            c.create_arc(cx - 5, 47, cx + 5, 55, start=30,         # plume
+                         extent=120, style=tk.ARC, outline=gold,
+                         width=2)
+            c.create_rectangle(cx - 4, 56, cx + 4, 67, fill=lite,  # cuirass
+                               outline=dark)
+            c.create_line(cx - 2, 67, cx - 2, H, fill=lite,        # legs
+                          width=2)
+            c.create_line(cx + 2, 67, cx + 2, H, fill=lite, width=2)
+            c.create_line(cx + 8, 46, cx + 8, H, fill=lite,        # spear
+                          width=2)
+            c.create_polygon(cx + 8, 42, cx + 6, 47, cx + 10, 47,
+                             fill=lite, outline="")                # spearhead
+            c.create_oval(cx - 11, 58, cx - 4, 66, fill=gold,      # shield
+                          outline=dark)
         wall.bind("<Configure>", _draw_city_wall)
         _draw_city_wall()
 

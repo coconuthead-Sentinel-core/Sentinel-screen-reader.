@@ -11,6 +11,19 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🛡 The Sentinel takes human form + the pediment** (finish-out G5g,
+  the owner's reference-board session, 2026-07-26 — an illuminated-
+  manuscript mockup brought as art direction, interpreted rather than
+  copied, per the owner's own instruction). The gatehouse gains a
+  classical Greco-Roman PEDIMENT over its arch, and the emoji shield
+  (which rendered as a blob on the owner's machine) is replaced by a
+  DRAWN vector sentinel standing watch in the archway: helmet,
+  plumed crest, cuirass, spear, and a round shield — with the
+  composition's single warm note, muted Byzantine gold, reserved for
+  the shield, the plume, and the dome's finial on the center line.
+  Geometry probed (figure contained by the arch, clear of the
+  pediment); still static, still never a control. Suite 457 green
+  + 14 skips.
 - **⚡ Idea Collision — Llull's wheel over your own knowledge**
   (owner-approved from the polymathy research intake, 2026-07-26).
   New ⚡ Collide button on the Glossary tab: draws two of YOUR studied
