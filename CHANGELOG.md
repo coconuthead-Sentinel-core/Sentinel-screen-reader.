@@ -11,6 +11,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🛡 Phase D — the loaded plan** (Blueprint §12, owner's order
+  2026-07-27; §12 IS NOW COMPLETE — every phase of the owner's
+  original no-re-entry design is EXECUTED). The flow's end now greets
+  you with what it carried in: the Start room opens with a briefing
+  panel — "⚔ Today's march — N open tasks" with each task marked ✔
+  done or ▫ open (capped at six, "… and N more"), the Do-Now count,
+  and the Sentinel's send-off — rebuilt by pure kernel every time
+  Start is shown (▶ from the wheel or the tab). An empty plan speaks:
+  "enter through a gate to load today, or begin freely." Kernels
+  session_briefing + count_do_items in lyceum/flow_carry.py (7 new
+  headless tests — 20 total in the carry suite); static gate locks
+  the Start-room imports. The full circuit runs on one Save: gate →
+  goal → Do Now → today's plan → the briefing at Start.
+  Suite 478 green + 14 skips.
 - **📅 Phase C — the carry marches onto the Planner** (Blueprint §12,
   owner's order 2026-07-27). The same next action that lands in Do
   Now (Phase B) now ALSO lands on TODAY's planner as a day task, in

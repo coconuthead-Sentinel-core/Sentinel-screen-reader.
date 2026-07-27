@@ -13142,10 +13142,20 @@ class BookReader:
         ss_frames: dict = {}
         ss_buttons: dict = {}
 
+        # §12 Phase D: hooks the panels register after _show_ss exists —
+        # the Start room refreshes its loaded-plan briefing every time
+        # it is shown (the flow ends by showing what it carried in).
+        ss_hooks: dict = {"briefing": None}
+
         def _show_ss(key):
             for f in ss_frames.values():
                 f.pack_forget()
             ss_frames[key].pack(fill=tk.BOTH, expand=True)
+            if key == "start" and ss_hooks.get("briefing"):
+                try:
+                    ss_hooks["briefing"]()
+                except Exception:
+                    pass
             for k, b in ss_buttons.items():
                 if k == "wheel":
                     b.configure(bg=self._WHEEL_TAB_COLOR, fg="white")
@@ -13224,6 +13234,36 @@ class BookReader:
         # The original Session Start flow becomes the "Start" panel.
         body = tk.Frame(ss_frames["start"], bg=BG_DARK, padx=18, pady=12)
         body.pack(fill=tk.BOTH, expand=True)
+
+        # §12 Phase D (owner's order, 2026-07-27): the LOADED PLAN —
+        # the flow's end greets you with what it carried in: today's
+        # planner tasks (✔/▫, capped) + the Do-Now count, rebuilt by
+        # the pure kernel every time Start is shown. An empty plan
+        # speaks (law 3) instead of rendering blank.
+        _brief_var = tk.StringVar()
+        tk.Label(body, textvariable=_brief_var, bg=BG_PANEL, fg=FG_TEXT,
+                 font=("Segoe UI", 10), justify=tk.LEFT, anchor="w",
+                 padx=12, pady=8, wraplength=620
+                 ).pack(fill=tk.X, pady=(0, 8))
+
+        def _refresh_briefing():
+            from lyceum.flow_carry import session_briefing, count_do_items
+            today = date.today().strftime("%Y-%m-%d")
+            try:
+                tasks = self._db_query(
+                    "SELECT title, done FROM planner_tasks WHERE day=? "
+                    "ORDER BY sort_order", (today,))
+            except Exception:
+                tasks = []
+            try:
+                rows = self._db_query(
+                    "SELECT body FROM eisenhower WHERE quadrant='do'")
+                do_n = count_do_items(rows[0][0] if rows else "")
+            except Exception:
+                do_n = 0
+            _brief_var.set(session_briefing(tasks, do_n))
+        ss_hooks["briefing"] = _refresh_briefing
+        _refresh_briefing()
 
         # (Mic accuracy + Voice Memory row removed — microphone feature
         #  was taken out of the project.)

@@ -6,7 +6,8 @@ Do-Now quadrant. Pure logic, no GUI, no DB.
 import unittest
 
 from lyceum.flow_carry import (next_action, planner_task_title,
-                               is_duplicate_task)
+                               is_duplicate_task, count_do_items,
+                               session_briefing)
 
 
 class NextActionTest(unittest.TestCase):
@@ -75,6 +76,46 @@ class IsDuplicateTaskTest(unittest.TestCase):
 
     def test_empty_day_accepts_anything_real(self):
         self.assertFalse(is_duplicate_task([], "🎯 First of the day"))
+
+
+class CountDoItemsTest(unittest.TestCase):
+    def test_bullets_counted_sources_ignored(self):
+        body = ("• Call the pharmacy\n  (🎯 Refill · 💰 — 2026-07-27)\n"
+                "• Walk 20 minutes\n  (2026-07-27)\n")
+        self.assertEqual(count_do_items(body), 2)
+
+    def test_unchecked_boxes_counted_checked_not(self):
+        self.assertEqual(count_do_items("[ ] open one\n[x] done one\n"), 1)
+
+    def test_empty_body_is_zero(self):
+        self.assertEqual(count_do_items(""), 0)
+        self.assertEqual(count_do_items(None), 0)
+
+
+class SessionBriefingTest(unittest.TestCase):
+    def test_empty_plan_speaks(self):
+        out = session_briefing([], 0)
+        self.assertIn("empty", out)
+        self.assertIn("gate", out)
+
+    def test_lists_tasks_with_marks_and_counts(self):
+        out = session_briefing([("🎯 A: step", 0), ("🎯 B", 1)], 3)
+        self.assertIn("1 open task (of 2)", out)
+        self.assertIn("▫ 🎯 A: step", out)
+        self.assertIn("✔ 🎯 B", out)
+        self.assertIn("Do Now holds 3 items", out)
+        self.assertIn("Begin", out)
+
+    def test_caps_at_six_and_says_so(self):
+        tasks = [(f"t{i}", 0) for i in range(9)]
+        out = session_briefing(tasks, 0)
+        self.assertIn("… and 3 more", out)
+        self.assertNotIn("t7", out)
+
+    def test_blank_titles_skipped(self):
+        out = session_briefing([("", 0), ("  ", 1), ("real", 0)], 0)
+        self.assertIn("1 open task:", out)
+        self.assertIn("▫ real", out)
 
 
 if __name__ == "__main__":

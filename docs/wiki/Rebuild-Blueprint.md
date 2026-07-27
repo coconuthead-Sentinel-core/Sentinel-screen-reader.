@@ -370,7 +370,10 @@ PHASES (each shippable alone, one commit each):
       calendar idiom '🎯 goal: step', deduped case/space-insensitively
       so a re-save never doubles the day; kernel rules in
       lyceum/flow_carry.py)
-  D: ▶ Start session close-of-flow button + loaded-plan summary
+  D: ▶ Start session + loaded-plan summary ... EXECUTED 2026-07-27
+     (session_briefing + count_do_items kernels; the Start room
+      rebuilds the briefing every time it is shown — today's tasks
+      ✔/▫ capped at 6, Do-Now count, empty plan speaks)
 
 KNOWN TRAP: hiding tabs must NOT orphan the rooms — every room
   reachable through the flow, verified per phase; a room you can't
