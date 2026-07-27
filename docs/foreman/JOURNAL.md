@@ -125,3 +125,10 @@ ALL FOUR sections granted; grounding feed extended (commentaries,
 topic-entry bodies, Matrix, Planner) with a seeded-row retrieval test
 per section. Punch #9 struck; #8 half-struck (E: drive plug-in is the
 only remaining proprietor action besides the SUS baseline).
+
+## 2026-07-27 — Session close
+
+Proprietor closed the finish-out session to live with the product —
+general use, not QA (the right next instrument: field time feeds the
+SUS baseline). Full narrative filed in the front-office journal.
+Next session opens per law: punch-list walk, then Cycle 1.
