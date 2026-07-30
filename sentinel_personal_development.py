@@ -1971,11 +1971,9 @@ class BookReader:
         # OUTLIVES the Study workspace window — without this check a
         # stale tab would pop a Glossary dialog from anywhere in the
         # app after the workspace closed (Blueprint §11, KNOWN TRAP).
-        win = getattr(self, "_study_win", None)
-        try:
-            if win is None or not win.winfo_exists():
-                return False
-        except tk.TclError:
+        # One seam with the other study claims (punch #4): visible
+        # window or no claim — hidden workspaces don't own clicks.
+        if not self._study_workspace_visible():
             return False
         tab = getattr(self, "_study_active_tab", None)
         if tab == "topics":
@@ -2055,8 +2053,13 @@ class BookReader:
             return False
         try:
             self._save_current_journal_entry()
-        except Exception:
-            return False
+        except Exception as e:
+            # Claimed context + failed action must SPEAK (Law 3) and
+            # STOP the chain — returning False here told the chain
+            # "not mine" and the user "nothing to save": both lies.
+            _qlog(f"ftb-save: journal claimed but save FAILED: {e!r}")
+            self.set_status("⚠ Journal save failed — details in qa_debug.log.")
+            return True
         self.set_status("💾 ✓ Journal entry saved.")
         return True
 
@@ -2065,8 +2068,10 @@ class BookReader:
             return False
         try:
             self._save_notes()
-        except Exception:
-            return False
+        except Exception as e:
+            _qlog(f"ftb-save: study-notes claimed but save FAILED: {e!r}")
+            self.set_status("⚠ Study-notes save failed — details in qa_debug.log.")
+            return True
         self.set_status("💾 ✓ Study notes saved.")
         return True
 
@@ -2118,8 +2123,10 @@ class BookReader:
             return False
         try:
             hooks["today"]()
-        except Exception:
-            return False
+        except Exception as e:
+            _qlog(f"ftb-review: ADD claimed but hook FAILED: {e!r}")
+            self.set_status("⚠ Review add failed — details in qa_debug.log.")
+            return True
         _qlog("ftb-review: ADD claimed -> jumped to today")
         self.set_status("🪞 Today's review — type, then the yellow Save.")
         return True
@@ -2134,8 +2141,10 @@ class BookReader:
             return False
         try:
             cleared = hooks["clear_today"]()
-        except Exception:
-            return False
+        except Exception as e:
+            _qlog(f"ftb-review: DELETE claimed but hook FAILED: {e!r}")
+            self.set_status("⚠ Review delete failed — details in qa_debug.log.")
+            return True
         _qlog(f"ftb-review: DELETE claimed, day={self._review_current_day}, "
               f"cleared={cleared} (False = past day refused, archive law)")
         if cleared:
@@ -19911,6 +19920,9 @@ class BookReader:
         try:
             content = pane.get("1.0", tk.END).strip()
         except tk.TclError:
+            # Ghost pane: the Topics tab claimed context but its compose
+            # pane is dead (Blueprint §11 trap family) — breadcrumb it.
+            _qlog("ftb-save: topics claimed but compose pane is a GHOST")
             return False
         tsel = self._topics_listbox.curselection()
         if not tsel:
@@ -19957,10 +19969,26 @@ class BookReader:
         self.set_status(msg)
         return True
 
+    def _study_workspace_visible(self) -> bool:
+        """Blueprint §11 ghost-tab guard, ONE seam (punch #4): a study
+        tab may claim a toolbar click only while the workspace window
+        is actually on screen. `_study_active_tab` outlives the hidden
+        window (close withdraws, never destroys — the widgets stay
+        alive, so no lucky TclError saves us), meaning a bare tab check
+        would claim clicks thrown from anywhere in the app."""
+        win = getattr(self, "_study_win", None)
+        try:
+            return (win is not None and win.winfo_exists()
+                    and win.state() in ("normal", "zoomed"))
+        except tk.TclError:
+            _qlog("study-guard: workspace window HALF-DEAD (TclError)")
+            return False
+
     def _topics_context_active(self) -> bool:
         topics = getattr(self, "_topics_listbox", None)
         entries = getattr(self, "_topic_entries_listbox", None)
-        if getattr(self, "_study_active_tab", None) == "topics":
+        if (self._study_workspace_visible()
+                and getattr(self, "_study_active_tab", None) == "topics"):
             return True
         if hasattr(self, "_ftb_action_targets"):
             for target in self._ftb_action_targets():
@@ -20004,7 +20032,8 @@ class BookReader:
 
     def _glossary_context_active(self) -> bool:
         lb = getattr(self, "_glossary_listbox", None)
-        if getattr(self, "_study_active_tab", None) == "glossary":
+        if (self._study_workspace_visible()
+                and getattr(self, "_study_active_tab", None) == "glossary"):
             return True
         if hasattr(self, "_ftb_action_targets"):
             for target in self._ftb_action_targets():
@@ -20028,7 +20057,8 @@ class BookReader:
 
     def _commentary_context_active(self) -> bool:
         lb = getattr(self, "_commentary_listbox", None)
-        if getattr(self, "_study_active_tab", None) == "commentary":
+        if (self._study_workspace_visible()
+                and getattr(self, "_study_active_tab", None) == "commentary"):
             return True
         if hasattr(self, "_ftb_action_targets"):
             for target in self._ftb_action_targets():
@@ -21283,7 +21313,8 @@ class BookReader:
     def _journal_context_active(self) -> bool:
         body = getattr(self, "_journal_body", None)
         listbox = getattr(self, "_journal_listbox", None)
-        if getattr(self, "_study_active_tab", None) == "journal":
+        if (self._study_workspace_visible()
+                and getattr(self, "_study_active_tab", None) == "journal"):
             return True
         if hasattr(self, "_ftb_action_targets"):
             for target in self._ftb_action_targets():
@@ -23072,7 +23103,8 @@ class BookReader:
         editor = getattr(self, "_study_notes_widget", None)
         title = getattr(self, "_study_notes_title_entry", None)
         listbox = getattr(self, "_study_notes_listbox", None)
-        if getattr(self, "_study_active_tab", None) == "study_notes":
+        if (self._study_workspace_visible()
+                and getattr(self, "_study_active_tab", None) == "study_notes"):
             return True
         if hasattr(self, "_ftb_action_targets"):
             for target in self._ftb_action_targets():

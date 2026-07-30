@@ -657,3 +657,14 @@
   class the suite now polices. Same session, the punch list got its
   second dated Eisenhower triage: the matrix is now the shop's
   standing scheduler, not a one-time exercise.
+
+- **2026-07-30 (night) — Promote-the-deferred day.** The proprietor's
+  standing order — DO-queue clear, promote the scheduled/deferred by
+  Eisenhower — retired the two oldest engineering items in one shift:
+  the silent-declines sweep (#5) and the ghost-tab visibility seam
+  (#4). The deeper finding: the ghost-tab trap was worse than the
+  ledger recorded — the hidden-not-destroyed workspace kept every
+  widget alive, so no TclError ever fired; "lucky exception" was
+  actually "no exception." For the paper: a defect ledger's model of
+  a trap must be re-derived from current code before each fix — the
+  codebase drifts out from under its own history.

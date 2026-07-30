@@ -37,6 +37,27 @@ class TestStudyTabContract(unittest.TestCase):
         body = _method_body(self.src, "_show_study_tab")
         self.assertIn("_qlog", body)
 
+    def test_tab_claims_require_visible_workspace(self):
+        # Punch #4 gate (Blueprint §11 ghost tab): any context test that
+        # claims a toolbar click via _study_active_tab must first check
+        # _study_workspace_visible — the tab key outlives the hidden
+        # window, and the widgets stay alive (no TclError to save us).
+        self.assertIn("def _study_workspace_visible(", self.src)
+        for m in re.finditer(
+                r"def (_\w+_context_active)\(self\).*?(?=\n    def )",
+                self.src, re.S):
+            name, body = m.group(1), m.group(0)
+            if "_study_active_tab" in body:
+                self.assertIn(
+                    "_study_workspace_visible", body,
+                    f"{name} claims via _study_active_tab without the "
+                    "visible-workspace guard")
+
+    def test_study_add_route_uses_the_shared_guard(self):
+        start = self.src.index("def _study_add_from_toolbar(")
+        body = self.src[start:self.src.find("\n    def ", start + 1)]
+        self.assertIn("_study_workspace_visible", body)
+
     def test_workspace_build_lands_on_a_registered_tab(self):
         body = _method_body(self.src, "open_study_workspace")
         m = re.search(r'_show_study_tab\("(\w+)"\)', body)

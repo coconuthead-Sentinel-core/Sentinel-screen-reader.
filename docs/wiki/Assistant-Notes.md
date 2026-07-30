@@ -427,6 +427,18 @@ dashboards.
   dated 2026-07-30): next foreman DO = #5 silent-declines sweep; owner
   DO = #11/#'reader' UAT, Recycle Bin click, #10 SUS. Former-Bugs entry
   filed with the concept named.
+- ✅ 2026-07-30 (night) — **Punch #5 + #4 executed** (promote-the-
+  deferred order): four claimed-context exception swallows now _qlog +
+  ⚠ status + stop the chain; `_study_workspace_visible()` one-seam
+  guard fronts all five tab context tests + add route (hidden
+  workspace can no longer claim clicks — no TclError luck involved,
+  window is withdrawn not destroyed). Gates: decline-scan (line-based
+  after a catastrophic-backtracking regex lesson), tab-claim scan,
+  updated AST guard. Suite **528** green; smoke 10/10. .aitk 20 GB
+  copy to E: launched (junction swap only after byte-verify + owner-
+  visible report). Shelter clone pass 2 running with node_modules/
+  __pycache__ excluded after pass 1 thrashed on OneDrive hydration
+  timeouts (ERROR 426) inside Completed projects.
 - (empty — Shannon or the assistant may append instructions here; the
   next README check executes them)
 

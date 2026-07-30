@@ -11,6 +11,26 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Fixed
+- **🔇 Punch #5 — silent declines now speak** (proprietor's promote-
+  the-deferred order, 2026-07-30). Four claimed-context failures in
+  the toolbar dispatch chains swallowed their exceptions and returned
+  False — telling the chain "not mine" and the user "nothing to save"
+  when the truth was "mine, and it FAILED" (journal save, study-notes
+  save, AAR add, AAR delete). Each now breadcrumbs the exception,
+  shows an honest ⚠ status, and STOPS the chain. Two abnormal probes
+  (ghost topics pane, half-dead window) breadcrumb too. Static gate:
+  `tests/test_ftb_decline_gate.py` scans every chain helper — an
+  except-swallow without a `_qlog` fails the suite.
+- **👻 Punch #4 — ghost-tab claims closed at ONE seam.** Worse than
+  the ledger thought: the workspace close WITHDRAWS (never destroys),
+  so `_study_active_tab` and all its widgets outlive the visible
+  window — no lucky TclError involved; a hidden workspace could claim
+  toolbar clicks thrown from anywhere in the app. New shared guard
+  `_study_workspace_visible()` (exists AND normal/zoomed state, half-
+  dead probes breadcrumbed) now fronts every tab-based context claim
+  (topics, glossary, commentary, journal, study-notes) and the add
+  route. Gates: tab-claim scan + AST guard checks (updated in
+  `test_clipboard_wiring.py`). Suite **528**, all green; smoke 10/10.
 - **👻 The ghost tab default** (`[init] study window build: 'reader'`,
   green-lit 2026-07-30). Two call sites still requested the Reader tab
   removed from the registry: the workspace build's default (crashed

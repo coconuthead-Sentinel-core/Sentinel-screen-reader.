@@ -294,3 +294,29 @@ precondition too — sufficient value separation — and "drawn" is not
   must precede teardown; the decline must breadcrumb; the default tab
   must exist in the registry). Smoke proves startup withdraw + bogus-
   key fallback under a real mainloop.
+
+## 2026-07-30 (later) — the hidden workspace that owned every click
+
+- **Symptom:** with the Study workspace closed (hidden), the floating
+  toolbar's Save/Add/Remove could still be CLAIMED by study tabs —
+  saving into invisible panes, popping dialogs from anywhere. And four
+  claimed-context handlers swallowed real failures (`except: return
+  False`), so a failed journal/notes/AAR action reported as "nothing
+  to save here."
+- **Concept — stale state as authority + exception swallowing.** The
+  close handler WITHDRAWS the window (never destroys, by design), so
+  `_study_active_tab` and its widgets outlive the visible window; a
+  context test keyed on the tab alone treats a memory as a state
+  (Blueprint §11). Swallowed exceptions convert "claimed and failed"
+  into "unclaimed" — a category error that misroutes the chain.
+- **Fix & guard:** one seam, `_study_workspace_visible()` (exists AND
+  normal/zoomed; half-dead probes breadcrumb), fronting all five
+  tab-based context tests and the add route. All claimed-context
+  failures now `_qlog` + honest ⚠ status + stop the chain (Law 3).
+  Gates: `tests/test_ftb_decline_gate.py` (line-based except-swallow
+  scan), tab-claim scan in `test_study_tab_contract.py`, AST guard
+  checks in `test_clipboard_wiring.py`. Lesson paid for en route: the
+  first version of the decline gate used a backtracking-prone regex
+  that spun for minutes on the 18k-line source — rewritten as a
+  line-based scan; pattern-match complexity is part of a gate's
+  design, too.

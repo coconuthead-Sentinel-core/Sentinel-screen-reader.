@@ -169,19 +169,28 @@ class EntryDialogSaveReachableTest(unittest.TestCase):
     def test_study_add_checks_the_window_not_just_the_tab(self):
         """_study_active_tab outlives the Study workspace window (it is a
         memory, not a state — Blueprint §11 KNOWN TRAP). The Add route
-        must verify _study_win exists or a stale tab pops a dialog from
-        anywhere in the app after the workspace closes."""
+        must verify the workspace is actually VISIBLE or a stale tab
+        pops a dialog from anywhere in the app. Since punch #4 (2026-
+        07-30) the check lives in ONE seam: _study_workspace_visible —
+        the route must call it, and the seam itself must probe the real
+        window."""
         fn = _find_func("_study_add_from_toolbar")
-        names = {n.value for n in ast.walk(fn)
-                 if isinstance(n, ast.Constant) and isinstance(n.value, str)}
-        self.assertIn("_study_win", names,
-                      "_study_add_from_toolbar lost its ghost guard")
         calls = {c.func.attr for c in ast.walk(fn)
                  if isinstance(c, ast.Call)
                  and isinstance(c.func, ast.Attribute)}
-        self.assertIn("winfo_exists", calls,
-                      "_study_add_from_toolbar no longer verifies the "
-                      "workspace window exists")
+        self.assertIn("_study_workspace_visible", calls,
+                      "_study_add_from_toolbar lost its ghost guard seam")
+        guard = _find_func("_study_workspace_visible")
+        names = {n.value for n in ast.walk(guard)
+                 if isinstance(n, ast.Constant) and isinstance(n.value, str)}
+        self.assertIn("_study_win", names,
+                      "_study_workspace_visible no longer probes _study_win")
+        gcalls = {c.func.attr for c in ast.walk(guard)
+                  if isinstance(c, ast.Call)
+                  and isinstance(c.func, ast.Attribute)}
+        for required in ("winfo_exists", "state"):
+            self.assertIn(required, gcalls,
+                          f"_study_workspace_visible dropped {required}()")
 
     def test_toolbar_fallback_searches_toplevel_dialogs(self):
         """_ftb_invoke_context_button must not skip Toplevel ancestors:
