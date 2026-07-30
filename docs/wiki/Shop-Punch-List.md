@@ -56,6 +56,17 @@ Imprint archive-ledger paperwork (concept, scoped when called).
 CleanroomIntake benchmark (owner's want, optional). **DELETE** →
 nothing; the archive law stands.
 
+**COMPLETION DECLARATION 2026-07-30 (proprietor's word, on the
+record):** Sentinel Forge — Personal Development is **DONE**. The
+house is built, inspected, and occupied (final walk-through
+certificate: Claude AI\Portfoliooards6-07-30_FinalWalkthrough
+.md — FIT FOR OCCUPANCY). The promote-the-deferred queue is
+re-parked as OPTIONAL post-completion backlog — built only if the
+proprietor ever orders it, owed to no one. The shop stands in
+MAINTENANCE MODE: defects found in daily use get fixed under warranty;
+nothing new gets built without a fresh scope. SUS scorecard remains a
+measurement of the finished product, not a build item.
+
 | # | Item | Origin | State |
 |---|---|---|---|
 | 1 | Owner UAT: full CRUD cycle on Topics after 68fb199 (delete topic+7 entries, add fresh, delete again) | 2026-07-25 ticket 4 | ~~STRUCK~~ — owner UAT ✅ 2026-07-25 ("read, saved, deleted, copied and pasted into every section") |
