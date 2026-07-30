@@ -447,6 +447,11 @@ dashboards.
   Session Start band. Zero new palette values; AST gates extended
   (panorama presence, ss-sky presence, no click bindings); suite
   **529** green; init smoke clean. Owner eyeball = UAT, pending.
+- ✅ 2026-07-30 (later) — **G7 Dome shipped** (owner's Parthenon
+  brief): three measured sky bands (Rayleigh order, 1.66/2.37/3.28:1
+  gated), dome bow via huge-circle top arc, zenith pool top-center;
+  Session Start strip = top of dome, panorama = mid-to-horizon, wall =
+  foreground. Suite **529** green. Owner eyeball UAT pending.
 - (empty — Shannon or the assistant may append instructions here; the
   next README check executes them)
 

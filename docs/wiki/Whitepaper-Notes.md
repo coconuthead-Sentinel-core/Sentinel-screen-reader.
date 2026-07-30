@@ -678,3 +678,13 @@
   paper: in a neurodivergent-first co-creation loop, the owner's
   annotated screenshot is a first-class requirements document — more
   precise than prose, cheaper than a meeting.
+
+- **2026-07-30 (the Dome) — Old geometry, new canvas.** The owner
+  described quadratura from memory — Pozzo's projected ceiling, the
+  gridded-panel transfer, Byzantine light — and asked whether a 2026
+  classroom could do it. Answer: the dome illusion IS projection
+  geometry, computable natively; the platform's real limit (no
+  gradients in Tk) was answered the way the Byzantines answered it —
+  banded values, each band's contrast measured before painting. For
+  the paper: accessibility law and art history converged on the same
+  discipline — measure the light, then paint.

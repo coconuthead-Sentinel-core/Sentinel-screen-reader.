@@ -11,6 +11,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🕌 G7 — the Dome** (owner's Parthenon brief, 2026-07-30:
+  "as you scroll it unfurls — dome at the top, the vanishing point
+  the bluest blue, cut at the horizon, castle walls in the
+  foreground"). Quadratura done the mosaic way: Tk has no gradients,
+  so the sky steps through three MEASURED bands in Rayleigh order —
+  zenith #2e4a7a (1.66:1), mid #46628f (2.37:1), horizon #5a7a9e
+  (3.28:1), all gated vs their true canvas before painting. The mid
+  band's boundary is the top arc of a huge circle so the sky bows
+  down toward the edges (pale corners are CORRECT — a corner is
+  nearer the horizon than the zenith); the zenith pools deepest at
+  top-center. The Session Start strip wears the top of the dome; the
+  panorama carries mid-to-horizon; the wall stays foreground — three
+  panels, unfurling. Suite **529** green. Owner's eyeball = UAT.
+
+### Added
 - **🏞 G6 — the Panorama Pass** (the proprietor's own marked
   canvas, 2026-07-30: SKY above, GROUND below, one horizon to the
   vignettes; warranty-era venustas, fresh order + scope on record).

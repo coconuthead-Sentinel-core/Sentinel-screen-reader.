@@ -13160,6 +13160,13 @@ class BookReader:
                 return
             PHI = 1.618
             V = self._VIGNETTE_PALETTE
+            # G7: this strip is the TOP of the dome — nearest the
+            # zenith, so it wears the mid band with the deep zenith
+            # pool at its center. Scrolling down unfurls the rest.
+            c.create_rectangle(0, 0, w, 26, fill=V["sky_mid"],
+                               outline="")
+            c.create_oval(int(w * 0.06), -18, int(w * 0.94), 22,
+                          fill=V["sky_zenith"], outline="")
             for cx, cy, cl in ((int(w * (1 - 1 / PHI)), 11,
                                 int(w * 0.10)),
                                (int(w / PHI), 17, int(w * 0.07))):
@@ -23991,6 +23998,12 @@ class BookReader:
         # G5k (journey vignette): the sun's muted gold and the hero's
         # pale silhouette — both contrast-gated like every other value.
         "sun":    "#a3822a", "hero":  "#8b99b0",
+        # G7 (the Dome, owner's Parthenon brief 2026-07-30): three sky
+        # bands in Rayleigh order — zenith deepest ("the bluest blue"),
+        # palest at the horizon. Measured 1.66 / 2.37 / 3.28 : 1 vs
+        # BG_PANEL before the brush touched (visibility law).
+        "sky_zenith": "#2e4a7a", "sky_mid": "#46628f",
+        "sky_low":    "#5a7a9e",
     }
 
     def _zz_area_label(self, val: str) -> str:
@@ -24201,6 +24214,22 @@ class BookReader:
             PHI = 1.618
             V = self._VIGNETTE_PALETTE
             hor = int(h * (1 - 1 / PHI))          # the shared horizon
+            # G7 — the Dome (quadratura by banded values, the Baroque
+            # ceiling-painters' projection done the mosaic way: Tk has
+            # no gradients, so the sky steps through measured bands).
+            # Palest at the horizon; the mid band's boundary is the top
+            # arc of a huge circle, so the sky bows downward toward the
+            # edges (the dome read, pale corners correct — a corner is
+            # nearer the horizon than the zenith); the zenith pools
+            # deepest at top-center: the bluest blue at the vanishing
+            # point, exactly as the owner specified.
+            c.create_rectangle(0, 0, w, hor, fill=V["sky_low"],
+                               outline="")
+            R = max(w, (w * w) // 72)
+            c.create_oval(int(w / 2 - R), 1, int(w / 2 + R), 1 + 2 * R,
+                          fill=V["sky_mid"], outline="")
+            c.create_oval(int(w * 0.10), -16, int(w * 0.90), hor - 2,
+                          fill=V["sky_zenith"], outline="")
             c.create_rectangle(0, hor, w, h, fill=V["ground"],
                                outline="")
             # far range — pale, low (atmospheric perspective)
