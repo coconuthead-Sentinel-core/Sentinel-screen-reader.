@@ -457,6 +457,11 @@ dashboards.
   pool widened over the top strip. Continuity, not addition — zero
   new palette values or elements. Suite **529** green; init smoke
   clean. Owner eyeball UAT pending.
+- ✅ 2026-07-30 (close) — **Owner UAT ✅ on G6/G7/G8** ("it looks very
+  good, excellent work") and the proprietor's STOP order: the art
+  track is CLOSED at good — deliberately before over-decoration.
+  Standing law reaffirmed: more elements = distraction. No further
+  art without a fresh order.
 - (empty — Shannon or the assistant may append instructions here; the
   next README check executes them)
 
