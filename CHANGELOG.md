@@ -10,6 +10,25 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- **🪧 Room signs — universal pictogram + word signage** (punch item
+  #11, proprietor's green light 2026-07-29; built 2026-07-30). Every
+  study-workspace room now hangs a door plate at the top of its tab:
+  pictogram AND word, always together (AAC picture-board principle;
+  ISO 7001-style public pictograms; recognition-over-recall). The
+  Matrix room wears the proprietor's own card: △ ⏱ ⚒ ✕ under
+  PRIORITY MATRIX. One controlled registry (`lyceum/room_signs.py` —
+  a symbol never means two things, words read uppercase like road
+  signage), ONE shell seam (`_draw_room_sign`, called once in the
+  study-tab loop), decline path breadcrumbs to `qa_debug.log` per the
+  silent-decline law. Deviation from the board, on the record: signs
+  are fixed chrome like tab buttons — NOT enrolled in A−/A+ scaling,
+  per the house rule that prose scales and chrome stays put. 14
+  headless tests incl. a static wiring gate; design-law linter green;
+  smoke 8/8 under a real `mainloop()` (temp-DB isolated). Suite
+  **520**, all green, 0 skips on the owner's laptop. Owner UAT
+  pending — his territory.
+
 ### Changed
 - **📚 BM25 replaces raw counting in the assistant's reading** (the
   shop's first REAL research pass, 2026-07-27 — the proprietor's

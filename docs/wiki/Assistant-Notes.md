@@ -404,6 +404,19 @@ dashboards.
   persisted size + prompt_lib breadcrumb field). Smokes 9/9, 5/5, 5/5;
   suite 422 green throughout; shared time_log now carries both parties'
   punches. *(this session)*
+- ✅ 2026-07-30 — **Room signs shipped** (punch #11, owner green light):
+  `lyceum/room_signs.py` registry (pictogram+word, uniqueness + uppercase
+  checks) + `_draw_room_sign` seam in the study-tab loop — all 8 rooms
+  signed, Matrix wears the △ ⏱ ⚒ ✕ / PRIORITY MATRIX card. 14 tests
+  incl. static wiring gate; smoke 8/8 real mainloop (temp DB); suite
+  **520** green, 0 skips. Signs are fixed chrome (house rule: prose
+  scales, chrome stays) — deviation from board Rule 3, on the record.
+  Owner UAT pending. Same night: E: drive verified (NTFS healthy,
+  718.7 GB free) and the Q1 storm-shelter clone ran (live study.db
+  220 MB + shop records + Books + 3 repo bundles). Pre-existing
+  breadcrumb observed, not touched: `[init] study window build:
+  'reader'` fires on the unmodified baseline at startup — candidate
+  ticket for a session that isn't in wrap-up posture.
 - (empty — Shannon or the assistant may append instructions here; the
   next README check executes them)
 

@@ -638,3 +638,12 @@
   paper: a neurodivergent-first designer converging on published
   accessibility standards from lived need is itself evidence for the
   design-partnership methodology.
+
+- **2026-07-30 — Signs hung the same night.** The RoomSigns concept
+  went from the proprietor's pictogram card to shipped feature in one
+  session, entirely through the standing pipeline: registry kernel,
+  headless tests with a static wiring gate, one shell seam, mainloop
+  smoke 8/8, suite 520 green. For the paper: the seam-plus-gate
+  pattern (one call site, a source-scan test proving it exists) is
+  the shop's answer to the hand-sweep defect class — coverage is
+  enforced by the suite, not by memory.

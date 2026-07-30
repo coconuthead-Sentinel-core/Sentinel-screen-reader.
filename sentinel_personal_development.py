@@ -38,6 +38,7 @@ from lyceum.dictation_guard import dedup_punctuation
 from lyceum.platform_dpi import enable_high_dpi_awareness
 from lyceum.handoff_view import fill_readonly
 from lyceum.select_all import select_all
+from lyceum import room_signs
 from lyceum.pomo_clock import deadline_for, remaining_seconds
 from lyceum import finance as _finance
 from lyceum import util as _util
@@ -18368,6 +18369,27 @@ class BookReader:
         except Exception:
             pass
 
+    def _draw_room_sign(self, parent: tk.Frame, room_id: str):
+        """One seam for the house signage (punch item #11): draw the
+        room's sign — pictogram AND word, always together (AAC
+        picture-board principle) — as a bar at the top of `parent`.
+        The registry lives in lyceum/room_signs.py; an unsigned room
+        breadcrumbs and declines loudly, never silently."""
+        try:
+            sign = room_signs.get_sign(room_id)
+        except KeyError:
+            _qlog(f"room-sign: unsigned room {room_id!r} — no sign drawn")
+            return None
+        bar = tk.Frame(parent, bg=BG_PANEL)
+        bar.pack(side=tk.TOP, fill=tk.X)
+        tk.Label(bar, text=sign.pictogram, font=("Segoe UI Emoji", 14),
+                 bg=BG_PANEL, fg=FG_TEXT).pack(side=tk.LEFT, padx=(10, 6),
+                                               pady=(3, 3))
+        tk.Label(bar, text=sign.word, font=("Segoe UI", 11, "bold"),
+                 bg=BG_PANEL, fg=FG_TEXT).pack(side=tk.LEFT, pady=(3, 3))
+        _qlog(f"room-sign: hung {sign.pictogram} {sign.word} in {room_id}")
+        return bar
+
     def open_study_workspace(self) -> None:
         """Open (or focus) the Study workspace. Acts as 'restore' too —
         if the window is iconified, this brings it back."""
@@ -18499,6 +18521,9 @@ class BookReader:
             self._study_tab_buttons[key] = b
             f = tk.Frame(content, bg=BG_DARK)
             self._study_tab_frames[key] = f
+            # Room sign first (punch #11), so it packs above the tab's
+            # own content — the door plate hangs at the top of the room.
+            self._draw_room_sign(f, key)
             # Built once at startup (window is persistent). Guard each builder
             # so one failing tab can never stop the app from starting.
             try:
