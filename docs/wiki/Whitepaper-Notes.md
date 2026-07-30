@@ -647,3 +647,13 @@
   pattern (one call site, a source-scan test proving it exists) is
   the shop's answer to the hand-sweep defect class — coverage is
   enforced by the suite, not by memory.
+
+- **2026-07-30 (later) — Validate before you demolish.** The 'reader'
+  ghost-tab fix is the cleanest design-by-contract lesson on the
+  ledger: a dispatch that mutates shared state before checking its
+  precondition fails in the worst possible place (mid-teardown, zero
+  tabs packed). The repaired order — guard, breadcrumb, fall back —
+  plus four static gates turns a refactor-era stale reference into a
+  class the suite now polices. Same session, the punch list got its
+  second dated Eisenhower triage: the matrix is now the shop's
+  standing scheduler, not a one-time exercise.

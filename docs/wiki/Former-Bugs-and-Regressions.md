@@ -270,3 +270,27 @@ canvas of each drawing; a computed contrast gate now measures every
 mural color vs its actual background. Lesson: an artwork has a
 precondition too — sufficient value separation — and "drawn" is not
 "visible"; measure the light, not just the geometry.
+
+## 2026-07-30 — the ghost tab default: `[init] study window build: 'reader'`
+
+- **Symptom:** every app start printed `[init] study window build:
+  'reader'` to stderr; the study window skipped its startup
+  `withdraw()`; and `_show_study_tab` with the unknown key tore down
+  every tab before crashing, leaving ZERO tabs packed. A second copy
+  of the same defect hid in `_load_book`: it requested the removed
+  Reader tab on every book open, swallowed by a bare `except` — a
+  silent decline, on the books since the Reader was removed.
+- **Concept — stale reference after refactor + validate-before-mutate
+  (design-by-contract).** The Reader tab was removed from the tabs
+  registry, but two call sites still requested the key. The dispatch
+  mutated shared state (pack_forget on all tabs) BEFORE validating its
+  precondition, so the failure landed mid-teardown — the worst place.
+- **Fix & guard:** `_show_study_tab` validates the key FIRST; unknown
+  keys breadcrumb to `qa_debug.log` and fall back to the first
+  registered tab (Law 3: declines speak). Workspace build lands on
+  `study_notes`; the dead Reader request in `_load_book` retired with
+  a logged decline path. Guard: `tests/test_study_tab_contract.py` —
+  four static gates (no call site may request "reader"; validation
+  must precede teardown; the decline must breadcrumb; the default tab
+  must exist in the registry). Smoke proves startup withdraw + bogus-
+  key fallback under a real mainloop.

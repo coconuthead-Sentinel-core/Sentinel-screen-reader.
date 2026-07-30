@@ -417,6 +417,16 @@ dashboards.
   breadcrumb observed, not touched: `[init] study window build:
   'reader'` fires on the unmodified baseline at startup — candidate
   ticket for a session that isn't in wrap-up posture.
+- ✅ 2026-07-30 (later) — **'reader' ghost-tab defect fixed** (owner
+  green light): _show_study_tab validates before teardown, unknown keys
+  breadcrumb + fall back; workspace default now study_notes; dead
+  Reader request in _load_book retired (was a silent decline on every
+  book open). 4 static gates (tests/test_study_tab_contract.py); suite
+  **524** green; smoke 10/10 (startup-withdrawn + bogus-key fallback +
+  8 signs). Punch list re-triaged per proprietor's order (Eisenhower,
+  dated 2026-07-30): next foreman DO = #5 silent-declines sweep; owner
+  DO = #11/#'reader' UAT, Recycle Bin click, #10 SUS. Former-Bugs entry
+  filed with the concept named.
 - (empty — Shannon or the assistant may append instructions here; the
   next README check executes them)
 

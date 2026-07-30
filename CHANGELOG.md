@@ -10,6 +10,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- **👻 The ghost tab default** (`[init] study window build: 'reader'`,
+  green-lit 2026-07-30). Two call sites still requested the Reader tab
+  removed from the registry: the workspace build's default (crashed
+  the build tail at every startup and skipped the `withdraw()`) and
+  `_load_book` (a KeyError swallowed silently on every book open).
+  `_show_study_tab` now validates the key BEFORE tearing tabs down —
+  unknown keys breadcrumb and fall back to the first registered tab;
+  the build lands on Study Notes; the dead request retired. 4 static
+  contract gates in `tests/test_study_tab_contract.py`; smoke proves
+  startup-withdrawn + bogus-key fallback under a real `mainloop()`.
+  Suite **524** green. Filed in Former-Bugs with the concept named:
+  stale reference after refactor + validate-before-mutate.
+
 ### Added
 - **🪧 Room signs — universal pictogram + word signage** (punch item
   #11, proprietor's green light 2026-07-29; built 2026-07-30). Every

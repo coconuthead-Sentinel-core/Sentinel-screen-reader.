@@ -2993,13 +2993,15 @@ class BookReader:
         """Extract text from `path` and place it in the reading area.
         Shared by the file-picker (Open), the Library window, and any
         other future loader."""
-        # The reader lives in the Study workspace now — make sure it's open and
-        # on the Reader tab so the book is actually visible.
+        # The reader surface is hidden by design (removed from the UI;
+        # built off-screen so the text_area machinery stays alive), so
+        # only the workspace itself is opened here. The old code also
+        # asked for the removed "reader" tab — a KeyError swallowed by
+        # this guard on EVERY book open, a silent decline on the books.
         try:
             self.open_study_workspace()
-            self._show_study_tab("reader")
-        except Exception:
-            pass
+        except Exception as e:
+            _qlog(f"load-book: workspace open failed: {e!r}")
         self.set_status(f"Loading {os.path.basename(path)}…")
         self.root.update_idletasks()
         try:
@@ -18583,7 +18585,11 @@ class BookReader:
         except Exception:
             pass
 
-        self._show_study_tab("reader")
+        # Land on a REAL tab. The old default asked for the removed
+        # Reader tab, which crashed the tail of this build at startup
+        # ("[init] study window build: 'reader'") and skipped the
+        # withdraw() in __init__.
+        self._show_study_tab("study_notes")
 
     # ---- Audit tab ------------------------------------------------------
     # Matches the rubric structure shared by the Walkenbach Excel audits
@@ -19383,6 +19389,19 @@ class BookReader:
         self.set_status(f"💬 Exported {len(rows)} prompts → {os.path.basename(out)}")
 
     def _show_study_tab(self, key: str) -> None:
+        # Contract (the 'reader' init defect, 2026-07-30): validate the
+        # key BEFORE tearing anything down. The old order pack_forgot
+        # every tab and THEN indexed the dict — an unknown key (the
+        # removed Reader tab) crashed mid-teardown, left ZERO tabs
+        # packed, and skipped the startup withdraw(). Unknown keys now
+        # decline loudly and fall back to the first registered tab.
+        if key not in self._study_tab_frames:
+            fallback = next(iter(self._study_tab_frames), None)
+            _qlog(f"study-tab: unknown tab {key!r} — falling back "
+                  f"to {fallback!r}")
+            if fallback is None:
+                return
+            key = fallback
         self._study_active_tab = key
         for k, frame in self._study_tab_frames.items():
             frame.pack_forget()

@@ -40,6 +40,22 @@ then #4, then #9-implementation (blocked on delegate), then v1.0 cut
 (proprietor's word). DELEGATE → #8, #9-scope-call (Falcon One).
 DEFER → #6, #7 (scope-first before any code).
 
+**Eisenhower triage 2026-07-30** (proprietor's order: DO-now queue
+cleared, promote the deferred/scheduled items in order of date and
+importance): **DO, foreman** → 'reader' ghost-tab defect (green-lit,
+executed same session), then #5 silent-declines sweep (oldest open
+engineering item, red-plum law, first motion next session). **DO,
+Falcon One** → #11 signs UAT + 'reader'-fix UAT; Recycle Bin click
+(C: at ~4 GB free); then #10 SUS scorecard (oldest open owner item,
+2026-07-26). **SCHEDULE** → #4 legacy-handler sweep (rides behind #5,
+same seam family); `.aitk` 20 GB relocation to E: (awaits owner OK);
+hub-window signage extension (scope call). **DELEGATE** → Q3
+warehouse freight to E: after the owner's pruning pass (foreman);
+Imprint archive-ledger paperwork (concept, scoped when called).
+**DEFER** → #6 Vault Catalog, #7 script-export, imaging node,
+CleanroomIntake benchmark (owner's want, optional). **DELETE** →
+nothing; the archive law stands.
+
 | # | Item | Origin | State |
 |---|---|---|---|
 | 1 | Owner UAT: full CRUD cycle on Topics after 68fb199 (delete topic+7 entries, add fresh, delete again) | 2026-07-25 ticket 4 | ~~STRUCK~~ — owner UAT ✅ 2026-07-25 ("read, saved, deleted, copied and pasted into every section") |
