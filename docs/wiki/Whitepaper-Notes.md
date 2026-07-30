@@ -627,3 +627,14 @@
   For the paper: evaluating AI-suggested work means grading the
   payload and the costume separately — and never letting a good idea
   smuggle in a bad frame.
+
+- **2026-07-29 — The owner reinvents the standards.** The proprietor,
+  reasoning from his own accessibility experience, proposed per-panel
+  "universal signs" — pictogram plus word, one consistent symbol set —
+  independently arriving at AAC picture-board practice, ISO 7001
+  public-information pictograms, and the recognition-over-recall
+  heuristic that the shipped traffic-light toolbar already embodies.
+  Boarded as backlog item #11 under the wrap-up posture. For the
+  paper: a neurodivergent-first designer converging on published
+  accessibility standards from lived need is itself evidence for the
+  design-partnership methodology.
