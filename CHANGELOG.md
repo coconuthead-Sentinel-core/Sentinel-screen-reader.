@@ -10,6 +10,22 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- **🏞 G6 — the Panorama Pass** (the proprietor's own marked
+  canvas, 2026-07-30: SKY above, GROUND below, one horizon to the
+  vignettes; warranty-era venustas, fresh order + scope on record).
+  The City Gates header's empty middle now carries a full-width
+  panorama: shared golden horizon (h·(1−1/φ)) continuous with the
+  journey vignette, rolling ranges in the two field tones (far =
+  paler: atmospheric perspective), the road entering lower-left and
+  exiting to the journey's foreground, cloud banks at the golden
+  points, three distant birds. The Session Start band gets the
+  quietest layer of the same sky (G6b). ZERO new palette values —
+  same pigments, one world; every color already passes the 1.55:1
+  visibility gate vs its true canvas. Art is never a control (no
+  click bindings, gated). AST gates extended; suite **529** green;
+  full-app init smoke clean. Owner's eyeball = UAT.
+
 ### Fixed
 - **🔇 Punch #5 — silent declines now speak** (proprietor's promote-
   the-deferred order, 2026-07-30). Four claimed-context failures in

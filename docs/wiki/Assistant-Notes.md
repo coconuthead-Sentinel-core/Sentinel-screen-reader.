@@ -439,6 +439,14 @@ dashboards.
   visible report). Shelter clone pass 2 running with node_modules/
   __pycache__ excluded after pass 1 thrashed on OneDrive hydration
   timeouts (ERROR 426) inside Completed projects.
+- ✅ 2026-07-30 (warranty era) — **G6 Panorama Pass shipped** (fresh
+  owner order via marked-up screenshot: SKY/GROUND/horizon): full-width
+  panorama in the City Gates header middle (shared golden horizon,
+  atmospheric perspective, road handoff to the journey vignette,
+  clouds at φ points, three birds) + G6b sparse sky strip in the
+  Session Start band. Zero new palette values; AST gates extended
+  (panorama presence, ss-sky presence, no click bindings); suite
+  **529** green; init smoke clean. Owner eyeball = UAT, pending.
 - (empty — Shannon or the assistant may append instructions here; the
   next README check executes them)
 

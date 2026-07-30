@@ -668,3 +668,13 @@
   actually "no exception." For the paper: a defect ledger's model of
   a trap must be re-derived from current code before each fix — the
   codebase drifts out from under its own history.
+
+- **2026-07-30 (warranty era) — The owner draws the brief.** The
+  Panorama Pass began as the proprietor's literal markup: SKY, GROUND,
+  and a horizon line drawn over a screenshot in red and white. The
+  foreman's job was interpretation (frieze, unity, atmospheric
+  perspective, phi points) and execution inside standing gates — zero
+  new palette values, art-never-a-control, contrast law. For the
+  paper: in a neurodivergent-first co-creation loop, the owner's
+  annotated screenshot is a first-class requirements document — more
+  precise than prose, cheaper than a meeting.

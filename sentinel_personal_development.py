@@ -13144,6 +13144,35 @@ class BookReader:
         tk.Label(header, text=date.today().strftime("%A · %B %d, %Y"),
                  bg=BG_PANEL, fg=FG_MUTED, font=("Segoe UI", 10)
                  ).pack(side=tk.RIGHT)
+        # G6b (the owner's SKY mark over this band, 2026-07-30): a
+        # sparse strip of the same sky — two cloud streaks at the
+        # golden points, one pair of distant birds. The quietest layer
+        # of the same world. Static, never a control.
+        ss_sky = tk.Canvas(header, bg=BG_PANEL, height=26,
+                           highlightthickness=0)
+        ss_sky.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(16, 16))
+
+        def _draw_ss_sky(_e=None):
+            c = ss_sky
+            c.delete("all")
+            w = c.winfo_width() or 200
+            if w < 60:
+                return
+            PHI = 1.618
+            V = self._VIGNETTE_PALETTE
+            for cx, cy, cl in ((int(w * (1 - 1 / PHI)), 11,
+                                int(w * 0.10)),
+                               (int(w / PHI), 17, int(w * 0.07))):
+                c.create_oval(cx - cl, cy - 3, cx + cl, cy + 3,
+                              fill=V["haze"], outline="")
+                c.create_oval(cx - cl // 2, cy - 5, cx + cl // 2,
+                              cy + 1, fill=V["haze2"], outline="")
+            bx, by = int(w * 0.5), 9
+            c.create_arc(bx - 4, by - 2, bx, by + 2, start=0,
+                         extent=180, style=tk.ARC, outline=V["hero"])
+            c.create_arc(bx, by - 2, bx + 4, by + 2, start=0,
+                         extent=180, style=tk.ARC, outline=V["hero"])
+        ss_sky.bind("<Configure>", _draw_ss_sky)
 
         # ---- Tabs: Start / Wheel of Life / Goals (the Ziglar Performance
         # Planner pieces), each in its own panel. ------------------------
@@ -24025,7 +24054,16 @@ class BookReader:
                               highlightthickness=0)
         head_art2.pack(side=tk.RIGHT, padx=(10, 0))
         head_txt = tk.Frame(head, bg=BG_PANEL)
-        head_txt.pack(side=tk.LEFT, fill=tk.X, expand=True)
+        head_txt.pack(side=tk.LEFT)
+        # G6 (the owner's own marked canvas, 2026-07-30): he drew SKY
+        # across the empty upper band, GROUND across the lower, and one
+        # horizon line running right until it meets the vignettes. This
+        # panorama fills the middle with exactly that — same palette,
+        # same golden horizon as the journey, so the three canvases
+        # read as ONE country. Static, muted, never a control.
+        head_pan = tk.Canvas(head, bg=BG_PANEL, height=64,
+                             highlightthickness=0)
+        head_pan.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(12, 0))
         tk.Label(head_txt, text="🏰 The City Gates", bg=BG_PANEL,
                  fg=FG_TEXT,
                  font=("Segoe UI", 15, "bold")).pack(anchor="w")
@@ -24144,6 +24182,60 @@ class BookReader:
                           fill=V["hero"])                       # the staff
         head_art2.bind("<Configure>", _draw_journey)
 
+        def _draw_panorama(_e=None):
+            # G6: SKY above, GROUND below, the horizon at the same
+            # golden height as the journey's (h·(1−1/φ)) so the line
+            # is continuous across all three canvases. Atmospheric
+            # perspective: the far range is the paler field tone, the
+            # near range darker. The road enters at the lower left,
+            # runs the valley, and exits the right edge low — handing
+            # off to the journey's foreground. Sky carries two cloud
+            # banks at the golden points and three distant birds (the
+            # city-proper's own motif). Same pigments, one world.
+            c = head_pan
+            c.delete("all")
+            w = c.winfo_width() or 200
+            if w < 48:
+                return                     # too narrow to compose
+            h = 64
+            PHI = 1.618
+            V = self._VIGNETTE_PALETTE
+            hor = int(h * (1 - 1 / PHI))          # the shared horizon
+            c.create_rectangle(0, hor, w, h, fill=V["ground"],
+                               outline="")
+            # far range — pale, low (atmospheric perspective)
+            c.create_oval(-int(w * 0.10), hor - 4, int(w * 0.45),
+                          hor + 14, fill=V["f2"], outline="")
+            c.create_oval(int(w * 0.30), hor - 3, int(w * 0.85),
+                          hor + 16, fill=V["f2"], outline="")
+            # near range — darker, taller
+            c.create_oval(int(w * 0.05), hor + 2, int(w * 0.55),
+                          hor + 30, fill=V["f1"], outline="")
+            c.create_oval(int(w * 0.55), hor + 1, int(w * 1.15),
+                          hor + 28, fill=V["f1"], outline="")
+            # the road through the valley, handed to the journey
+            c.create_line(int(w * 0.08), h, int(w * 0.30), hor + 12,
+                          int(w * 0.62), hor + 10, w, h - 8,
+                          fill=V["road"], width=3, smooth=True)
+            # sky — cloud banks at the golden points
+            for cx, cy, cl in ((int(w * (1 - 1 / PHI)), 10,
+                                int(w * 0.16)),
+                               (int(w / PHI), 17, int(w * 0.12))):
+                c.create_oval(cx - cl, cy - 3, cx + cl, cy + 3,
+                              fill=V["haze"], outline="")
+                c.create_oval(cx - cl // 2, cy - 5, cx + cl // 2,
+                              cy + 1, fill=V["haze2"], outline="")
+            # three distant birds
+            for bx, by in ((int(w * 0.25), 26), (int(w * 0.31), 22),
+                           (int(w * 0.72), 24)):
+                c.create_arc(bx - 4, by - 2, bx, by + 2, start=0,
+                             extent=180, style=tk.ARC,
+                             outline=V["hero"])
+                c.create_arc(bx, by - 2, bx + 4, by + 2, start=0,
+                             extent=180, style=tk.ARC,
+                             outline=V["hero"])
+        head_pan.bind("<Configure>", _draw_panorama)
+
         def _size_head_art(e):
             head_art.configure(width=max(110, min(260,
                                                   int(e.width * 0.30))))
@@ -24152,6 +24244,7 @@ class BookReader:
         head.bind("<Configure>", _size_head_art)
         _draw_city_proper()
         _draw_journey()
+        _draw_panorama()
 
         # G5a (logged decision, owner 2026-07-26): the city wall itself —
         # STATIC vector art on a canvas (no animation, muted stone

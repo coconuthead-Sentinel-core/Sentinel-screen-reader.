@@ -224,6 +224,10 @@ class WheelAreaButtonGateTest(unittest.TestCase):
                       "the city-proper vignette is gone from the header")
         self.assertIn("_draw_journey", names,
                       "the journey vignette is gone from the header")
+        # G6 (owner's marked canvas, 2026-07-30): the panorama joins
+        # the middle to the vignettes — one horizon, one world.
+        self.assertIn("_draw_panorama", names,
+                      "the panorama is gone from the header middle")
         consts = {n.value for n in ast.walk(fn)
                   if isinstance(n, ast.Constant)
                   and isinstance(n.value, str)}
@@ -231,6 +235,21 @@ class WheelAreaButtonGateTest(unittest.TestCase):
             self.assertNotIn(click, consts,
                              "a click binding appeared in the gates "
                              "panel — art must never be a control")
+
+    def test_session_start_sky_present_and_never_a_control(self):
+        """G6b (owner's SKY mark, 2026-07-30): the Session Start header
+        carries the sparse sky strip — and like all art, it takes no
+        click bindings."""
+        fn = None
+        for node in ast.walk(_app_tree()):
+            if isinstance(node, ast.FunctionDef) \
+                    and node.name == "_build_session_start_panel":
+                fn = node
+        self.assertIsNotNone(fn)
+        names = {n.name for n in ast.walk(fn)
+                 if isinstance(n, ast.FunctionDef)}
+        self.assertIn("_draw_ss_sky", names,
+                      "the Session Start sky strip is gone")
 
     def test_color_law_red_reserved_and_doors_distinct(self):
         """F6: red means stop/delete ONLY — no room or door identity may
