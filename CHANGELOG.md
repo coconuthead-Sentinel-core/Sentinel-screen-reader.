@@ -11,6 +11,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **🕌 G8 — completing the Dome** (owner's second markup,
+  2026-07-30: "join the sky to the ground… complete the dome"). The
+  banded sky now flows through BOTH vignettes (city proper and the
+  journey) — the seams at their borders are gone, one atmosphere
+  across every canvas from the Session Start cap to the right edge;
+  the zenith pool widened nearly edge to edge over the top strip.
+  Zero new values, zero new elements — the completion was continuity,
+  not addition. Suite **529** green.
 - **🕌 G7 — the Dome** (owner's Parthenon brief, 2026-07-30:
   "as you scroll it unfurls — dome at the top, the vanishing point
   the bluest blue, cut at the horizon, castle walls in the

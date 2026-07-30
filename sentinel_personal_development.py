@@ -13165,7 +13165,9 @@ class BookReader:
             # pool at its center. Scrolling down unfurls the rest.
             c.create_rectangle(0, 0, w, 26, fill=V["sky_mid"],
                                outline="")
-            c.create_oval(int(w * 0.06), -18, int(w * 0.94), 22,
+            # G8: the zenith pool widened nearly edge to edge — the
+            # cap of the dome reads full over the topmost band.
+            c.create_oval(int(w * 0.02), -20, int(w * 0.98), 23,
                           fill=V["sky_zenith"], outline="")
             for cx, cy, cl in ((int(w * (1 - 1 / PHI)), 11,
                                 int(w * 0.10)),
@@ -24098,6 +24100,14 @@ class BookReader:
             haze, haze2 = V["haze"], V["haze2"]   # old values were tuned
             ground, road = V["ground"], V["road"]  # vs the WRONG bg
             vpx, vpy = int(w / PHI), int(h * (1 - 1 / PHI))  # golden VP
+            # G8 (completing the dome, owner's order 2026-07-30): the
+            # banded sky flows through this vignette too — one
+            # atmosphere across every canvas, no seams at the borders.
+            c.create_rectangle(0, 0, w, vpy, fill=V["sky_low"],
+                               outline="")
+            _R = max(w, (w * w) // 72)
+            c.create_oval(int(w / 2 - _R), 2, int(w / 2 + _R),
+                          2 + 2 * _R, fill=V["sky_mid"], outline="")
             c.create_rectangle(0, vpy, w, h, fill=ground, outline="")
             # the walkway, converging on the vanishing point
             c.create_polygon(int(w * 0.30), h, int(w * 0.70), h,
@@ -24168,6 +24178,13 @@ class BookReader:
             hor = int(h * (1 - 1 / PHI))               # golden horizon
             vpx = int(w / PHI)                         # city at 0.618·w
             sunx = int(w * (1 - 1 / PHI))              # sun at 0.382·w
+            # G8: the same banded sky continues here — the dome's
+            # eastern reach, sun riding above the mid band.
+            c.create_rectangle(0, 0, w, hor, fill=V["sky_low"],
+                               outline="")
+            _R = max(w, (w * w) // 72)
+            c.create_oval(int(w / 2 - _R), 2, int(w / 2 + _R),
+                          2 + 2 * _R, fill=V["sky_mid"], outline="")
             c.create_rectangle(0, hor, w, h, fill=V["ground"],
                                outline="")
             c.create_oval(-int(w * 0.2), hor - 6, int(w * 0.65),

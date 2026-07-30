@@ -452,6 +452,11 @@ dashboards.
   gated), dome bow via huge-circle top arc, zenith pool top-center;
   Session Start strip = top of dome, panorama = mid-to-horizon, wall =
   foreground. Suite **529** green. Owner eyeball UAT pending.
+- ✅ 2026-07-30 (last) — **G8 dome completed**: banded sky carried
+  through both vignettes (no border seams; one atmosphere), zenith
+  pool widened over the top strip. Continuity, not addition — zero
+  new palette values or elements. Suite **529** green; init smoke
+  clean. Owner eyeball UAT pending.
 - (empty — Shannon or the assistant may append instructions here; the
   next README check executes them)
 
