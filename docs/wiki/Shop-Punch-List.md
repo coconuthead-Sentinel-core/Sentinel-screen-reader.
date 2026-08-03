@@ -81,6 +81,8 @@ measurement of the finished product, not a build item.
 | 9 | AI assistant grounding gaps | owner status report 2026-07-25 | ~~STRUCK~~ — scope call ✅ 2026-07-26 (proprietor: ALL FOUR sections) and implemented same session: commentaries, topic-entry bodies, Matrix, Planner added to the grounding feed (lyceum/local_context.py); headless test seeds one row per section and proves retrieval |
 | 11 | Room signs: universal pictogram + word signage per panel/window (AAC picture-board principle, ISO 7001 pictograms, recognition-over-recall; extends the shipped traffic-light design language; one shared header seam) | owner's 2026-07-29 intake; board `Claude AI\Portfolio\boards\2026-07-29_RoomSigns.md` | SHIPPED (owner green light same night) — kernel `lyceum/room_signs.py` + `_draw_room_sign` seam in the study-tab loop; all 8 study rooms signed; 14 tests + static gate; smoke 8/8; suite 520 green. ~~STRUCK~~ — owner UAT ✅ 2026-07-30 ("did the walk, all eight tabs, all okay"). Hub windows (Library, Money Hub, …) NOT yet signed — extension queued in the authorized promote-the-deferred order |
 
+| 12 | Prompt Fragment Vault: procedural-knowledge harvest from the Prompt Library (declarative→Glossary/FSRS stays as-is; procedural fragments→new additive vault table→Prompt Coach snippets). Payload admitted from a Gemini-costumed proposal per the costume-vs-payload precedent (2026-07-27); costume rejected; re-derive pseudocode before any build | owner's 2026-07-31 study session (his observation, his credit) | BACKLOG — scope-first + blueprint; shop in maintenance mode; Do Now is the job campaign |
+
 ## C. How a line moves
 
 OPEN → owner UAT / foreman evidence → STRUCK (moved to Former-Bugs or
