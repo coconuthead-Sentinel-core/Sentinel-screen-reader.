@@ -56,6 +56,24 @@ Imprint archive-ledger paperwork (concept, scoped when called).
 CleanroomIntake benchmark (owner's want, optional). **DELETE** →
 nothing; the archive law stands.
 
+
+**Eisenhower triage 2026-08-03 (proprietor's clear-the-board order:
+everything green-lighted, nothing parked, Pomodoro execution):**
+**DO NOW, foreman, one cycle each** → C1 ✅ warranty pair executed this
+session (A−/A+ ceiling now SPEAKS “at MAXIMUM”; Treasury hub gained
+wheel-scroll + wide slider so the 🔍 Zero-Based Audit door is reachable
+— root cause: below-the-fold + no wheel binding; PLUS third live-DB
+test-isolation leak fixed with temp_study_db in RetrieveContextRecursionTest).
+C2 → hub-window signage. C3 → CleanroomIntake retrieval benchmark.
+C4–C7 → scope statements, one per cycle, in order: #13 analytics panel,
+#12 Prompt Fragment Vault, #6 Vault Catalog, #7 script-export; each
+build follows its approved scope as its own sprint. **DELEGATE, Falcon
+One** → five resume blanks · Carlton ask · #10 SUS · #4 spot-check ·
+UAT tonight's two fixes (wheel reaches Audit; A+ names its MAXIMUM).
+**SCHEDULE** → the C4–C7 builds behind their scopes. **DO LATER (real
+constraints, not deferral)** → imaging node + portable container (await
+hardware/funding per the owner's own condition). **DELETE** → nothing.
+
 **COMPLETION DECLARATION 2026-07-30 (proprietor's word, on the
 record):** Sentinel Forge — Personal Development is **DONE**. The
 house is built, inspected, and occupied (final walk-through
@@ -82,6 +100,8 @@ measurement of the finished product, not a build item.
 | 11 | Room signs: universal pictogram + word signage per panel/window (AAC picture-board principle, ISO 7001 pictograms, recognition-over-recall; extends the shipped traffic-light design language; one shared header seam) | owner's 2026-07-29 intake; board `Claude AI\Portfolio\boards\2026-07-29_RoomSigns.md` | SHIPPED (owner green light same night) — kernel `lyceum/room_signs.py` + `_draw_room_sign` seam in the study-tab loop; all 8 study rooms signed; 14 tests + static gate; smoke 8/8; suite 520 green. ~~STRUCK~~ — owner UAT ✅ 2026-07-30 ("did the walk, all eight tabs, all okay"). Hub windows (Library, Money Hub, …) NOT yet signed — extension queued in the authorized promote-the-deferred order |
 
 | 12 | Prompt Fragment Vault: procedural-knowledge harvest from the Prompt Library (declarative→Glossary/FSRS stays as-is; procedural fragments→new additive vault table→Prompt Coach snippets). Payload admitted from a Gemini-costumed proposal per the costume-vs-payload precedent (2026-07-27); costume rejected; re-derive pseudocode before any build | owner's 2026-07-31 study session (his observation, his credit) | BACKLOG — scope-first + blueprint; shop in maintenance mode; Do Now is the job campaign |
+
+| 13 | Progress Observatory: ONE descriptive-analytics panel answering the stakeholder question “effort, attempts, misses, supports used, consistency over time” from existing local records (aggregation only; no prediction — n-of-one overfits; admission rule ratified 2026-08-03) | owner's data-analytics coursework session | GREEN-LIT — scope-first doc = cycle C4 |
 
 ## C. How a line moves
 

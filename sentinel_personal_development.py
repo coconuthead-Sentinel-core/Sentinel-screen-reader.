@@ -3328,7 +3328,17 @@ class BookReader:
         except Exception:
             pass
         try:
-            self.set_status(f"🔡 Study text size: {self.study_font_size}pt")
+            if old == self.study_font_size:
+                # The ceiling/floor must SPEAK (warranty, 2026-08-03):
+                # fifteen logged clicks at a silent 32pt read as a dead
+                # button. A bound that won't name itself is invisible
+                # state.
+                bound = "MAXIMUM" if direction > 0 else "MINIMUM"
+                self.set_status(f"🔡 Text is at its {bound} size "
+                                f"({self.study_font_size}pt) — no change.")
+            else:
+                self.set_status(f"🔡 Study text size: "
+                                f"{self.study_font_size}pt")
         except Exception:
             pass
 
@@ -13051,7 +13061,7 @@ class BookReader:
         outer = tk.Frame(win, bg=BG_DARK); outer.pack(fill=tk.BOTH, expand=True,
                                                       padx=12, pady=6)
         canvas = tk.Canvas(outer, bg=BG_DARK, highlightthickness=0)
-        vsb = tk.Scrollbar(outer, command=canvas.yview, width=16)
+        vsb = tk.Scrollbar(outer, command=canvas.yview, width=18)
         body = tk.Frame(canvas, bg=BG_DARK)
         body.bind("<Configure>",
                   lambda _e: canvas.configure(scrollregion=canvas.bbox("all")))
@@ -13059,6 +13069,14 @@ class BookReader:
         canvas.configure(yscrollcommand=vsb.set)
         vsb.pack(side=tk.RIGHT, fill=tk.Y)
         canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        # Warranty fix (2026-08-03): the SPEND group — including the
+        # 🔍 Zero-Based Audit door — sits below the fold on short
+        # screens, and this canvas had NO wheel binding: the owner
+        # reported the audit "unreachable". The Library's "no sliders"
+        # lesson, applied: wheel scrolls the hub, slider widened.
+        win.bind("<MouseWheel>",
+                 lambda e: canvas.yview_scroll(int(-e.delta / 120),
+                                               "units"))
 
         cols = 3
         for title, tools in groups:

@@ -95,6 +95,23 @@ class RetrieveFromTextTest(unittest.TestCase):
 
 
 class RetrieveContextRecursionTest(unittest.TestCase):
+    """Isolation lesson, THIRD occurrence (2026-08-03): retrieve_context
+    also reads the study sections, so every test here must run on the
+    blessed temp_study_db() — the owner writing real notes in the live
+    app changed this class's answers mid-suite. The live file is never
+    a fixture."""
+
+    def setUp(self):
+        from lyceum.db import study_db
+        self._db_guard = study_db.temp_study_db()
+        self._db_guard.__enter__()
+        con = study_db.connect()
+        con.executescript(study_db.STUDY_SCHEMA)
+        con.close()
+
+    def tearDown(self):
+        self._db_guard.__exit__(None, None, None)
+
     def test_finds_files_in_subfolders(self):
         d = tempfile.mkdtemp()
         sub = os.path.join(d, "deep", "nested")
