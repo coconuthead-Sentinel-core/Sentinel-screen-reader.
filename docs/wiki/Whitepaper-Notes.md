@@ -688,3 +688,12 @@
   banded values, each band's contrast measured before painting. For
   the paper: accessibility law and art history converged on the same
   discipline — measure the light, then paint.
+
+- **2026-08-03 — The continued session as a unit of work.** The
+  proprietor formalized a five-day continued session with an explicit
+  checkpoint marker and metadata boundary, filed in the wiki and
+  mirrored to all stations — treating the human-AI collaboration
+  session itself as a versioned, resumable artifact with its own
+  front-matter. For the paper: session continuity engineering (his
+  Session Start/End loop, handoff state, and now dated checkpoint
+  markers) is a first-class part of the accessibility architecture.

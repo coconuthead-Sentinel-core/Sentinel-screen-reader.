@@ -144,3 +144,37 @@ what's next. Reviewed 2026-06-27 against `aea48c8`.*
   verified byte-identical after the test run (isolation holds).
 - Three-way mirror refreshed: laptop `Desktop\Sentinel-Forge` → GitHub
   `main` → OneDrive `Sentinel personal development` clone.
+
+---
+
+## Session checkpoint — 2026-08-03 21:35 (continued multi-day session)
+
+```yaml
+session_update: 2026-08-03T21:35
+type: continued-session checkpoint (proprietor's order)
+prior_span: 2026-07-29 -> 2026-08-03
+boundary: everything before this marker = prior session days,
+  incorporated below; session continues after a filed 20-min break
+status: 20-minute break filed via the dashboard
+```
+
+**Aggregate of the span, incorporated:** The session opened 2026-07-29
+with the cleanroom review (mythos gated out of NotebookLM intake,
+three READMEs verified identical) and closed out the build era:
+room signs shipped and owner-UAT'd (punch #11), the 'reader'
+ghost-tab defect fixed, punch #4 and #5 sweeps executed with static
+gates, G6 Panorama and G7 Dome painted under the visibility law,
+suite grown 520 → 529 green, E: storm shelter verified and stocked
+(study.db, repo bundles, records, 19.75 GB .aitk relocation,
+manifest filed), C: recovered 3.8 → ~25 GB free, and the proprietor
+declared the project COMPLETE — maintenance mode. The shop then
+pivoted to the standing priority: the job campaign (verified resume
+v2.0 with YAML metadata, reference cards, Carlton/parish/mechanic
+reference plan, Trinity Health Radiology Care Coordination target
+plus the in-spec remote stack, campaign tasks seeded in the live
+Planner) and the classroom (Navigator of the Lyceum Gem rebuilt
+v2.1, SDLC eras lesson taught over the dashboard as case study,
+elasticity lesson for the cloud exam, punch #12 Prompt Fragment
+Vault boarded as backlog). 2026-08-03: proprietor back from three
+12-hour shifts, light Pomodoro session, dashboard work review
+pending after break.
