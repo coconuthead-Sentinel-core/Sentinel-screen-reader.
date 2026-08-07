@@ -4819,9 +4819,36 @@ class BookReader:
         self._ai_brain = brain
 
         def _send(event=None):
-            if not brain or not brain.available:
-                return "break"
-                
+            nonlocal brain
+            if brain is None or not brain.available:
+                # Availability was snapshotted when this tab was built —
+                # Ollama may have started since. Re-probe before declining
+                # (the one-shot check silently ate Enter presses, owner
+                # field report 2026-08-07: "text just sticks in the box").
+                try:
+                    import ai_brain
+                    brain = ai_brain.get_brain()
+                    brain.recheck()
+                    self._ai_brain = brain
+                except Exception as e:
+                    _qlog(f"ai-send: ai_brain reload failed: {e!r}")
+                    brain = None
+                if brain is None or not brain.available:
+                    # Law 3: a decline must BREADCRUMB and TELL. The draft
+                    # stays in the box on purpose — nothing to retype.
+                    reason = (getattr(brain, "last_error", None)
+                              or "the AI module failed to load")
+                    _qlog(f"ai-send: declined — assistant offline: {reason}")
+                    _append_msg("Error",
+                                f"Can't send — the assistant is offline ({reason}). "
+                                "Start Ollama, then press Enter again; your "
+                                "message is still in the box.")
+                    try:
+                        self.set_status("⚠ AI chat offline — start Ollama, then press Enter again.")
+                    except Exception:
+                        pass
+                    return "break"
+
             content = chat_input.get("1.0", tk.END).strip()
             if not content:
                 return "break"
@@ -4950,7 +4977,10 @@ class BookReader:
             return "break"
 
         def _on_keypress(event):
-            if event.keysym == "Return":
+            # KP_Enter: the numeric-keypad Enter is a DIFFERENT keysym on
+            # Windows — unhandled it fell through to the Text class binding
+            # and inserted a newline instead of sending (Law 6 platform trap).
+            if event.keysym in ("Return", "KP_Enter"):
                 if event.state & 0x0001:  # Shift pressed
                     return None  # Allow normal newline
                 else:

@@ -71,17 +71,32 @@ class LocalBrain:
         self.keep_alive = keep_alive or os.environ.get("SENTINEL_AI_KEEP_ALIVE", "10m")
         self.available = False
         self.last_error: Optional[str] = None
+        self.recheck()
+
+    def recheck(self) -> bool:
+        """Re-probe availability and update .available / .last_error.
+
+        Availability is a moment-in-time fact, not a property of the app
+        launch: the Ollama daemon may start (or the model be pulled) AFTER
+        this object was created. Callers that cached an offline brain call
+        this before declining, so a later-started Ollama just works.
+        Cheap: one loopback list call."""
         if not _OLLAMA_IMPORTED:
+            self.available = False
             self.last_error = f"ollama package not installed: {_OLLAMA_ERR}"
-            return
+            return False
         try:
             self.available = any(
                 self.model.split(":")[0] in n for n in self._installed_models()
             )
-            if not self.available:
+            if self.available:
+                self.last_error = None
+            else:
                 self.last_error = f"model '{self.model}' not pulled (run: ollama pull {self.model})"
         except Exception as e:
+            self.available = False
             self.last_error = f"Ollama daemon not reachable: {type(e).__name__}"
+        return self.available
 
     @staticmethod
     def _installed_models():
