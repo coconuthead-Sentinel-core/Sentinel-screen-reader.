@@ -32,31 +32,31 @@ Estimated from every repository's full commit history on GitHub (method §3).
 
 | Repository | Commits | Sessions | Est. hours | Active period |
 |---|---:|---:|---:|---|
-| **sentinel-forge-personal-development** (flagship) | 320 | 46 | **81.2** | 2026-05-22 → 2026-07-20 |
-| Sentinel-of-sentinel-s-Forge (platform) | 40 | 23 | 16.1 | 2025-04-28 → 2026-05-03 |
-| sentinel-forge-cognitive-orchestrator | 39 | 22 | 15.2 | 2025-04-28 → 2026-04-28 |
-| Sovereign-Forge | 35 | 20 | 13.7 | 2025-04-28 → 2026-05-10 |
-| Neural-Lattice-Architecture-and-Workflow-Optimization | 26 | 12 | 7.7 | 2025-12-22 → 2026-05-10 |
-| enterprise-ai-reliability-platform-v1 | 21 | 10 | 7.2 | 2026-04-18 → 2026-04-28 |
-| Quantum-Nexus-Forge | 16 | 8 | 5.9 | 2026-04-09 → 2026-04-28 |
-| Imprint (document-automation dashboard) | 15 | 6 | 4.7 | 2026-07-01 → 2026-07-13 |
-| cognitive-neural-overlay | 18 | 4 | 3.7 | 2026-05-03 → 2026-05-08 |
-| SentinelForge-AI | 8 | 5 | 2.9 | 2026-04-28 → 2026-05-10 |
-| sentinel-prime-network | 4 | 4 | 2.0 | 2026-04-26 → 2026-05-03 |
+| **accessible-reading-study-workstation** (flagship) | 320 | 46 | **81.2** | 2026-05-22 → 2026-07-20 |
+| multi-provider-llm-platform (platform) | 40 | 23 | 16.1 | 2025-04-28 → 2026-05-03 |
+| tiered-memory-orchestration-service | 39 | 22 | 15.2 | 2025-04-28 → 2026-04-28 |
+| parallel-request-gateway | 35 | 20 | 13.7 | 2025-04-28 → 2026-05-10 |
+| neuroinclusive-workflow-framework | 26 | 12 | 7.7 | 2025-12-22 → 2026-05-10 |
+| ai-reliability-scoring-platform | 21 | 10 | 7.2 | 2026-04-18 → 2026-04-28 |
+| multi-agent-orchestration-prototype | 16 | 8 | 5.9 | 2026-04-09 → 2026-04-28 |
+| sdlc-document-automation (document-automation dashboard) | 15 | 6 | 4.7 | 2026-07-01 → 2026-07-13 |
+| five-stage-inference-pipeline | 18 | 4 | 3.7 | 2026-05-03 → 2026-05-08 |
+| ai-workstation-platform-prototype | 8 | 5 | 2.9 | 2026-04-28 → 2026-05-10 |
+| local-ai-workstation-scaffold | 4 | 4 | 2.0 | 2026-04-26 → 2026-05-03 |
 | portfolio-dashboard | 3 | 2 | 1.9 | 2026-05-03 → 2026-05-10 |
-| glyphic-codex-7system-work-flow-dsl | 3 | 3 | 1.5 | 2026-05-02 → 2026-05-03 |
-| strata-console (local-first NLP pipeline) | 3 | 2 | 1.1 | 2026-07-06 → 2026-07-11 |
-| engineering-project-build-and-inventory-template-pack | 2 | 2 | 1.0 | 2026-05-02 → 2026-05-03 |
-| hub-and-spoke-ai-chatbot | 2 | 2 | 1.0 | 2026-05-02 → 2026-05-03 |
-| ios-compliance-framework | 2 | 2 | 1.0 | 2026-05-02 → 2026-05-03 |
-| seed-crystal-input-processing-layer | 2 | 2 | 1.0 | 2026-05-03 |
-| seven-layer-architecture-template-pack | 2 | 2 | 1.0 | 2026-05-02 → 2026-05-03 |
-| software-development-lifecycle-framework | 2 | 2 | 1.0 | 2026-05-02 → 2026-05-03 |
-| ancient-numerics-codex | 1 | 1 | 0.5 | 2026-05-03 |
+| workflow-dsl-specification | 3 | 3 | 1.5 | 2026-05-02 → 2026-05-03 |
+| local-nlp-pipeline-console (local-first NLP pipeline) | 3 | 2 | 1.1 | 2026-07-06 → 2026-07-11 |
+| project-build-inventory-templates | 2 | 2 | 1.0 | 2026-05-02 → 2026-05-03 |
+| hub-and-spoke-chatbot-architecture | 2 | 2 | 1.0 | 2026-05-02 → 2026-05-03 |
+| ios-submission-compliance-templates | 2 | 2 | 1.0 | 2026-05-02 → 2026-05-03 |
+| input-processing-service | 2 | 2 | 1.0 | 2026-05-03 |
+| architecture-governance-templates | 2 | 2 | 1.0 | 2026-05-02 → 2026-05-03 |
+| sdlc-reference-framework | 2 | 2 | 1.0 | 2026-05-02 → 2026-05-03 |
+| historical-numeral-systems | 1 | 1 | 0.5 | 2026-05-03 |
 | cinematography-pipeline | 1 | 1 | 0.5 | 2026-05-03 |
-| cstm-lattice-reference | 1 | 1 | 0.5 | 2026-05-03 |
-| earp-prompts | 2 | 1 | 0.5 | 2026-05-01 |
-| library-first-decision-agent | 1 | 1 | 0.5 | 2026-05-03 |
+| contextual-memory-reference-implementation | 1 | 1 | 0.5 | 2026-05-03 |
+| prompt-quality-scoring-service | 2 | 1 | 0.5 | 2026-05-01 |
+| library-first-decision-protocol | 1 | 1 | 0.5 | 2026-05-03 |
 | llm-eval-harness | 1 | 1 | 0.5 | 2026-05-03 |
 | rag-reference-implementation | 1 | 1 | 0.5 | 2026-05-03 |
 | **TOTAL** | **571** | **186** | **174.3** | 2025-04-28 → 2026-07-20 |
@@ -100,11 +100,11 @@ contractor would additionally bill to reproduce.
 
 | Item | Detail |
 |---|---|
-| 7 unmerged branches | `sentinel-prime-network:claude/wizardly-…` (9 commits ahead), `sentinel-forge-cognitive-orchestrator:claude/setup-quantum-nexus` (2), `Neural-Lattice:claude/neural-lattice-docs` + 3 `copilot/*` (1 each), `Sentinel-of-sentinel-s-Forge:claude/setup-sentinel-forge` (1). Deleting these destroys commits — review or merge first. |
+| 7 unmerged branches | `local-ai-workstation-scaffold:claude/wizardly-…` (9 commits ahead), `tiered-memory-orchestration-service:claude/setup-quantum-nexus` (2), `Neural-Lattice:claude/neural-lattice-docs` + 3 `copilot/*` (1 each), `multi-provider-llm-platform:claude/setup-sentinel-forge` (1). Deleting these destroys commits — review or merge first. |
 | C: drive critical | **2.0 GB free.** Recycle Bin holds 539 items / ~0.8 GB — sampled contents are all book `.docx` + `.meta.json` sidecars from old Library removals, no code. Verdict: safe to empty after a 60-second visual scan (owner action). |
 | Stale third clone | `C:\Users\sbrya\Desktop\Sentinel personal Development` (local Desktop, capital-D naming) — clean but 1 commit behind; not part of the two-clone protocol. Recommend removing or repurposing. |
 | Old backup folder | `OneDrive\Sentinel personal development backup 20260621-015858` — June snapshot, superseded by GitHub + two live clones. Candidate for the E: drive. |
-| Uncommitted work | `Desktop\Quantum-Nexus-Forge-GitHub` (8 dirty files, April), `OneDrive\Desktop\Imprint` (1 dirty file), `OneDrive\Desktop\Claude AI` (9 dirty files, last commit April). Commit or discard deliberately. |
+| Uncommitted work | `Desktop\multi-agent-orchestration-prototype-GitHub` (8 dirty files, April), `OneDrive\Desktop\sdlc-document-automation` (1 dirty file), `OneDrive\Desktop\Claude AI` (9 dirty files, last commit April). Commit or discard deliberately. |
 | E: backup drive | **Not connected during this audit** — its backup state could not be verified. Reconnect and re-verify. |
 
 ## 6. Attribution
@@ -148,7 +148,7 @@ The shop's earlier ledger (`Claude AI\Completed projects\AI_Memory_Core\
 docs\SHOP_NOTES.md`, maintained May 2026) recorded **scope-based
 per-project replacement estimates**: SDLC Framework $9K–$30K ·
 Seven-Layer Architecture Pack $7K–$24K · iOS Compliance Framework
-$6K–$20K · earp-prompts $6K–$25K · Engineering/Inventory Template Pack
+$6K–$20K · prompt-quality-scoring-service $6K–$25K · Engineering/Inventory Template Pack
 $4.5K–$15K · Hub-and-Spoke $4.5K–$15K — six projects summing
 **~$37K–$129K**, before counting the flagship or the full-stack tier.
 That ledger also records test evidence beyond this audit's tiering
@@ -177,9 +177,9 @@ honestly, per this project's own no-inflation rule:
 
 | Tier | Repositories | Honest label |
 |---|---|---|
-| **A — working, tested software** | sentinel-forge-personal-development (422 tests, in daily production use by its intended user), Imprint, strata-console, Quantum-Nexus-Forge, earp-prompts (FastAPI + tests) | "Production-quality for its intended scope" — real, runnable, tested |
-| **B — reference implementations & prototypes** | rag-reference-implementation, llm-eval-harness, hub-and-spoke-ai-chatbot, cognitive-neural-overlay, seed-crystal-input-processing-layer, library-first-decision-agent, and peers | Working demonstrations of a pattern; not hardened products |
-| **C — engineering documentation & templates** | software-development-lifecycle-framework, seven-layer-architecture-template-pack, ios-compliance-framework, engineering/inventory template packs, glyphic-codex DSL, codices | Process artifacts — evidence of systems thinking, not code |
+| **A — working, tested software** | accessible-reading-study-workstation (422 tests, in daily production use by its intended user), sdlc-document-automation, local-nlp-pipeline-console, multi-agent-orchestration-prototype, prompt-quality-scoring-service (FastAPI + tests) | "Production-quality for its intended scope" — real, runnable, tested |
+| **B — reference implementations & prototypes** | rag-reference-implementation, llm-eval-harness, hub-and-spoke-chatbot-architecture, five-stage-inference-pipeline, input-processing-service, library-first-decision-protocol, and peers | Working demonstrations of a pattern; not hardened products |
+| **C — engineering documentation & templates** | sdlc-reference-framework, architecture-governance-templates, ios-submission-compliance-templates, engineering/inventory template packs, glyphic-codex DSL, codices | Process artifacts — evidence of systems thinking, not code |
 
 **"Industrial grade" is not claimed** — that term implies CI/CD
 pipelines, independent code review, security audit, and multi-user
@@ -195,3 +195,5 @@ release. For a hiring manager, that is the demonstrated skill: not
 *Generated 2026-07-20 by Claude (Anthropic) at the owner's direction; data
 source: GitHub commit history, reproducible per §3. Value analysis added
 same day at the owner's direction after his stakeholder-framing review.*
+
+> **Repository names updated 2026-09-03.** Twenty-three repositories were renamed to descriptive, function-first names (see `Claude AI\Portfolio\REPO_NAMING_REVIEW_2026-09-03.md`). Old URLs redirect. Figures in this audit are unchanged.
