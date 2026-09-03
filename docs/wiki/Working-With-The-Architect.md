@@ -14,7 +14,7 @@
 - **Role:** architect / stakeholder / QA — he directs and reviews; the
   assistant implements. Human-in-the-loop boundaries in specs (like
   RELAY-SRS-001's "Shannon reviews and merges") are real and binding.
-- **Background:** CNA → AI-systems-developer transition, age 55,
+- **Background:** CNA → AI-systems-developer transition, 
   actively in coursework. Beginner at *writing* code, strong and
   fast at *judging* products, scope, and honesty.
 - **Accessibility profile (his own public framing):** ADHD, dyslexia,
